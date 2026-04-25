@@ -181,7 +181,7 @@ jobs:
         name: backend-coverage
     
     - name: Upload coverage reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: backend-coverage-report
         path: backend/htmlcov/
@@ -194,7 +194,7 @@ jobs:
         pip-audit -r requirements-prod.txt -f json -o pip-audit-report.json || true
     
     - name: Upload security reports
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: security-reports
         path: |
@@ -241,7 +241,7 @@ jobs:
         npm run build
     
     - name: Upload frontend coverage
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: frontend-coverage-report
         path: frontend/coverage/
@@ -358,7 +358,7 @@ jobs:
         locust -f tests/performance/locustfile.py --headless -u 10 -r 2 -t 30s --html performance-report.html
     
     - name: Upload performance report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v7
       with:
         name: performance-report
         path: backend/performance-report.html
