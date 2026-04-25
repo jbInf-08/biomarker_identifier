@@ -1,0 +1,30 @@
+{
+  "title": "Biomarker Identifier — app metrics",
+  "schemaVersion": 38,
+  "version": 1,
+  "panels": [
+    {
+      "type": "stat",
+      "title": "LLM requests (rate)",
+      "gridPos": { "h": 4, "w": 8, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(llm_requests_total[5m])",
+          "legendFormat": "{{endpoint}} {{status}}"
+        }
+      ]
+    },
+    {
+      "type": "graph",
+      "title": "Federated rounds",
+      "gridPos": { "h": 8, "w": 16, "x": 8, "y": 0 },
+      "targets": [
+        {
+          "expr": "rate(federated_rounds_total[5m])",
+          "legendFormat": "{{phase}}"
+        }
+      ]
+    }
+  ],
+  "uid": "biomarker-app-metrics"
+}

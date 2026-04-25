@@ -1,0 +1,6 @@
+zenodo_id,doi,title,publication_date,access_right
+18370208,10.5281/zenodo.18370208,ProstateX Results,2026-01-25,restricted
+17238024,10.5281/zenodo.17238024,Features prostatex,2025-09-30,restricted
+15643313,10.5281/zenodo.15643313,PROSTATEx-Targets: Point annotations of lesion targets for the PROSTATEx collection,2025-11,open
+10718469,10.5281/zenodo.10718469,ProstateZones - Segmentations of the prostatic zones and urethra for the PROSTATEx dataset,2024-08-28,open
+11620861,10.5281/zenodo.11620861,Reproducible Evaluation of Open-Source Tools for Prostate Segmentation on Public Datasets,2024-06-12,open

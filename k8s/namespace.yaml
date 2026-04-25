@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: biomarker-identifier
+  labels:
+    name: biomarker-identifier
+    app: biomarker-identifier

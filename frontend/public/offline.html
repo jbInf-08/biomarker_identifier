@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Biomarker Identifier</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        
+        .offline-container {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+        
+        .offline-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            background: #f3f4f6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        
+        .offline-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.5rem;
+        }
+        
+        .offline-message {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+        
+        .retry-button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .retry-button:hover {
+            background: #2563eb;
+        }
+        
+        .retry-button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+        
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #ef4444;
+            margin-right: 0.5rem;
+        }
+        
+        .status-dot.online {
+            background: #10b981;
+        }
+        
+        .cached-content {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #f9fafb;
+            border-radius: 6px;
+            text-align: left;
+        }
+        
+        .cached-content h3 {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cached-content ul {
+            list-style: none;
+            font-size: 0.75rem;
+            color: #6b7280;
+        }
+        
+        .cached-content li {
+            margin-bottom: 0.25rem;
+        }
+        
+        .cached-content li:before {
+            content: "✓";
+            color: #10b981;
+            margin-right: 0.5rem;
+        }
+        
+        @media (max-width: 480px) {
+            .offline-container {
+                padding: 1.5rem;
+                margin: 1rem;
+            }
+            
+            .offline-title {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="offline-container">
+        <div class="offline-icon">📡</div>
+        <h1 class="offline-title">You're Offline</h1>
+        <p class="offline-message">
+            It looks like you've lost your internet connection. Don't worry, you can still access some features of the Biomarker Identifier.
+        </p>
+        
+        <button class="retry-button" onclick="checkConnection()">
+            Try Again
+        </button>
+        
+        <div class="status-indicator">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Checking connection...</span>
+        </div>
+        
+        <div class="cached-content">
+            <h3>Available Offline:</h3>
+            <ul>
+                <li>View previously loaded results</li>
+                <li>Access cached reports</li>
+                <li>Review analysis history</li>
+                <li>Basic navigation</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let isOnline = navigator.onLine;
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        const retryButton = document.querySelector('.retry-button');
+        
+        function updateStatus() {
+            if (isOnline) {
+                statusDot.classList.add('online');
+                statusText.textContent = 'Connected';
+                retryButton.textContent = 'Go Online';
+                retryButton.onclick = () => window.location.href = '/';
+            } else {
+                statusDot.classList.remove('online');
+                statusText.textContent = 'Offline';
+                retryButton.textContent = 'Try Again';
+                retryButton.onclick = checkConnection;
+            }
+        }
+        
+        function checkConnection() {
+            retryButton.disabled = true;
+            retryButton.textContent = 'Checking...';
+            
+            // Try to fetch a small resource to test connection
+            fetch('/api/health', { 
+                method: 'HEAD',
+                cache: 'no-cache',
+                timeout: 5000
+            })
+            .then(() => {
+                isOnline = true;
+                updateStatus();
+                retryButton.disabled = false;
+                
+                // Redirect to main app after a short delay
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 1000);
+            })
+            .catch(() => {
+                isOnline = false;
+                updateStatus();
+                retryButton.disabled = false;
+            });
+        }
+        
+        // Listen for online/offline events
+        window.addEventListener('online', () => {
+            isOnline = true;
+            updateStatus();
+        });
+        
+        window.addEventListener('offline', () => {
+            isOnline = false;
+            updateStatus();
+        });
+        
+        // Initial status check
+        updateStatus();
+        
+        // Periodic connection check
+        setInterval(() => {
+            if (!isOnline) {
+                checkConnection();
+            }
+        }, 30000); // Check every 30 seconds
+    </script>
+</body>
+</html>

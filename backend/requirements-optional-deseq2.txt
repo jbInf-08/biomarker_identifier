@@ -1,0 +1,5 @@
+# Optional: differential expression on raw counts via R (DESeq2 / edgeR).
+# Requires a local R installation with Bioconductor DESeq2 and/or edgeR.
+# pip install -r requirements-optional-deseq2.txt
+# See docs/PRODUCT_ROADMAP.md and backend/app/analysis/raw_counts_deseq2.py
+rpy2>=3.5.0

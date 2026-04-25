@@ -1,0 +1,19 @@
+{
+  "total_sources": 5,
+  "successful_sources": 3,
+  "failed_sources": 2,
+  "successful_source_names": [
+    "GEO",
+    "GDC",
+    "ClinVar"
+  ],
+  "failed_source_names": [
+    "COSMIC",
+    "OncoKB"
+  ],
+  "total_records_collected": 176399,
+  "total_samples_collected": 0,
+  "total_collection_time": 139.43866157531738,
+  "average_time_per_source": 27.887732315063477,
+  "collection_timestamp": "2026-04-23T22:06:51.724252"
+}

@@ -1,0 +1,118 @@
+# Dependencies
+node_modules/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+.venv/
+env/
+ml_env/
+.env.local
+.env.*.local
+
+# Environment
+.env
+.env.prod
+.env.production
+
+# Local agent / editor config
+.claude/
+
+# Installers (use Docker or package managers; do not commit)
+*.msi
+
+# Pipeline run artifacts (regenerated per analysis)
+backend/data/outputs/*
+!backend/data/outputs/.gitkeep
+
+# Live TCGA/GDC downloads + pipeline outputs from scripts/run_tcga_gdc_pipeline_quick_full.py
+backend/data/tcga_gdc_pipeline_runs/
+
+# Frontend test coverage (regenerated)
+frontend/coverage/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Local SQLite / scratch DBs
+*.db
+!**/.gitkeep
+
+# Testing
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+.pytest_cache/
+.tox/
+.nox/
+coverage.xml
+*.cover
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build outputs
+*.pyc
+*.pyo
+*.pyd
+.next/
+out/
+
+# Data and models (optional - adjust if you want to version some)
+data/raw/*
+data/processed/*
+models/*
+!models/.gitkeep
+
+# Reports (optional)
+reports/*
+!reports/.gitkeep
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Docker
+*.log
+docker_build*.log
+docker_rebuild.log
+
+# Legacy local paper JSON (use conference project and its paper_output/ instead)
+paper_output/
+
+# Data collector smoke-test outputs
+data_collection/.collector_smoke_output/
+data_collection/test_results.json
+
+# Large TCGA matrices for paper experiments (fetched from conference; see ../conference)
+data/paper_datasets/**/*.tsv
+
+# GEO / full TCGA CSVs over GitHub's file size limit (regenerate or store outside git)
+data/external_sources/geo/geo_expression_breast_cancer_*_datasets.csv
+data/paper_datasets/tcga_brca/gdc_raw/tcga_gene_expression_BRCA_520_samples.csv

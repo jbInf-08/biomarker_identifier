@@ -1,0 +1,16 @@
+id,downloads,likes,gated,private
+EulerianKnight/breast-histopathology-images-train-test-valid-split,22,0,False,False
+dbzadnen/breast-histopathology-images,296,3,False,False
+mezeidragos-lateral/bach-breast-histopathology-he-staining,4,0,False,False
+mezeidragos-lateral/bach-breast-histopathology-he-staining-patches-512x512,14,0,False,False
+mezeidragos-lateral/bach-breast-histopathology-he-staining-patches,4,0,False,False
+serag-ai/Synthetic-Histopathology-Images,4,0,False,False
+Cilem/histopathology,107,1,False,False
+Cilem/histopathology-1024,56,2,False,False
+Cilem/mixed-histopathology-512,77,0,False,False
+BIOMEDICA/biomedica_histopathology_subset_webdataset,10,2,auto,False
+BIOMEDICA/biomedica_histopathology_subset_parquet,326,2,auto,False
+nayoungku1/npz-histopathology-dataset,3,0,False,False
+junyeong-nero/mini-breast-histopathology-images,8,0,False,False
+electricsheepafrica/africa-synth-cancer-cancer-pathology-histopathology-all,59,0,False,False
+GitHunter/dlmi-histopathology-results,65,0,False,False

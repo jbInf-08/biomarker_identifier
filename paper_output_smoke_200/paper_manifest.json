@@ -1,0 +1,20 @@
+{
+  "generated_at_utc": "2026-04-16T04:00:33.935362+00:00",
+  "python": "3.11.9",
+  "git_commit": "unknown",
+  "git_branch": "unknown",
+  "numpy_version": "1.26.4",
+  "pandas_version": "2.1.1",
+  "sklearn_version": "1.3.1",
+  "scipy_version": "1.11.3",
+  "xgboost_version": "1.7.6",
+  "torch_version": "2.1.0+cpu",
+  "shap_version": "0.43.0",
+  "reproduce": {
+    "seed": 7,
+    "quick": true,
+    "minimal": false,
+    "expression": "data\\paper_datasets\\tcga_brca_smoke_200\\expression.tsv",
+    "labels": "data\\paper_datasets\\tcga_brca_smoke_200\\labels_er.tsv"
+  }
+}

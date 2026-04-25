@@ -1,0 +1,33 @@
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Normalization Report</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 20px; }
+                .section { margin: 20px 0; padding: 10px; border: 1px solid #ddd; }
+                table { border-collapse: collapse; width: 100%; }
+                th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+                th { background-color: #f2f2f2; }
+            </style>
+        </head>
+        <body>
+            <h1>Normalization Report</h1>
+            <div class="section">
+                <h2>Steps Applied</h2>
+                <ul><li>Transformation: log2</li></ul>
+            </div>
+            <div class="section">
+                <h2>Data Statistics</h2>
+                <table>
+                    <tr><th>Metric</th><th>Original</th><th>Final</th></tr>
+                    <tr><td>mean</td><td>7.3185</td><td>2.9721</td></tr><tr><td>std</td><td>2.6933</td><td>0.5162</td></tr><tr><td>min</td><td>0.2952</td><td>0.3732</td></tr><tr><td>max</td><td>18.3301</td><td>4.2728</td></tr><tr><td>median</td><td>7.3401</td><td>3.0600</td></tr>
+                </table>
+            </div>
+            <div class="section">
+                <h2>Improvements</h2>
+                <h3>Transformation</h3><ul><li>mean: 2.9721</li><li>std: 0.5162</li><li>skewness: -0.2460</li><li>kurtosis: -0.2286</li></ul>
+            </div>
+        </body>
+        </html>
+        

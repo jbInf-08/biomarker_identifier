@@ -1,0 +1,3 @@
+# Default local / CI install: includes tests and linters.
+# Production Docker images use requirements-prod.txt only.
+-r requirements-dev.txt

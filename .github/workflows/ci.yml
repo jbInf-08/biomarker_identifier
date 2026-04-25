@@ -1,0 +1,364 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+env:
+  PYTHON_VERSION: "3.11"
+  NODE_VERSION: "18"
+
+jobs:
+  backend-tests:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: test_db
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+      
+      redis:
+        image: redis:6
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 6379:6379
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('backend/requirements-dev.txt', 'backend/requirements-prod.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+    
+    - name: Install Python dependencies
+      run: |
+        cd backend
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest pytest-cov pytest-asyncio pytest-xdist black flake8 mypy isort
+    
+    - name: Set up test environment
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+    
+    - name: Run code quality checks
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        echo "Running black (code formatting)..."
+        black --check app/ tests/
+        echo "Running flake8 (linting)..."
+        flake8 app/ tests/ --max-line-length=120 --extend-ignore=E203,W503
+        echo "Running isort (import sorting)..."
+        isort --check-only app/ tests/
+        echo "Running mypy (type checking)..."
+        mypy app/ --ignore-missing-imports --no-strict-optional
+
+    - name: Semgrep static analysis
+      continue-on-error: true
+      run: |
+        pip install semgrep
+        cd backend && semgrep scan --config p/ci --verbose
+
+    - name: Bandit security lint (fail on issues)
+      run: |
+        cd backend
+        pip install bandit
+        bandit -r app/ -lll -f txt
+    
+    - name: Generate sample real data for tests
+      run: |
+        cd backend
+        python scripts/setup_real_data.py --generate-sample || true
+
+    - name: Run database migrations (Alembic)
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        alembic upgrade head || python -c "from app.core.database import engine, Base; Base.metadata.create_all(bind=engine)"
+    
+    - name: Run unit tests (parallel)
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        python -m pytest tests/unit/ -v -n auto --cov=app --cov-report=xml --cov-report=html
+
+    # Real-service integration tests need a worker registered with the same Celery app as the app code.
+    - name: Start Celery worker (background, for integration tests)
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        nohup celery -A app.services.celery_service:celery_app worker --loglevel=warning --concurrency=1 > /tmp/celery-ci.log 2>&1 &
+        for i in $(seq 1 45); do
+          python -c "from app.services.celery_service import celery_app; s = celery_app.control.inspect(timeout=3).stats(); import sys; sys.exit(0 if s else 1)" && break
+          sleep 2
+        done
+        python -c "from app.services.celery_service import celery_app; s = celery_app.control.inspect(timeout=3).stats(); import sys; sys.exit(0 if s else 1)"
+    
+    - name: Run integration tests (parallel)
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        python -m pytest tests/integration/ -v -n auto --cov=app --cov-append --cov-report=xml --cov-report=html
+    
+    - name: Benchmark overlap script (optional)
+      run: |
+        cd backend
+        python scripts/check_benchmark_overlap.py --genes BRCA1,BRCA2,TP53 --min-overlap 1
+    
+    # E2E tests that use requests (see tests/e2e/conftest.py) expect a live API on 127.0.0.1:8000.
+    - name: Start API server (background, for E2E tests)
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        nohup uvicorn app.main:app --host 127.0.0.1 --port 8000 > /tmp/uvicorn-ci.log 2>&1 &
+        for i in $(seq 1 45); do
+          curl -sf http://127.0.0.1:8000/health && break
+          sleep 2
+        done
+        curl -sf http://127.0.0.1:8000/health
+
+    - name: Run end-to-end tests (parallel)
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        python -m pytest tests/e2e/ -v -n auto --cov=app --cov-append --cov-report=xml --cov-report=html
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./backend/coverage.xml
+        flags: backend
+        name: backend-coverage
+    
+    - name: Upload coverage reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: backend-coverage-report
+        path: backend/htmlcov/
+    
+    - name: Dependency and supply-chain audit
+      run: |
+        cd backend
+        pip install safety pip-audit
+        safety check --json --output safety-report.json || true
+        pip-audit -r requirements-prod.txt -f json -o pip-audit-report.json || true
+    
+    - name: Upload security reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: security-reports
+        path: |
+          backend/bandit-report.json
+          backend/safety-report.json
+          backend/pip-audit-report.json
+
+  frontend-tests:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        cache-dependency-path: frontend/package-lock.json
+    
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Run linting
+      run: |
+        cd frontend
+        npm run lint
+    
+    - name: Run type checking
+      run: |
+        cd frontend
+        npm run type-check
+    
+    - name: Run unit tests with coverage
+      run: |
+        cd frontend
+        npm run test:coverage
+    
+    - name: Build frontend
+      run: |
+        cd frontend
+        npm run build
+    
+    - name: Upload frontend coverage
+      uses: actions/upload-artifact@v3
+      with:
+        name: frontend-coverage-report
+        path: frontend/coverage/
+
+  docker-verify:
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests]
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Build production backend image (no push)
+      uses: docker/build-push-action@v4
+      with:
+        context: ./backend
+        target: production
+        push: false
+        tags: biomarker-identifier-backend:ci
+        load: true
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    - name: Trivy container scan
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: biomarker-identifier-backend:ci
+        format: table
+        severity: CRITICAL,HIGH
+        exit-code: "0"
+
+  docker-build:
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests, docker-verify]
+    if: secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+    - name: Login to Docker Hub
+      uses: docker/login-action@v2
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    - name: Build and push backend image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./backend
+        target: production
+        push: true
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/biomarker-identifier-backend:latest
+          ${{ secrets.DOCKER_USERNAME }}/biomarker-identifier-backend:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    - name: Build and push frontend image
+      uses: docker/build-push-action@v4
+      with:
+        context: ./frontend
+        push: true
+        tags: |
+          ${{ secrets.DOCKER_USERNAME }}/biomarker-identifier-frontend:latest
+          ${{ secrets.DOCKER_USERNAME }}/biomarker-identifier-frontend:${{ github.sha }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  deployment:
+    runs-on: ubuntu-latest
+    needs: [backend-tests, frontend-tests, docker-verify]
+    if: github.ref == 'refs/heads/main'
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # Add deployment commands here
+    
+    - name: Run smoke tests
+      run: |
+        echo "Running smoke tests..."
+        # Add smoke test commands here
+    
+    - name: Deploy to production
+      if: success()
+      run: |
+        echo "Deploying to production environment..."
+        # Add production deployment commands here
+
+  performance-tests:
+    runs-on: ubuntu-latest
+    needs: [backend-tests]
+    continue-on-error: true
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install dependencies
+      run: |
+        cd backend
+        pip install -r requirements.txt
+        pip install locust
+    
+    - name: Run performance tests
+      run: |
+        cd backend
+        export DATABASE_URL="postgresql://postgres:postgres@localhost:5432/test_db"
+        export REDIS_URL="redis://localhost:6379/0"
+        export SECRET_KEY="test-secret-key"
+        export DEBUG=True
+        locust -f tests/performance/locustfile.py --headless -u 10 -r 2 -t 30s --html performance-report.html
+    
+    - name: Upload performance report
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-report
+        path: backend/performance-report.html

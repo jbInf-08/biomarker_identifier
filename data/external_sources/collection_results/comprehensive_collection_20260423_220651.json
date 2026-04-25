@@ -1,0 +1,175 @@
+{
+  "results": {
+    "GEO": {
+      "search_term": "breast cancer",
+      "data_type": "expression",
+      "datasets_collected": 5,
+      "data": "                   ID_REF GSM36777  ...   GSM1045310   GSM1045311\n0             \"1007_s_at\"   3848.1  ...          NaN          NaN\n1               \"1053_at\"    228.9  ...          NaN          NaN\n2                \"117_at\"    213.1  ...          NaN          NaN\n3                \"121_at\"   1009.4  ...          NaN          NaN\n4             \"1255_g_at\"     31.8  ...          NaN          NaN\n...                   ...      ...  ...          ...          ...\n176194   \"AFFX-ThrX-5_at\"      NaN  ...  3.828617784   4.05151321\n176195   \"AFFX-ThrX-M_at\"      NaN  ...   7.09804043   6.68632336\n176196  \"AFFX-TrpnX-3_at\"      NaN  ...  2.312811642  2.336712883\n176197  \"AFFX-TrpnX-5_at\"      NaN  ...  2.312811642  2.312811642\n176198  \"AFFX-TrpnX-M_at\"      NaN  ...  2.312811642  2.386853719\n\n[176199 rows x 1043 columns]",
+      "metadata": {
+        "source": "GEOCollector",
+        "data_type": "expression",
+        "collection_timestamp": "2026-04-23T22:06:40.872846",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "expression",
+          "search_term": "breast cancer",
+          "max_datasets": 5,
+          "series_list": [
+            "GSE2034",
+            "GSE3494",
+            "GSE7390",
+            "GSE10780",
+            "GSE42568"
+          ]
+        },
+        "output_directory": "data\\external_sources\\geo"
+      },
+      "records_collected": 176199,
+      "validation": {
+        "timestamp": "2026-04-23T22:05:46.647224",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [
+          "High percentage of missing values"
+        ],
+        "metrics": {
+          "rows": 176199,
+          "columns": 1043,
+          "missing_values": "150314604",
+          "duplicate_rows": "0",
+          "memory_usage": "7070818679"
+        }
+      },
+      "collection_time": 128.5882523059845,
+      "source": "GEO"
+    },
+    "COSMIC": {
+      "error": "Failed to download real mutation data from COSMIC API",
+      "status": "failed"
+    },
+    "GDC": {
+      "data_type": "cases",
+      "records_collected": 100,
+      "data": "                                      id  ...                              submitter_portion_ids\n0   e3935ce4-64d3-4a66-ba11-d308b844b410  ...  [TCGA-E9-A5FL-01A-11, TCGA-E9-A5FL-01A-21, TCG...\n1   e3b555aa-7f0a-49c6-9b13-182c61a144c1  ...  [TCGA-A2-A1G4-01A-11, TCGA-A2-A1G4-01A-21-A17I...\n2   17ca61a2-607a-45ff-88fa-ef72e80bf891  ...         [TCGA-BH-A0HF-01A-11, TCGA-BH-A0HF-10A-01]\n3   7d681cc6-689d-41c8-9e84-e13733089ec9  ...  [TCGA-AR-A1AS-01A-21-A13E-20, TCGA-AR-A1AS-01A...\n4   17f275c1-a0d4-487d-8f02-ea279584b4cd  ...  [TCGA-D8-A13Y-10A-01, TCGA-D8-A13Y-01A-22-A21W...\n..                                   ...  ...                                                ...\n95  70931617-b3df-4a12-8e3f-2b2307602f48  ...  [TCGA-A8-A06X-01A-12-A615-42, TCGA-A8-A06X-01A...\n96  dd67408e-46ba-4573-9415-d4814e9f84de  ...  [TCGA-E9-A226-01A-21, TCGA-E9-A226-01A-11-A17K...\n97  71229981-97c2-4ae1-a130-fe5de336b37d  ...  [TCGA-C8-A12T-01A-31-A615-42, TCGA-C8-A12T-01A...\n98  71626753-cc34-4731-abc0-ae188b0964e7  ...  [TCGA-AO-A12C-10A-01, TCGA-AO-A12C-01A-11, TCG...\n99  0bc5744c-5fa3-45bb-87d0-70a02068b392  ...  [TCGA-BH-A0DG-01A-11-A13B-20, TCGA-BH-A0DG-10A...\n\n[100 rows x 24 columns]",
+      "metadata": {
+        "source": "GDCCollector",
+        "data_type": "cases",
+        "collection_timestamp": "2026-04-23T22:06:43.927054",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "data_type": "cases",
+          "size": 100,
+          "project": "TCGA-BRCA"
+        },
+        "output_directory": "data\\external_sources\\gdc"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:06:43.925059",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 1.380244255065918,
+      "source": "GDC"
+    },
+    "ClinVar": {
+      "data_type": "genetic_variants",
+      "records_collected": 100,
+      "data": "        uid  ... rcv_accession\n0   4819605  ...  VCV004819605\n1   4812286  ...  VCV004812286\n2   4811916  ...  VCV004811916\n3   4805346  ...  VCV004805346\n4   4800662  ...  VCV004800662\n..      ...  ...           ...\n95  4539755  ...  VCV004539755\n96  4539754  ...  VCV004539754\n97  4539753  ...  VCV004539753\n98  4539752  ...  VCV004539752\n99  4539751  ...  VCV004539751\n\n[100 rows x 6 columns]",
+      "metadata": {
+        "source": "ClinVarCollector",
+        "data_type": "genetic_variants",
+        "collection_timestamp": "2026-04-23T22:06:44.868300",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "data_type": "genetic_variants",
+          "gene_symbol": "TP53",
+          "max_records": 100
+        },
+        "output_directory": "data\\external_sources\\clinvar"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:06:44.866299",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [
+          "High percentage of missing values"
+        ],
+        "metrics": {
+          "rows": 100,
+          "columns": 6,
+          "missing_values": "300",
+          "duplicate_rows": "0",
+          "memory_usage": "30348"
+        }
+      },
+      "collection_time": 0.9412462711334229,
+      "source": "ClinVar"
+    },
+    "OncoKB": {
+      "error": "OncoKB requires ONCOKB_API_TOKEN or ONCOKB_API_KEY (Bearer token from https://www.oncokb.org/apiAccess)",
+      "status": "failed"
+    }
+  },
+  "summary": {
+    "total_sources": 5,
+    "successful_sources": 3,
+    "failed_sources": 2,
+    "successful_source_names": [
+      "GEO",
+      "GDC",
+      "ClinVar"
+    ],
+    "failed_source_names": [
+      "COSMIC",
+      "OncoKB"
+    ],
+    "total_records_collected": 176399,
+    "total_samples_collected": 0,
+    "total_collection_time": 139.43866157531738,
+    "average_time_per_source": 27.887732315063477,
+    "collection_timestamp": "2026-04-23T22:06:51.724252"
+  },
+  "collection_log": [
+    {
+      "timestamp": "2026-04-23T22:06:40.874846",
+      "source": "GEO",
+      "status": "success",
+      "collection_time": 128.5882523059845,
+      "records_collected": 176199,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:06:42.546809",
+      "source": "COSMIC",
+      "status": "failed",
+      "error": "Failed to download real mutation data from COSMIC API"
+    },
+    {
+      "timestamp": "2026-04-23T22:06:43.927054",
+      "source": "GDC",
+      "status": "success",
+      "collection_time": 1.380244255065918,
+      "records_collected": 100,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:06:44.868300",
+      "source": "ClinVar",
+      "status": "success",
+      "collection_time": 0.9412462711334229,
+      "records_collected": 100,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:06:51.724252",
+      "source": "OncoKB",
+      "status": "failed",
+      "error": "OncoKB requires ONCOKB_API_TOKEN or ONCOKB_API_KEY (Bearer token from https://www.oncokb.org/apiAccess)"
+    }
+  ]
+}
