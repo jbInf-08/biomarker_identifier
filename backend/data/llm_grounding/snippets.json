@@ -1,0 +1,44 @@
+[
+  {
+    "id": "brca1_her2",
+    "title": "BRCA1/2 and breast cancer susceptibility",
+    "genes": ["BRCA1", "BRCA2", "PALB2"],
+    "text": "Germline pathogenic variants in BRCA1 and BRCA2 substantially increase lifetime risk of breast and ovarian cancer. Loss-of-function variants impair homologous recombination DNA repair; PARP inhibitors exploit synthetic lethality in tumors with deficient HR. PALB2 bridges BRCA2 to chromatin and is part of the same pathway."
+  },
+  {
+    "id": "er_pr_her2",
+    "title": "Hormone receptors and HER2 in breast cancer subtyping",
+    "genes": ["ESR1", "PGR", "ERBB2"],
+    "text": "ESR1 and PGR encode estrogen and progesterone receptors; expression guides endocrine therapy decisions. ERBB2 (HER2) amplification or overexpression defines HER2-positive disease and enables anti-HER2 therapies such as trastuzumab. Biomarker panels often combine receptor status with proliferation markers."
+  },
+  {
+    "id": "tp53_cell_cycle",
+    "title": "TP53 and cell-cycle control",
+    "genes": ["TP53", "MDM2", "CDKN1A"],
+    "text": "TP53 is a central tumor suppressor regulating apoptosis and cell-cycle arrest. MDM2 can ubiquitinate and inhibit p53; CDKN1A (p21) is a key downstream effector. TP53 mutations are common across epithelial cancers and may associate with genomic instability."
+  },
+  {
+    "id": "myc_proliferation",
+    "title": "MYC and proliferation programs",
+    "genes": ["MYC", "CCND1", "CDK4"],
+    "text": "MYC transcription factors drive proliferation and metabolism. CCND1–CDK4/6 axis regulates G1–S transition; CDK4/6 inhibitors are used in hormone receptor–positive breast cancer. Elevated MYC activity can correlate with aggressive biology depending on context."
+  },
+  {
+    "id": "immune_checkpoint",
+    "title": "Immune microenvironment markers",
+    "genes": ["CD274", "PDCD1", "CTLA4"],
+    "text": "CD274 encodes PD-L1; interaction with PD-1 (PDCD1) on T cells dampens immune responses. CTLA4 is another immune checkpoint. Expression of these markers can inform immunotherapy eligibility in some tumor types, though biomarker interpretation is cancer-specific."
+  },
+  {
+    "id": "egfr_pathway",
+    "title": "EGFR signaling",
+    "genes": ["EGFR", "KRAS", "BRAF"],
+    "text": "EGFR tyrosine kinase signaling promotes growth and survival. KRAS and BRAF mutations downstream can predict resistance or guide targeted therapy in several cancers. EGFR alterations are classic drivers in lung cancer and head-and-neck tumors among others."
+  },
+  {
+    "id": "emt_invasion",
+    "title": "EMT and invasion programs",
+    "genes": ["VIM", "CDH1", "SNAI1"],
+    "text": "Epithelial–mesenchymal transition involves downregulation of CDH1 (E-cadherin) and upregulation of mesenchymal markers such as VIM (vimentin). SNAI1 is a transcriptional repressor of E-cadherin. These programs associate with invasion and metastatic potential in experimental models."
+  }
+]

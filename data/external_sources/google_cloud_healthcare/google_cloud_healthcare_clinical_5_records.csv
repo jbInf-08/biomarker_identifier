@@ -1,0 +1,6 @@
+resourceType,id,gender,birthDate
+Patient,,male,1974-12-25
+Patient,,male,1974-12-25
+Patient,123,male,1974-12-25
+Patient,,male,1974-12-25
+Patient,123a,male,1974-12-25

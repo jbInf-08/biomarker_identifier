@@ -1,0 +1,203 @@
+{
+  "tcga": {
+    "sample_limit": 120,
+    "cancer_types": ["BRCA", "LUAD", "COAD", "PRAD", "OV", "GBM", "LUSC", "STAD"],
+    "data_types": ["gene_expression", "mutation", "copy_number", "methylation", "clinical"]
+  },
+  "geo": {
+    "max_datasets": 10,
+    "search_terms": [
+      "breast cancer", "lung cancer", "prostate cancer", "colorectal cancer",
+      "ovarian cancer", "pancreatic cancer", "liver cancer", "brain cancer"
+    ],
+    "data_types": ["expression", "methylation", "mirna", "lncrna"],
+    "_series_list_doc": "Optional curated GSE allowlist. When set, the collector skips esearch and pulls these series directly. All entries must publish a *_series_matrix.txt.gz at the standard NCBI FTP path (we verified the ones below).",
+    "series_list": [
+      "GSE2034",
+      "GSE3494",
+      "GSE7390",
+      "GSE10780",
+      "GSE42568",
+      "GSE25066",
+      "GSE9893",
+      "GSE17705",
+      "GSE32646",
+      "GSE45255"
+    ]
+  },
+  "cosmic": {
+    "gene_list": [
+      "TP53", "BRCA1", "BRCA2", "EGFR", "KRAS", "MYC", "RB1", "PTEN",
+      "APC", "VHL", "CDKN2A", "MLH1", "MSH2", "MSH6", "PMS2", "ATM",
+      "CHEK2", "PALB2", "BARD1", "BRIP1", "RAD51C", "RAD51D", "CDH1"
+    ],
+    "cancer_types": ["breast", "lung", "prostate", "colorectal", "ovarian", "pancreatic"],
+    "data_types": ["mutations", "cancer_gene_census", "clinical", "drug_resistance"]
+  },
+  "icgc": {
+    "sample_limit": 200,
+    "cancer_types": ["BRCA", "LUAD", "COAD", "PRAD"],
+    "data_types": ["genomic_data", "clinical_data", "expression_data", "mutation_data"]
+  },
+  "ega": {
+    "sample_limit": 50,
+    "data_types": ["genomic_data", "clinical_data", "phenotype_data"]
+  },
+  "tcia": {
+    "sample_limit": 30,
+    "data_types": ["medical_images", "clinical_data", "radiomics_data"]
+  },
+  "gdc": {
+    "sample_limit": 500,
+    "cancer_types": ["BRCA", "LUAD", "COAD", "PRAD"],
+    "data_types": ["genomic_data", "clinical_data", "expression_data", "mutation_data"]
+  },
+  "cdc": {
+    "sample_limit": 1000,
+    "data_types": ["cancer_statistics", "mortality_data", "incidence_data"]
+  },
+  "nih": {
+    "sample_limit": 100,
+    "data_types": ["research_data", "clinical_trials", "biomarker_data"]
+  },
+  "kaggle": {
+    "sample_limit": 50,
+    "data_types": ["cancer_datasets", "medical_images", "clinical_data"]
+  },
+  "nci": {
+    "sample_limit": 100,
+    "data_types": ["cancer_statistics", "clinical_trials", "biomarker_data"]
+  },
+  "pubmed": {
+    "sample_limit": 100,
+    "max_records": 100,
+    "data_types": ["literature", "biomarker_studies", "clinical_trials"]
+  },
+  "ncbi": {
+    "sample_limit": 100,
+    "max_ids": 50,
+    "data_types": ["genomic_data", "protein_data", "literature"]
+  },
+  "miccai": {
+    "sample_limit": 20,
+    "data_types": ["medical_images", "segmentation_data", "classification_data"]
+  },
+  "nih_clinical": {
+    "sample_limit": 50,
+    "data_types": ["clinical_data", "biomarker_data", "treatment_data"]
+  },
+  "prostate_x": {
+    "sample_limit": 20,
+    "data_types": ["medical_images", "clinical_data", "prostate_cancer_data"]
+  },
+  "pathlaion": {
+    "sample_limit": 30,
+    "data_types": ["pathology_images", "histopathology_data", "cancer_classification"]
+  },
+  "camelyon": {
+    "sample_limit": 20,
+    "data_types": ["histopathology_images", "lymph_node_data", "metastasis_detection"]
+  },
+  "pancancer_atlas": {
+    "sample_limit": 30,
+    "data_types": ["pathology_images", "multi_omics_data", "clinical_data"]
+  },
+  "seer": {
+    "sample_limit": 1000,
+    "data_types": ["cancer_statistics", "survival_data", "incidence_data"]
+  },
+  "ncdb": {
+    "sample_limit": 500,
+    "data_types": ["cancer_registry_data", "treatment_data", "outcome_data"]
+  },
+  "mimic": {
+    "sample_limit": 100,
+    "data_types": ["clinical_data", "vital_signs", "laboratory_data"]
+  },
+  "wisconsin_breast_cancer": {
+    "sample_limit": 100,
+    "data_types": ["breast_cancer_data", "diagnostic_features", "classification_data"]
+  },
+  "ddsm": {
+    "sample_limit": 50,
+    "data_types": ["mammography_images", "breast_cancer_screening", "diagnostic_data"]
+  },
+  "inbreast": {
+    "sample_limit": 50,
+    "data_types": ["mammography_images", "breast_cancer_data", "diagnostic_features"]
+  },
+  "lidc_idri": {
+    "sample_limit": 30,
+    "data_types": ["lung_ct_images", "nodule_data", "diagnostic_annotations"]
+  },
+  "nsclc_radiogenomics": {
+    "sample_limit": 30,
+    "data_types": ["ct_images", "genomic_data", "clinical_data"]
+  },
+  "luna16": {
+    "sample_limit": 20,
+    "data_types": ["lung_ct_images", "nodule_detection", "segmentation_data"]
+  },
+  "isic": {
+    "sample_limit": 50,
+    "data_types": ["skin_lesion_images", "melanoma_data", "classification_data"]
+  },
+  "ham10000": {
+    "sample_limit": 50,
+    "data_types": ["skin_lesion_images", "melanoma_classification", "diagnostic_data"]
+  },
+  "brats": {
+    "sample_limit": 20,
+    "data_types": ["brain_mri_images", "tumor_segmentation", "glioblastoma_data"]
+  },
+  "rembrandt": {
+    "sample_limit": 30,
+    "data_types": ["brain_mri_images", "glioblastoma_data", "clinical_data"]
+  },
+  "tcia_glioblastoma": {
+    "sample_limit": 30,
+    "data_types": ["brain_mri_images", "glioblastoma_data", "treatment_data"]
+  },
+  "clinvar": {
+    "sample_limit": 100,
+    "max_records": 500,
+    "data_types": ["genetic_variants", "clinical_significance", "disease_associations"]
+  },
+  "oncokb": {
+    "sample_limit": 100,
+    "data_types": ["cancer_genes", "drug_targets", "clinical_evidence"]
+  },
+  "cbioportal": {
+    "sample_limit": 100,
+    "page_size": 200,
+    "data_types": ["cancer_genomics", "clinical_data", "multi_omics_data"]
+  },
+  "firecloud_terra": {
+    "sample_limit": 50,
+    "data_types": ["genomic_data", "analysis_workflows", "research_data"]
+  },
+  "google_cloud_healthcare": {
+    "sample_limit": 50,
+    "data_types": ["medical_images", "clinical_data", "healthcare_analytics"]
+  },
+  "ccle": {
+    "sample_limit": 100,
+    "max_samples": 2500,
+    "data_types": ["cell_line_data", "expression_data", "drug_response_data"]
+  },
+  "gdsc": {
+    "sample_limit": 100,
+    "max_rows": 2000,
+    "data_types": ["drug_sensitivity_data", "genomic_data", "cell_line_data"]
+  },
+  "nci_60": {
+    "sample_limit": 100,
+    "data_types": ["cell_line_data", "drug_screening_data", "genomic_data"]
+  },
+  "general": {
+    "sample_limit": 50,
+    "rate_limit_delay": 1.0,
+    "max_retries": 3,
+    "timeout": 30
+  }
+}

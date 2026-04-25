@@ -1,0 +1,77 @@
+{
+  "n_samples": 186,
+  "n_features_input": 3000,
+  "n_features_used": 50,
+  "test_size": 38,
+  "metrics": {
+    "roc_auc": 0.9042145593869733,
+    "roc_auc_bootstrap_median": 0.9118773946360152,
+    "roc_auc_bootstrap_ci95": [
+      0.8005747126436781,
+      0.9810344827586207
+    ],
+    "pr_auc": 0.9746841771524166,
+    "f1_weighted": 0.8421052631578947,
+    "precision_weighted": 0.8421052631578947,
+    "recall_weighted": 0.8421052631578947,
+    "matthews_corrcoef": 0.5632183908045977,
+    "balanced_accuracy": 0.7816091954022988
+  },
+  "permutation_null": {
+    "n_permutations": 24,
+    "p_value_auc_ge_observed": 0.0,
+    "note": "Fraction of label-shuffled models with test AUC >= bootstrap median AUC"
+  },
+  "cross_validation_5fold": {
+    "roc_auc_mean": 0.9433088650479954,
+    "roc_auc_std": 0.05757498268818223,
+    "folds": [
+      0.9503105590062112,
+      0.9886363636363636,
+      0.9659090909090909,
+      0.8311688311688311,
+      0.9805194805194806
+    ]
+  },
+  "stability_jaccard": {
+    "mutual_information_top50": {
+      "mean": 0.543302149919797,
+      "std": 0.03653136050958643,
+      "runs": 4
+    },
+    "five_method_consensus_top50": {
+      "mean": 0.3710641966757608,
+      "std": 0.040599798112577176,
+      "runs": 4
+    }
+  },
+  "curves": {
+    "roc_fpr": [
+      0.0,
+      0.0,
+      0.0,
+      0.1111111111111111,
+      0.1111111111111111,
+      0.6666666666666666,
+      0.6666666666666666,
+      0.7777777777777778,
+      0.7777777777777778,
+      1.0,
+      1.0
+    ],
+    "roc_tpr": [
+      0.0,
+      0.034482758620689655,
+      0.7931034482758621,
+      0.7931034482758621,
+      0.896551724137931,
+      0.896551724137931,
+      0.9310344827586207,
+      0.9310344827586207,
+      0.9655172413793104,
+      0.9655172413793104,
+      1.0
+    ]
+  },
+  "manifest_ref": "paper_manifest.json"
+}

@@ -1,0 +1,5 @@
+GEO Dataset: GSE2034
+To download actual GEO expression data:
+1. Use GEOquery R package
+2. Or use GEO API with proper parsing
+3. Or download from GEO website directly

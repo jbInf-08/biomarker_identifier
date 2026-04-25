@@ -1,0 +1,5 @@
+# Multi-Tenant Demo (PowerShell) - tenant routes require an admin-authenticated session in production
+Invoke-RestMethod -Uri "http://localhost:8000/api/tenants/" -Method POST -ContentType "application/json" -Body '{"id":"lab-oncology","name":"Lab Oncology"}'
+Invoke-RestMethod -Uri "http://localhost:8000/api/tenants/" -Method POST -ContentType "application/json" -Body '{"id":"lab-pathology","name":"Lab Pathology"}'
+Invoke-RestMethod -Uri "http://localhost:8000/api/tenants/" -Method GET
+Invoke-RestMethod -Uri "http://localhost:8000/api/tenants/lab-oncology" -Method GET -Headers @{"X-Tenant-ID"="lab-oncology"}

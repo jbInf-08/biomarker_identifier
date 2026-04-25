@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Biomarker Identifier",
+    "slug": "biomarker-identifier",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "biomarker",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#f8f9fa"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.biomarker.identifier"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#2c3e50"
+      },
+      "package": "com.biomarker.identifier"
+    },
+    "plugins": [],
+    "extra": {
+      "eas": {
+        "projectId": "replace-with-expo-project-id"
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Biomarker API on Lambda (sketch — zip layers and VPC per your org)
+
+Globals:
+  Function:
+    Timeout: 120
+    MemorySize: 2048
+
+Resources:
+  BiomarkerApi:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: handler.handler
+      Runtime: python3.11
+      CodeUri: ../lambda_package/
+      Environment:
+        Variables:
+          DATABASE_URL: !Ref DatabaseUrl
+          SECRET_KEY: !Ref SecretKey
+      Events:
+        Api:
+          Type: HttpApi
+          Properties:
+            Path: /{proxy+}
+            Method: ANY
+
+Parameters:
+  DatabaseUrl:
+    Type: String
+    Default: ""
+  SecretKey:
+    Type: String
+    Default: ""

@@ -1,0 +1,1548 @@
+{
+  "results": {
+    "TCGA": {
+      "data_type": "gene_expression",
+      "cancer_type": "BRCA",
+      "samples_collected": 120,
+      "data": "                    TCGA-D8-A1XO  TCGA-AN-A0FN  ...  TCGA-B6-A0WZ  TCGA-D8-A1XB\ngene_id                                         ...                            \nENSG00000000003.15       56.2216       28.5350  ...       25.4294       20.7056\nENSG00000000005.6         0.2768        5.1690  ...        0.1576        0.1295\nENSG00000000419.13      126.9161      101.9253  ...       67.4355       95.9407\nENSG00000000457.14       25.4778       11.2845  ...       12.1295       24.4033\nENSG00000000460.17       15.4251        3.6297  ...        3.3793        9.6985\n...                          ...           ...  ...           ...           ...\nENSG00000288669.1         0.0000        0.0000  ...        0.0000        0.0000\nENSG00000288670.1        24.1890        6.3918  ...        5.0835       20.3039\nENSG00000288671.1         0.0000        0.0000  ...        0.0000        0.0000\nENSG00000288674.1         0.0910        0.0000  ...        0.0725        0.0497\nENSG00000288675.1         0.9379        1.1669  ...        1.7649        1.3081\n\n[60660 rows x 120 columns]",
+      "validation": {
+        "timestamp": "2026-04-23T22:14:15.740538",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 60660,
+          "columns": 120,
+          "missing_values": "0",
+          "duplicate_rows": "4706",
+          "memory_usage": "62736764"
+        }
+      },
+      "metadata": {
+        "source": "TCGACollector",
+        "data_type": "gene_expression",
+        "collection_timestamp": "2026-04-23T22:14:16.203529",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 120,
+          "data_type": "gene_expression",
+          "cancer_type": "BRCA"
+        },
+        "output_directory": "data\\external_sources\\tcga"
+      },
+      "collection_time": 229.253342628479,
+      "source": "TCGA"
+    },
+    "GEO": {
+      "search_term": "breast cancer",
+      "data_type": "expression",
+      "datasets_collected": 10,
+      "data": "                   ID_REF GSM36777 GSM36778  ... GSM1100173 GSM1100174 GSM1100175\n0             \"1007_s_at\"   3848.1   6520.9  ...        NaN        NaN        NaN\n1               \"1053_at\"    228.9    112.5  ...        NaN        NaN        NaN\n2                \"117_at\"    213.1    189.8  ...        NaN        NaN        NaN\n3                \"121_at\"   1009.4   2083.3  ...        NaN        NaN        NaN\n4             \"1255_g_at\"     31.8    145.8  ...        NaN        NaN        NaN\n...                   ...      ...      ...  ...        ...        ...        ...\n320297   \"AFFX-ThrX-5_at\"      NaN      NaN  ...     5.2368      3.235     4.4584\n320298   \"AFFX-ThrX-M_at\"      NaN      NaN  ...     2.9202      4.221     3.6788\n320299  \"AFFX-TrpnX-3_at\"      NaN      NaN  ...     1.2034     1.7852     3.8952\n320300  \"AFFX-TrpnX-5_at\"      NaN      NaN  ...     2.6759     2.1673     5.2963\n320301  \"AFFX-TrpnX-M_at\"      NaN      NaN  ...     1.9777     3.0639     2.7214\n\n[320302 rows x 2258 columns]",
+      "metadata": {
+        "source": "GEOCollector",
+        "data_type": "expression",
+        "collection_timestamp": "2026-04-23T22:25:34.101881",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "expression",
+          "search_term": "breast cancer",
+          "max_datasets": 10,
+          "series_list": [
+            "GSE2034",
+            "GSE3494",
+            "GSE7390",
+            "GSE10780",
+            "GSE42568",
+            "GSE25066",
+            "GSE9893",
+            "GSE17705",
+            "GSE32646",
+            "GSE45255"
+          ]
+        },
+        "output_directory": "data\\external_sources\\geo"
+      },
+      "records_collected": 320302,
+      "validation": {
+        "timestamp": "2026-04-23T22:21:29.883763",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: Unable to allocate 2.44 MiB for an array with shape (320302,) and data type int64"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 677.8983521461487,
+      "source": "GEO"
+    },
+    "COSMIC": {
+      "error": "Failed to download real mutation data from COSMIC API",
+      "status": "failed"
+    },
+    "ICGC": {
+      "data_type": "bioproject_index",
+      "records_collected": 23,
+      "data": "        uid  ...  supergroup\n0   1430277  ...            \n1   1132917  ...  Eukaryotes\n2   1005341  ...  Eukaryotes\n3    875953  ...  Eukaryotes\n4    800581  ...  Eukaryotes\n5    748264  ...  Eukaryotes\n6    734225  ...            \n7    628610  ...  Eukaryotes\n8    542178  ...  Eukaryotes\n9    525995  ...  Eukaryotes\n10   371290  ...  Eukaryotes\n11   371289  ...  Eukaryotes\n12   306437  ...            \n13   279695  ...  Eukaryotes\n14   279694  ...  Eukaryotes\n15   248553  ...  Eukaryotes\n16   238221  ...  Eukaryotes\n17   238220  ...  Eukaryotes\n18   238218  ...            \n19   219095  ...  Eukaryotes\n20   171808  ...  Eukaryotes\n21   171807  ...  Eukaryotes\n22   157347  ...  Eukaryotes\n\n[23 rows x 35 columns]",
+      "metadata": {
+        "source": "ICGCCollector",
+        "data_type": "bioproject_index",
+        "collection_timestamp": "2026-04-23T22:25:36.258598",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 200,
+          "data_type": "bioproject_index",
+          "term": "ICGC cancer"
+        },
+        "output_directory": "data\\external_sources\\icgc"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:36.240848",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 0.6290879249572754,
+      "source": "ICGC"
+    },
+    "EGA": {
+      "data_type": "clinical",
+      "records_collected": 15,
+      "data": "   study_accession  ... data_source\n0       PRJDB10067  ...         ENA\n1       PRJDB10475  ...         ENA\n2       PRJDB10542  ...         ENA\n3       PRJDB10600  ...         ENA\n4       PRJDB10601  ...         ENA\n5       PRJDB10737  ...         ENA\n6       PRJDB10743  ...         ENA\n7       PRJDB10896  ...         ENA\n8       PRJDB10906  ...         ENA\n9       PRJDB10974  ...         ENA\n10      PRJDB11288  ...         ENA\n11      PRJDB11292  ...         ENA\n12      PRJDB11367  ...         ENA\n13      PRJDB11567  ...         ENA\n14      PRJDB11730  ...         ENA\n\n[15 rows x 3 columns]",
+      "metadata": {
+        "source": "EGACollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:37.635375",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\ega"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:37.625644",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 15,
+          "columns": 3,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "4172"
+        }
+      },
+      "collection_time": 1.376776933670044,
+      "source": "EGA"
+    },
+    "TCIA": {
+      "data_type": "clinical",
+      "records_collected": 154,
+      "data": "                        Collection\n0                          4D-Lung\n1                          A091105\n2                         ACNS0332\n3                       ACRIN-6698\n4    ACRIN-Contralateral-Breast-MR\n..                             ...\n149                      UPENN-GBM\n150                 VAREPOP-APOLLO\n151                         VICTRE\n152    Vestibular-Schwannoma-MC-RC\n153      Vestibular-Schwannoma-SEG\n\n[154 rows x 1 columns]",
+      "metadata": {
+        "source": "TCIACollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:39.718812",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\tcia"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:39.718812",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 154,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "11134"
+        }
+      },
+      "collection_time": 2.083437442779541,
+      "source": "TCIA"
+    },
+    "GDC": {
+      "data_type": "cases",
+      "records_collected": 500,
+      "data": "                                       id  ...                              submitter_portion_ids\n0    e3935ce4-64d3-4a66-ba11-d308b844b410  ...  [TCGA-E9-A5FL-01A-11, TCGA-E9-A5FL-01A-21, TCG...\n1    e3b555aa-7f0a-49c6-9b13-182c61a144c1  ...  [TCGA-A2-A1G4-01A-11, TCGA-A2-A1G4-01A-21-A17I...\n2    17ca61a2-607a-45ff-88fa-ef72e80bf891  ...         [TCGA-BH-A0HF-01A-11, TCGA-BH-A0HF-10A-01]\n3    7d681cc6-689d-41c8-9e84-e13733089ec9  ...  [TCGA-AR-A1AS-01A-21-A13E-20, TCGA-AR-A1AS-01A...\n4    17f275c1-a0d4-487d-8f02-ea279584b4cd  ...  [TCGA-D8-A13Y-10A-01, TCGA-D8-A13Y-01A-22-A21W...\n..                                    ...  ...                                                ...\n495  b43e41af-1d82-4b5f-b8f1-add0510e6b86  ...         [TCGA-A8-A07B-01A-11, TCGA-A8-A07B-10A-01]\n496  b58ad350-5140-4fa8-bc2c-24bca8395f3a  ...  [TCGA-A2-A04T-01A-31, TCGA-A2-A04T-01A-21, TCG...\n497  b63391a0-73f8-4544-9e94-f6529245ca2a  ...  [TCGA-E2-A1IL-10A-01, TCGA-E2-A1IL-01A-11, TCG...\n498  b6633c36-7ce4-4b69-9bf6-30b64d46c66f  ...         [TCGA-A8-A07C-10A-01, TCGA-A8-A07C-01A-11]\n499  b6b1dc9a-91f4-4b0a-afd5-62c9a90c0d5e  ...  [TCGA-AC-A2FM-11B-32, TCGA-AC-A2FM-01A-11, TCG...\n\n[500 rows x 24 columns]",
+      "metadata": {
+        "source": "GDCCollector",
+        "data_type": "cases",
+        "collection_timestamp": "2026-04-23T22:25:43.191369",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "data_type": "cases",
+          "size": 500,
+          "project": "TCGA-BRCA"
+        },
+        "output_directory": "data\\external_sources\\gdc"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:43.191369",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 3.4745657444000244,
+      "source": "GDC"
+    },
+    "CDC": {
+      "data_type": "clinical",
+      "records_collected": 20,
+      "data": "            topic  ...             footnote_id_list\n0   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n1   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n2   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n3   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n4   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n5   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n6   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n7   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n8   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n9   Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n10  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n11  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n12  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n13  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n14  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n15  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n16  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n17  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n18  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n19  Cancer deaths  ...  FN0160,FN0020,NT0088,SC0001\n\n[20 rows x 20 columns]",
+      "metadata": {
+        "source": "CDCCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:44.272014",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 1000,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\cdc"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:44.266749",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 20,
+          "columns": 20,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "26326"
+        }
+      },
+      "collection_time": 1.08064603805542,
+      "source": "CDC"
+    },
+    "NIH": {
+      "data_type": "clinical",
+      "records_collected": 40,
+      "data": "     appl_id  ...                            full_study_section.name\n0   11303351  ...            Cancer Centers Study Section (A)[NCI-A]\n1   11238013  ...                                        ZCA1-RTRB-C\n2   11238016  ...                                        ZCA1-RTRB-C\n3   11265949  ...            Special Emphasis Panel[ZRG1 CTH-Z (43)]\n4   11258545  ...            Cancer Centers Study Section (A)[NCI-A]\n5   11333658  ...           Special Emphasis Panel[ZRG1 CDPT-G (40)]\n6   11469228  ...            Cancer Centers Study Section (A)[NCI-A]\n7   11317103  ...            Cancer Centers Study Section (A)[NCI-A]\n8   11373659  ...            Cancer Centers Study Section (A)[NCI-A]\n9   11317098  ...            Cancer Centers Study Section (A)[NCI-A]\n10  11373554  ...            Cancer Centers Study Section (A)[NCI-A]\n11  11373589  ...            Cancer Centers Study Section (A)[NCI-A]\n12  11469218  ...            Cancer Centers Study Section (A)[NCI-A]\n13  11317239  ...            Cancer Centers Study Section (A)[NCI-A]\n14  11469212  ...            Cancer Centers Study Section (A)[NCI-A]\n15  11373545  ...            Cancer Centers Study Section (A)[NCI-A]\n16  11373536  ...            Cancer Centers Study Section (A)[NCI-A]\n17  11264392  ...            Special Emphasis Panel[ZRG1 CTH-Z (43)]\n18  11322721  ...            Cancer Centers Study Section (A)[NCI-A]\n19  11478111  ...                                               None\n20  11317111  ...            Cancer Centers Study Section (A)[NCI-A]\n21  11299003  ...                                    ZCA1-RTRB-0(O1)\n22  11469237  ...            Cancer Centers Study Section (A)[NCI-A]\n23  11317107  ...            Cancer Centers Study Section (A)[NCI-A]\n24  11299012  ...                                        ZCA1-RTRB-0\n25  11373229  ...                                        ZCA1-RTRB-Y\n26  11425603  ...                                               None\n27  11469225  ...            Cancer Centers Study Section (A)[NCI-A]\n28  11326659  ...            Cancer Centers Study Section (A)[NCI-A]\n29  11264787  ...            Cancer Centers Study Section (A)[NCI-A]\n30  11303297  ...            Cancer Centers Study Section (A)[NCI-A]\n31  11265050  ...            Special Emphasis Panel[ZRG1 CTH-Z (43)]\n32  11303321  ...            Cancer Centers Study Section (A)[NCI-A]\n33  11326650  ...            Cancer Centers Study Section (A)[NCI-A]\n34  11237043  ...  Career Development For Early Career Investigat...\n35  11240200  ...          HSR-4  Mental and Behavioral Health[HSR4]\n36  11264393  ...            Special Emphasis Panel[ZRG1 CTH-Z (43)]\n37  11373186  ...                                    ZCA1-RTRB-Y(J2)\n38  11357494  ...            Cancer Centers Study Section (A)[NCI-A]\n39  11317099  ...            Cancer Centers Study Section (A)[NCI-A]\n\n[40 rows x 79 columns]",
+      "metadata": {
+        "source": "NIHCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:45.421292",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\nih"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:45.417848",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 1.147268533706665,
+      "source": "NIH"
+    },
+    "Kaggle": {
+      "data_type": "clinical",
+      "records_collected": 20,
+      "data": "    did  ...                                            quality\n0     1  ...  [{'name': 'MajorityClassSize', 'value': '684.0...\n1     2  ...  [{'name': 'MajorityClassSize', 'value': '684.0...\n2     3  ...  [{'name': 'MajorityClassSize', 'value': '1669....\n3     4  ...  [{'name': 'MajorityClassSize', 'value': '37.0'...\n4     5  ...  [{'name': 'MajorityClassSize', 'value': '245.0...\n5     6  ...  [{'name': 'MajorityClassSize', 'value': '813.0...\n6     7  ...  [{'name': 'MajorityClassSize', 'value': '57.0'...\n7     8  ...  [{'name': 'NumberOfClasses', 'value': '0.0'}, ...\n8     9  ...  [{'name': 'MajorityClassSize', 'value': '67.0'...\n9    10  ...  [{'name': 'MajorityClassSize', 'value': '81.0'...\n10   11  ...  [{'name': 'MajorityClassSize', 'value': '288.0...\n11   12  ...  [{'name': 'MajorityClassSize', 'value': '200.0...\n12   13  ...  [{'name': 'MajorityClassSize', 'value': '201.0...\n13   14  ...  [{'name': 'MajorityClassSize', 'value': '200.0...\n14   15  ...  [{'name': 'MajorityClassSize', 'value': '458.0...\n15   16  ...  [{'name': 'MajorityClassSize', 'value': '200.0...\n16   18  ...  [{'name': 'MajorityClassSize', 'value': '200.0...\n17   20  ...  [{'name': 'MajorityClassSize', 'value': '200.0...\n18   22  ...  [{'name': 'MajorityClassSize', 'value': '200.0...\n19   23  ...  [{'name': 'MajorityClassSize', 'value': '629.0...\n\n[20 rows x 8 columns]",
+      "metadata": {
+        "source": "KaggleCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:46.811571",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\kaggle"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:46.811571",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 1.3902783393859863,
+      "source": "Kaggle"
+    },
+    "NCI": {
+      "data_type": "clinical",
+      "records_collected": 25,
+      "data": "         nct_id                                        brief_title\n0   NCT00005580  Bryostatin + Fludarabine in Treating Patients ...\n1   NCT00574496  Combination Chemotherapy Followed by Donor Ste...\n2   NCT06732388  Itraconazole in Combination With Ablation for ...\n3   NCT02333188  Genetic Analysis-Guided Dosing of FOLFIRABRAX ...\n4   NCT04858256  Pacritinib in Relapsed/Refractory T-cell Lymph...\n5   NCT05243056  A Quality of Life Intervention for Young Afric...\n6   NCT00002922  Paclitaxel in Treating Patients With Advanced ...\n7   NCT07331129  The Analgesic Efficacy of Ultrasound Guided Tr...\n8   NCT04025229  High Intensity Interval Training in Endometria...\n9   NCT04333537  Comparing Sentinel Lymph Node (SLN) Biopsy Wit...\n10  NCT00002545  Radiation Therapy Plus Chemotherapy in Treatin...\n11  NCT01138345  Biomarkers in Blood Samples From Older Breast ...\n12  NCT00234039  S0353, Gemcitabine in Treating Patients With R...\n13  NCT01585675    Specimen Banking From Patients With Lung Cancer\n14  NCT00859157  Pain After Tumescent Mastectomy or Standard Ma...\n15  NCT00176501  Irradiated Donor Lymphocytes in Treating Patie...\n16  NCT00274781  Arsenic Trioxide and Gemtuzumab Ozogamicin in ...\n17  NCT05705219  Development of 3D Multi-Parametric Ultrasound ...\n18  NCT00253630  Vorinostat in Treating Patients With Low-Grade...\n19  NCT04641728  Pembrolizumab Plus Olaparib in Patients With R...\n20  NCT07085728  Testing the Investigational Agent Combination ...\n21  NCT00004165  Melphalan Followed by Peripheral Stem Cell Tra...\n22  NCT00005042  SU5416 in Treating Patients With AIDS-Related ...\n23  NCT05237986  Cognitive Aftereffects of Neurotoxicity in Chi...\n24  NCT00068783  S0331: Imatinib Mesylate in Treating Patients ...",
+      "metadata": {
+        "source": "NCICollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:47.279906",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\nci"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:47.277896",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 25,
+          "columns": 2,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "5786"
+        }
+      },
+      "collection_time": 0.4683353900909424,
+      "source": "NCI"
+    },
+    "PubMed": {
+      "data_type": "literature",
+      "records_collected": 100,
+      "data": "         uid      pubdate  ...          sortfirstauthor vernaculartitle\n0   33049662     2020 Nov  ...                Pessoa LS                \n1   30968746     2019 Jun  ...  Voith von Voithenberg L                \n2   34207103  2021 Jun 18  ...                 Morand S                \n3   37702170         2024  ...             Gopinath SCB                \n4   34607491         2022  ...        Ram\u00edrez-Carmona W                \n..       ...          ...  ...                      ...             ...\n95  30353665     2019 May  ...             Srivastava A                \n96  35181766     2022 Apr  ...               Hlav\u00e1\u010dek A                \n97  38468228  2024 Mar 11  ...                    Sun H                \n98  36979600  2023 Mar 15  ...        Asci Erkocyigit B                \n99  29496040     2018 Mar  ...              Retzbach EP                \n\n[100 rows x 43 columns]",
+      "metadata": {
+        "source": "PubMedCollector",
+        "data_type": "literature",
+        "collection_timestamp": "2026-04-23T22:25:48.754047",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "literature",
+          "query": "cancer biomarker review",
+          "max_records": 100
+        },
+        "output_directory": "data\\external_sources\\pubmed"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:48.754047",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 1.4741415977478027,
+      "source": "PubMed"
+    },
+    "NCBI": {
+      "data_type": "gene",
+      "records_collected": 1,
+      "data": "    uid  ...                                       locationhist\n0  7157  ...  [{'annotationrelease': 'RS_2025_08', 'assembly...\n\n[1 rows x 21 columns]",
+      "metadata": {
+        "source": "NCBICollector",
+        "data_type": "gene",
+        "collection_timestamp": "2026-04-23T22:25:49.330243",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "gene",
+          "gene_symbol": "TP53",
+          "max_ids": 50
+        },
+        "output_directory": "data\\external_sources\\ncbi"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:49.327503",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 0.576195478439331,
+      "source": "NCBI"
+    },
+    "MICCAI": {
+      "data_type": "clinical",
+      "records_collected": 25,
+      "data": "                                              api_url  ...                          incentives\n0   https://grand-challenge.org/api/v1/challenges/...  ...                       [Publication]\n1   https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n2   https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n3   https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n4   https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n5   https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n6   https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n7   https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n8   https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n9   https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n10  https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n11  https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n12  https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n13  https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n14  https://grand-challenge.org/api/v1/challenges/...  ...                       [Publication]\n15  https://grand-challenge.org/api/v1/challenges/...  ...             [Monetary, Publication]\n16  https://grand-challenge.org/api/v1/challenges/...  ...               [Speaking Engagement]\n17  https://grand-challenge.org/api/v1/challenges/...  ...                          [Monetary]\n18  https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n19  https://grand-challenge.org/api/v1/challenges/...  ...               [Speaking Engagement]\n20  https://grand-challenge.org/api/v1/challenges/...  ...  [Publication, Speaking Engagement]\n21  https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n22  https://grand-challenge.org/api/v1/challenges/...  ...                       [Publication]\n23  https://grand-challenge.org/api/v1/challenges/...  ...                                  []\n24  https://grand-challenge.org/api/v1/challenges/...  ...                       [Publication]\n\n[25 rows x 15 columns]",
+      "metadata": {
+        "source": "MICCAICollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:50.278279",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 20,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\miccai"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:50.276257",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 0.9480352401733398,
+      "source": "MICCAI"
+    },
+    "NIH_Clinical": {
+      "data_type": "clinical",
+      "records_collected": 25,
+      "data": "         nct_id  ...         overall_status\n0   NCT01247480  ...                UNKNOWN\n1   NCT03504488  ...              COMPLETED\n2   NCT05243056  ...             RECRUITING\n3   NCT00128856  ...              COMPLETED\n4   NCT01876251  ...             TERMINATED\n5   NCT05775822  ...              COMPLETED\n6   NCT01138345  ...              COMPLETED\n7   NCT01134172  ...  ACTIVE_NOT_RECRUITING\n8   NCT02812277  ...                UNKNOWN\n9   NCT03936075  ...                UNKNOWN\n10  NCT00859157  ...              COMPLETED\n11  NCT01133912  ...              COMPLETED\n12  NCT05907681  ...             RECRUITING\n13  NCT01745367  ...             TERMINATED\n14  NCT03018080  ...              COMPLETED\n15  NCT01356862  ...              COMPLETED\n16  NCT00234403  ...              COMPLETED\n17  NCT01920061  ...              COMPLETED\n18  NCT05650086  ...             TERMINATED\n19  NCT05489354  ...              COMPLETED\n20  NCT04666805  ...                UNKNOWN\n21  NCT05673629  ...                UNKNOWN\n22  NCT05888831  ...  ACTIVE_NOT_RECRUITING\n23  NCT07134153  ...             RECRUITING\n24  NCT01219075  ...              COMPLETED\n\n[25 rows x 3 columns]",
+      "metadata": {
+        "source": "NIHClinicalCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:50.740883",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\nih_clinical"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:50.738874",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 25,
+          "columns": 3,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "7733"
+        }
+      },
+      "collection_time": 0.462604284286499,
+      "source": "NIH_Clinical"
+    },
+    "Prostate_X": {
+      "data_type": "clinical",
+      "records_collected": 5,
+      "data": "   zenodo_id                      doi  ... publication_date access_right\n0   18370208  10.5281/zenodo.18370208  ...       2026-01-25   restricted\n1   17238024  10.5281/zenodo.17238024  ...       2025-09-30   restricted\n2   15643313  10.5281/zenodo.15643313  ...          2025-11         open\n3   10718469  10.5281/zenodo.10718469  ...       2024-08-28         open\n4   11620861  10.5281/zenodo.11620861  ...       2024-06-12         open\n\n[5 rows x 5 columns]",
+      "metadata": {
+        "source": "ProstateXCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:53.525015",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 20,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\prostate_x"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:53.522302",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 5,
+          "columns": 5,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "1803"
+        }
+      },
+      "collection_time": 2.784132242202759,
+      "source": "Prostate_X"
+    },
+    "PathLAION": {
+      "data_type": "clinical",
+      "records_collected": 15,
+      "data": "                                                   id  ...  private\n0   EulerianKnight/breast-histopathology-images-tr...  ...    False\n1               dbzadnen/breast-histopathology-images  ...    False\n2   mezeidragos-lateral/bach-breast-histopathology...  ...    False\n3   mezeidragos-lateral/bach-breast-histopathology...  ...    False\n4   mezeidragos-lateral/bach-breast-histopathology...  ...    False\n5            serag-ai/Synthetic-Histopathology-Images  ...    False\n6                                Cilem/histopathology  ...    False\n7                           Cilem/histopathology-1024  ...    False\n8                      Cilem/mixed-histopathology-512  ...    False\n9   BIOMEDICA/biomedica_histopathology_subset_webd...  ...    False\n10  BIOMEDICA/biomedica_histopathology_subset_parquet  ...    False\n11              nayoungku1/npz-histopathology-dataset  ...    False\n12    junyeong-nero/mini-breast-histopathology-images  ...    False\n13  electricsheepafrica/africa-synth-cancer-cancer...  ...    False\n14              GitHunter/dlmi-histopathology-results  ...    False\n\n[15 rows x 5 columns]",
+      "metadata": {
+        "source": "PathLAIONCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:53.955014",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\pathlaion"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:53.951653",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 15,
+          "columns": 5,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "2545"
+        }
+      },
+      "collection_time": 0.42999911308288574,
+      "source": "PathLAION"
+    },
+    "CAMELYON": {
+      "data_type": "clinical",
+      "records_collected": 5,
+      "data": "                    Collection\n0  Advanced-MRI-Breast-Lesions\n1        Breast-MRI-NACT-Pilot\n2       Duke-Breast-Cancer-MRI\n3           QIN Breast DCE-MRI\n4             RIDER Breast MRI",
+      "metadata": {
+        "source": "CAMELYONCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:56.035321",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 20,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\camelyon"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:56.033310",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 5,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "521"
+        }
+      },
+      "collection_time": 2.0803072452545166,
+      "source": "CAMELYON"
+    },
+    "PanCancer_Atlas": {
+      "data_type": "clinical",
+      "records_collected": 40,
+      "data": "                                                 name  ...                      citation\n0             Acute Myeloid Leukemia (TCGA GDC, 2025)  ...                           NaN\n1      Acute Myeloid Leukemia (TCGA, Firehose Legacy)  ...                           NaN\n2            Acute Myeloid Leukemia (TCGA, NEJM 2013)  ...               TCGA, NEJM 2013\n3      Acute Myeloid Leukemia (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n4           Adrenocortical Carcinoma (TCGA GDC, 2025)  ...                           NaN\n5    Adrenocortical Carcinoma (TCGA, Firehose Legacy)  ...                           NaN\n6    Adrenocortical Carcinoma (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n7        Adult Soft Tissue Sarcomas (TCGA, Cell 2017)  ...               TCGA, Cell 2017\n8            Bladder Cancer (MSK/TCGA, Eur Urol 2020)  ...  Pietzak et al. Eur Urol 2019\n9                    Bladder Cancer (TCGA, Cell 2017)  ...    Robertson et al. Cell 2017\n10      Bladder Urothelial Carcinoma (TCGA GDC, 2025)  ...                           NaN\n11  Bladder Urothelial Carcinoma (TCGA, Firehose L...  ...                           NaN\n12   Bladder Urothelial Carcinoma (TCGA, Nature 2014)  ...             TCGA, Nature 2014\n13  Bladder Urothelial Carcinoma (TCGA, PanCancer ...  ...               TCGA, Cell 2018\n14   Brain Lower Grade Glioma (TCGA, Firehose Legacy)  ...                           NaN\n15   Brain Lower Grade Glioma (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n16        Breast Invasive Carcinoma (TCGA, Cell 2015)  ...               TCGA, Cell 2015\n17  Breast Invasive Carcinoma (TCGA, Firehose Legacy)  ...                           NaN\n18      Breast Invasive Carcinoma (TCGA, Nature 2012)  ...             TCGA, Nature 2012\n19  Breast Invasive Carcinoma (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n20  Cervical Squamous Cell Carcinoma (TCGA GDC, 2025)  ...                           NaN\n21  Cervical Squamous Cell Carcinoma (TCGA, PanCan...  ...               TCGA, Cell 2018\n22  Cervical Squamous Cell Carcinoma and Endocervi...  ...                           NaN\n23                Cholangiocarcinoma (TCGA GDC, 2025)  ...                           NaN\n24         Cholangiocarcinoma (TCGA, Firehose Legacy)  ...                           NaN\n25         Cholangiocarcinoma (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n26  Chromophobe Renal Cell Carcinoma (TCGA GDC, 2025)  ...                           NaN\n27              Colon Adenocarcinoma (TCGA GDC, 2025)  ...                           NaN\n28  Colorectal Adenocarcinoma (TCGA, Firehose Legacy)  ...                           NaN\n29      Colorectal Adenocarcinoma (TCGA, Nature 2012)  ...             TCGA, Nature 2012\n30  Colorectal Adenocarcinoma (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n31                Cutaneous Melanoma (TCGA GDC, 2025)  ...                           NaN\n32                    Diffuse Glioma (TCGA GDC, 2025)  ...                           NaN\n33  Diffuse Large B-Cell Lymphoma (TCGA, PanCancer...  ...               TCGA, Cell 2018\n34  Diffuse Large B-Cell Lymphoma, NOS (TCGA GDC, ...  ...                           NaN\n35             Endometrial Carcinoma (TCGA GDC, 2025)  ...                           NaN\n36         Esophageal Adenocarcinoma (TCGA GDC, 2025)  ...                           NaN\n37  Esophageal Adenocarcinoma (TCGA, PanCancer Atlas)  ...               TCGA, Cell 2018\n38       Esophageal Carcinoma (TCGA, Firehose Legacy)  ...                           NaN\n39           Esophageal Carcinoma (TCGA, Nature 2017)  ...             TCGA, Nature 2017\n\n[40 rows x 14 columns]",
+      "metadata": {
+        "source": "PanCancerAtlasCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:57.146861",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\pancancer_atlas"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:57.142307",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 1.111539602279663,
+      "source": "PanCancer_Atlas"
+    },
+    "SEER": {
+      "data_type": "clinical",
+      "records_collected": 15,
+      "data": "    year stateabbr  ... geolocation.type                geolocation.coordinates\n0   2022        AR  ...            Point  [-92.3318762564724, 35.1471729558217]\n1   2022        AL  ...            Point   [-85.3024748570754, 31.153023163546]\n2   2022        CA  ...            Point   [-122.72355494043, 38.0735138436081]\n3   2022        AR  ...            Point  [-94.2415839878892, 33.9971085707583]\n4   2022        AR  ...            Point    [-92.882040791321, 33.593253927504]\n5   2022        AL  ...            Point  [-87.2942727229619, 32.6384797740624]\n6   2022        AZ  ...            Point  [-111.790179841763, 32.0975237350697]\n7   2022        AL  ...            Point  [-86.0349319631417, 34.0451449448922]\n8   2022        AL  ...            Point   [-87.3654708804686, 31.570816777416]\n9   2022        CA  ...            Point   [-121.60115169224, 39.6663795928272]\n10  2022        AR  ...            Point  [-92.3119548341849, 34.7700394452014]\n11  2022        AL  ...            Point   [-86.8530296512976, 34.453569812448]\n12  2022        AK  ...            Point  [-159.722233405755, 67.0527933404638]\n13  2022        AL  ...            Point   [-86.306202322979, 34.3673847093536]\n14  2022        AR  ...            Point  [-91.7196579038053, 33.5894113647675]\n\n[15 rows x 21 columns]",
+      "metadata": {
+        "source": "SEERCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:57.855543",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 1000,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\seer"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:57.852312",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 0.7086818218231201,
+      "source": "SEER"
+    },
+    "NCDB": {
+      "data_type": "clinical",
+      "records_collected": 25,
+      "data": "     appl_id  ...                            full_study_section.name\n0   11469266  ...            Cancer Centers Study Section (A)[NCI-A]\n1   11286627  ...  Cancer, Heart, and Sleep Epidemiology B Study ...\n2   11514604  ...                                               None\n3   11469037  ...  Cancer, Heart, and Sleep Epidemiology B Study ...\n4   11372794  ...  Science of Implementation in Health and Health...\n5   11373659  ...            Cancer Centers Study Section (A)[NCI-A]\n6   11368697  ...  Science of Implementation in Health and Health...\n7   11321108  ...  Interdisciplinary Clinical Care in Specialty C...\n8   11129108  ...                                               None\n9   11266203  ...            Special Emphasis Panel[ZRG1-F16-L(20)L]\n10  11267222  ...  HSR-5 Health Care System Organization and Deli...\n11  11424416  ...  Organization and Delivery of Health Services S...\n12  11252884  ...                                     ZCA1-SRB-P(O1)\n13  11285217  ...  Clinical Informatics and Digital Health Study ...\n14  11240200  ...          HSR-4  Mental and Behavioral Health[HSR4]\n15  11397688  ...  Healthcare and Health Disparities Study Sectio...\n16  11317111  ...            Cancer Centers Study Section (A)[NCI-A]\n17  11297883  ...            Special Emphasis Panel[ZRG1 HSS-P (90)]\n18  11265046  ...            Special Emphasis Panel[ZRG1 CTH-Z (43)]\n19  11247545  ...  Health Services: Quality and Effectiveness Stu...\n20  11425603  ...                                               None\n21  11237042  ...                   Pediatrics Study Section[CHHD-A]\n22  11302139  ...            Special Emphasis Panel[ZRG1 HSS-X (90)]\n23  11262209  ...            Special Emphasis Panel[ZRG1-HSS-G(90)S]\n24  11238044  ...  HSR-6 Aging and Recovery; Workforce Performanc...\n\n[25 rows x 79 columns]",
+      "metadata": {
+        "source": "NCDBCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:25:58.985376",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 500,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\ncdb"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:25:58.983368",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 1.1298332214355469,
+      "source": "NCDB"
+    },
+    "MIMIC": {
+      "data_type": "clinical",
+      "records_collected": 229,
+      "data": "     row_id  subject_id  ... hospital_expire_flag has_chartevents_data\n0      9467       10006  ...                  NaN                  NaN\n1      9472       10011  ...                  NaN                  NaN\n2      9474       10013  ...                  NaN                  NaN\n3      9478       10017  ...                  NaN                  NaN\n4      9479       10019  ...                  NaN                  NaN\n..      ...         ...  ...                  ...                  ...\n224   41055       44083  ...                  0.0                  1.0\n225   41070       44154  ...                  1.0                  1.0\n226   41087       44212  ...                  0.0                  1.0\n227   41090       44222  ...                  0.0                  1.0\n228   41092       44228  ...                  0.0                  1.0\n\n[229 rows x 26 columns]",
+      "metadata": {
+        "source": "MIMICCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:00.414409",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\mimic"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:00.402554",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [
+          "High percentage of missing values"
+        ],
+        "metrics": {
+          "rows": 229,
+          "columns": 26,
+          "missing_values": "2755",
+          "duplicate_rows": "0",
+          "memory_usage": "244627"
+        }
+      },
+      "collection_time": 1.4280636310577393,
+      "source": "MIMIC"
+    },
+    "Wisconsin_Breast_Cancer": {
+      "data_type": "clinical",
+      "records_collected": 569,
+      "data": "     mean radius  mean texture  ...  target  diagnosis\n0          17.99         10.38  ...       0     benign\n1          20.57         17.77  ...       0     benign\n2          19.69         21.25  ...       0     benign\n3          11.42         20.38  ...       0     benign\n4          20.29         14.34  ...       0     benign\n..           ...           ...  ...     ...        ...\n564        21.56         22.39  ...       0     benign\n565        20.13         28.25  ...       0     benign\n566        16.60         28.08  ...       0     benign\n567        20.60         29.33  ...       0     benign\n568         7.76         24.54  ...       1  malignant\n\n[569 rows x 32 columns]",
+      "metadata": {
+        "source": "WisconsinBreastCancerCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:01.439436",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\wisconsin_breast_cancer"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:01.432424",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 569,
+          "columns": 32,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "175886"
+        }
+      },
+      "collection_time": 1.0250270366668701,
+      "source": "Wisconsin_Breast_Cancer"
+    },
+    "DDSM": {
+      "data_type": "clinical",
+      "records_collected": 1,
+      "data": "  Collection\n0  CBIS-DDSM",
+      "metadata": {
+        "source": "DDSMCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:03.481348",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\ddsm"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:03.474993",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 1,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "198"
+        }
+      },
+      "collection_time": 2.041912317276001,
+      "source": "DDSM"
+    },
+    "INbreast": {
+      "data_type": "clinical",
+      "records_collected": 5,
+      "data": "   zenodo_id                               doi  ... publication_date access_right\n0   15679173  10.11591/ijece.v15i3.pp2820-2833  ...       2025-06-01         open\n1   14553484             10.3390/ app112412122  ...       2021-12-20         open\n2    1195615            10.5281/zenodo.1195615  ...       2018-02-20         open\n3   14769221           10.5281/zenodo.14769221  ...       2025-01-30         open\n4    3353623            10.5281/zenodo.3353623  ...       2019-06-07         open\n\n[5 rows x 5 columns]",
+      "metadata": {
+        "source": "INbreastCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:05.207505",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\inbreast"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:05.202236",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 5,
+          "columns": 5,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "1974"
+        }
+      },
+      "collection_time": 1.7261569499969482,
+      "source": "INbreast"
+    },
+    "LIDC_IDRI": {
+      "data_type": "clinical",
+      "records_collected": 1,
+      "data": "  Collection\n0  LIDC-IDRI",
+      "metadata": {
+        "source": "LIDCIDRICollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:07.354644",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\lidc_idri"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:07.354644",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 1,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "198"
+        }
+      },
+      "collection_time": 2.147139072418213,
+      "source": "LIDC_IDRI"
+    },
+    "NSCLC_Radiogenomics": {
+      "data_type": "clinical",
+      "records_collected": 5,
+      "data": "                       Collection\n0             ACRIN-NSCLC-FDG-PET\n1             NSCLC Radiogenomics\n2                 NSCLC-Radiomics\n3        NSCLC-Radiomics-Genomics\n4  NSCLC-Radiomics-Interobserver1",
+      "metadata": {
+        "source": "NSCLCRadiogenomicsCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:09.526134",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\nsclc_radiogenomics"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:09.525024",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 5,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "524"
+        }
+      },
+      "collection_time": 2.169482707977295,
+      "source": "NSCLC_Radiogenomics"
+    },
+    "Luna16": {
+      "data_type": "clinical",
+      "records_collected": 1,
+      "data": "                    Collection\n0  SPIE-AAPM Lung CT Challenge",
+      "metadata": {
+        "source": "Luna16Collector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:11.628698",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 20,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\luna16"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:11.627385",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 1,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "216"
+        }
+      },
+      "collection_time": 2.1019785404205322,
+      "source": "Luna16"
+    },
+    "ISIC": {
+      "data_type": "clinical",
+      "records_collected": 8,
+      "data": "   zenodo_id                      doi  ... publication_date access_right\n0   14201693  10.5281/zenodo.14201693  ...       2024-08-05         open\n1   17470940  10.5281/zenodo.17470940  ...       2025-10-29         open\n2   13694709  10.5281/zenodo.13694709  ...       2024-07-30         open\n3    7715211   10.5281/zenodo.7715211  ...       2023-03-10   restricted\n4    3264023   10.5281/zenodo.3264023  ...       2019-07-01         open\n5    7785879   10.5281/zenodo.7785879  ...       2023-03-30   restricted\n6   18474110  10.5281/zenodo.18474110  ...       2026-02-03         open\n7    7725853   10.5281/zenodo.7725853  ...       2023-03-10   restricted\n\n[8 rows x 5 columns]",
+      "metadata": {
+        "source": "ISICCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:12.887579",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\isic"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:12.887579",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 8,
+          "columns": 5,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "2857"
+        }
+      },
+      "collection_time": 1.2588818073272705,
+      "source": "ISIC"
+    },
+    "HAM10000": {
+      "data_type": "clinical",
+      "records_collected": 5,
+      "data": "   zenodo_id                      doi  ... publication_date access_right\n0   17498946  10.5281/zenodo.17498946  ...       2025-11-01         open\n1   13959422  10.5281/zenodo.13959422  ...       2024-10-21         open\n2    7895907   10.5281/zenodo.7895907  ...       2023-05-07         open\n3   18284218  10.5281/zenodo.18284218  ...             2025         open\n4   15170640  10.5281/zenodo.15170640  ...       2025-04-09         open\n\n[5 rows x 5 columns]",
+      "metadata": {
+        "source": "HAM10000Collector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:14.030562",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\ham10000"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:14.028283",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 5,
+          "columns": 5,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "1579"
+        }
+      },
+      "collection_time": 1.1320610046386719,
+      "source": "HAM10000"
+    },
+    "BraTS": {
+      "data_type": "clinical",
+      "records_collected": 1,
+      "data": "    Collection\n0  ICDC-Glioma",
+      "metadata": {
+        "source": "BraTSCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:16.135775",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 20,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\brats"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:16.133758",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 1,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "200"
+        }
+      },
+      "collection_time": 2.104647397994995,
+      "source": "BraTS"
+    },
+    "REMBRANDT": {
+      "data_type": "clinical",
+      "records_collected": 10,
+      "data": "         uid  accession  ... geo2r   bioproject\n0  200155052  GSE155052  ...   yes  PRJNA648352\n1  200118683  GSE118683  ...   yes  PRJNA486451\n2  200108476  GSE108476  ...   yes  PRJNA427347\n3  200108475  GSE108475  ...    no  PRJNA427348\n4  200108474  GSE108474  ...   yes  PRJNA427368\n5  200095106   GSE95106  ...   yes  PRJNA376103\n6  200068848   GSE68848  ...   yes  PRJNA283899\n7  200054077   GSE54077  ...   yes  PRJNA235156\n8       5669    GDS5669  ...        PRJNA235156\n9  200031545   GSE31545  ...   yes  PRJNA145483\n\n[10 rows x 29 columns]",
+      "metadata": {
+        "source": "REMBRANDTCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:17.021583",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\rembrandt"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:17.021583",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 0.8858075141906738,
+      "source": "REMBRANDT"
+    },
+    "TCIA_Glioblastoma": {
+      "data_type": "clinical",
+      "records_collected": 3,
+      "data": "        Collection\n0  GBM-DSC-MRI-DRO\n1      ICDC-Glioma\n2        UPENN-GBM",
+      "metadata": {
+        "source": "TCIAGlioblastomaCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:19.032928",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 30,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\tcia_glioblastoma"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:19.032928",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 3,
+          "columns": 1,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "338"
+        }
+      },
+      "collection_time": 2.011345386505127,
+      "source": "TCIA_Glioblastoma"
+    },
+    "ClinVar": {
+      "error": "No data returned from ClinVar for data_type='genetic_variants'",
+      "status": "failed"
+    },
+    "OncoKB": {
+      "error": "OncoKB requires ONCOKB_API_TOKEN or ONCOKB_API_KEY (Bearer token from https://www.oncokb.org/apiAccess)",
+      "status": "failed"
+    },
+    "cBioPortal": {
+      "data_type": "cancer_types",
+      "records_collected": 897,
+      "data": "                                     name  ... cancerTypeId\n0                  Aggressive Angiomyxoma  ...           aa\n1                   Activated B-cell Type  ...          abc\n2               Acute Basophilic Leukemia  ...          abl\n3                  Adrenocortical Adenoma  ...          aca\n4            Adenoid Cystic Breast Cancer  ...         acbc\n..                                    ...  ...          ...\n892    Well-Differentiated Thyroid Cancer  ...         wdtc\n893         Waldenstrom Macroglobulinemia  ...           wm\n894  Warty Penile Squamous Cell Carcinoma  ...        wpscc\n895                          Wilms' Tumor  ...           wt\n896                       Xanthogranuloma  ...          xga\n\n[897 rows x 5 columns]",
+      "metadata": {
+        "source": "cBioPortalCollector",
+        "data_type": "cancer_types",
+        "collection_timestamp": "2026-04-23T22:26:33.695516",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "cancer_types",
+          "page_size": 200
+        },
+        "output_directory": "data\\external_sources\\cbioportal"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:33.693508",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 897,
+          "columns": 5,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "301688"
+        }
+      },
+      "collection_time": 0.49950480461120605,
+      "source": "cBioPortal"
+    },
+    "FireCloud_Terra": {
+      "data_type": "clinical",
+      "records_collected": 30,
+      "data": "           type descriptorType  ... conceptDois.GITHUB.name  conceptDois.GITHUB.type\n0   BioWorkflow      gxformat2  ...                     NaN                      NaN\n1   BioWorkflow      gxformat2  ...                     NaN                      NaN\n2   BioWorkflow      gxformat2  ...                     NaN                      NaN\n3   BioWorkflow      gxformat2  ...                     NaN                      NaN\n4   BioWorkflow      gxformat2  ...                     NaN                      NaN\n5   BioWorkflow      gxformat2  ...                     NaN                      NaN\n6   BioWorkflow      gxformat2  ...                     NaN                      NaN\n7   BioWorkflow      gxformat2  ...                     NaN                      NaN\n8   BioWorkflow            NFL  ...  10.5281/zenodo.1400710                  CONCEPT\n9   BioWorkflow            NFL  ...                     NaN                      NaN\n10  BioWorkflow            NFL  ...  10.5281/zenodo.3456879                  CONCEPT\n11  BioWorkflow            NFL  ...  10.5281/zenodo.3589527                  CONCEPT\n12  BioWorkflow            NFL  ...  10.5281/zenodo.1401039                  CONCEPT\n13  BioWorkflow            NFL  ...  10.5281/zenodo.1465061                  CONCEPT\n14  BioWorkflow            NFL  ...                     NaN                      NaN\n15  BioWorkflow            NFL  ...  10.5281/zenodo.3240506                  CONCEPT\n16  BioWorkflow            NFL  ...  10.5281/zenodo.1343417                  CONCEPT\n17  BioWorkflow            WDL  ...                     NaN                      NaN\n18  BioWorkflow            CWL  ...                     NaN                      NaN\n19  BioWorkflow            WDL  ...                     NaN                      NaN\n20  BioWorkflow      gxformat2  ...                     NaN                      NaN\n21  BioWorkflow            WDL  ...  10.5281/zenodo.3957862                  CONCEPT\n22  BioWorkflow            WDL  ...                     NaN                      NaN\n23  BioWorkflow            WDL  ...  10.5281/zenodo.3957862                  CONCEPT\n24  BioWorkflow            WDL  ...                     NaN                      NaN\n25  BioWorkflow      gxformat2  ...                     NaN                      NaN\n26  BioWorkflow            WDL  ...                     NaN                      NaN\n27  BioWorkflow            WDL  ...                     NaN                      NaN\n28  BioWorkflow      gxformat2  ...                     NaN                      NaN\n29  BioWorkflow            WDL  ...                     NaN                      NaN\n\n[30 rows x 76 columns]",
+      "metadata": {
+        "source": "FireCloudTerraCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:37.452114",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\firecloud_terra"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:37.449034",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 3.754589080810547,
+      "source": "FireCloud_Terra"
+    },
+    "Google_Cloud_Healthcare": {
+      "data_type": "clinical",
+      "records_collected": 5,
+      "data": "  resourceType    id gender   birthDate\n0      Patient  None   male  1974-12-25\n1      Patient  None   male  1974-12-25\n2      Patient   123   male  1974-12-25\n3      Patient  None   male  1974-12-25\n4      Patient  123a   male  1974-12-25",
+      "metadata": {
+        "source": "GoogleCloudHealthcareCollector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:37.902654",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 50,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\google_cloud_healthcare"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:37.900070",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [
+          "High percentage of missing values"
+        ],
+        "metrics": {
+          "rows": 5,
+          "columns": 4,
+          "missing_values": "3",
+          "duplicate_rows": "2",
+          "memory_usage": "1285"
+        }
+      },
+      "collection_time": 0.45054078102111816,
+      "source": "Google_Cloud_Healthcare"
+    },
+    "CCLE": {
+      "data_type": "cell_line_data",
+      "records_collected": 1739,
+      "data": "                                     sample_id  ... tissue_site\n0                                   DMS53_LUNG  ...        LUNG\n1                       SW1116_LARGE_INTESTINE  ...   INTESTINE\n2                                NCIH1694_LUNG  ...        LUNG\n3     P3HR1_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE  ...      TISSUE\n4     HUT78_HAEMATOPOIETIC_AND_LYMPHOID_TISSUE  ...      TISSUE\n...                                        ...  ...         ...\n1734                                   IOSE523  ...            \n1735                              IOSE7516SV40  ...            \n1736                                   NCIH735  ...            \n1737                                   OVCA432  ...            \n1738                                 UCH1_BONE  ...        BONE\n\n[1739 rows x 3 columns]",
+      "metadata": {
+        "source": "CCLECollector",
+        "data_type": "cell_line_data",
+        "collection_timestamp": "2026-04-23T22:26:38.411802",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "cell_line_data",
+          "max_samples": 2500
+        },
+        "output_directory": "data\\external_sources\\ccle"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:38.402434",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 1739,
+          "columns": 3,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "364879"
+        }
+      },
+      "collection_time": 0.5091478824615479,
+      "source": "CCLE"
+    },
+    "GDSC": {
+      "data_type": "drug_annotation",
+      "records_collected": 282,
+      "data": "       Unnamed: 0       cid  ... bimodality density_cover_10_90\n0       Erlotinib    176870  ...   0.496001            0.408847\n1       Rapamycin   5284616  ...   0.522262            0.196361\n2       Sunitinib   5329102  ...   0.282786            0.590263\n3      PHA-665752  10461815  ...   0.430990            0.346311\n4          MG-132    462382  ...   0.383828            0.355013\n..            ...       ...  ...        ...                 ...\n277       AZD1208  58423153  ...   0.299235            0.390980\n278       AZD1332  49831044  ...   0.198579            0.423209\n279         SN-38    104842  ...   0.356257            0.092065\n280  Pevonedistat  16720766  ...   0.436623            0.423299\n281         PFI-3  78243717  ...   0.292405            0.183620\n\n[282 rows x 7 columns]",
+      "metadata": {
+        "source": "GDSCCollector",
+        "data_type": "drug_annotation",
+        "collection_timestamp": "2026-04-23T22:26:39.440523",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "drug_annotation",
+          "max_rows": 2000
+        },
+        "output_directory": "data\\external_sources\\gdsc"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:39.438514",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [],
+        "metrics": {
+          "rows": 282,
+          "columns": 7,
+          "missing_values": "0",
+          "duplicate_rows": "0",
+          "memory_usage": "92474"
+        }
+      },
+      "collection_time": 1.0287210941314697,
+      "source": "GDSC"
+    },
+    "NCI_60": {
+      "data_type": "clinical",
+      "records_collected": 12,
+      "data": "          uid  accession  ... geo2r    bioproject\n0   200244150  GSE244150  ...    no  PRJNA1021529\n1   200210541  GSE210541  ...   yes   PRJNA866130\n2   200210540  GSE210540  ...   yes   PRJNA866131\n3   200182772  GSE182772  ...   yes   PRJNA757738\n4   200143653  GSE143653  ...    no   PRJNA601191\n5   200140937  GSE140937  ...   yes   PRJNA591706\n6   200140936  GSE140936  ...   yes   PRJNA591707\n7   200140935  GSE140935  ...    no   PRJNA591708\n8   200140934  GSE140934  ...    no   PRJNA591709\n9   200140933  GSE140933  ...    no   PRJNA591710\n10  200140932  GSE140932  ...    no   PRJNA591712\n11  200140175  GSE140175  ...   yes   PRJNA588475\n\n[12 rows x 29 columns]",
+      "metadata": {
+        "source": "NCI60Collector",
+        "data_type": "clinical",
+        "collection_timestamp": "2026-04-23T22:26:40.059623",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "sample_limit": 100,
+          "data_type": "clinical"
+        },
+        "output_directory": "data\\external_sources\\nci_60"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:26:40.058139",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 0.6170945167541504,
+      "source": "NCI_60"
+    }
+  },
+  "summary": {
+    "total_sources": 41,
+    "successful_sources": 38,
+    "failed_sources": 3,
+    "successful_source_names": [
+      "TCGA",
+      "GEO",
+      "ICGC",
+      "EGA",
+      "TCIA",
+      "GDC",
+      "CDC",
+      "NIH",
+      "Kaggle",
+      "NCI",
+      "PubMed",
+      "NCBI",
+      "MICCAI",
+      "NIH_Clinical",
+      "Prostate_X",
+      "PathLAION",
+      "CAMELYON",
+      "PanCancer_Atlas",
+      "SEER",
+      "NCDB",
+      "MIMIC",
+      "Wisconsin_Breast_Cancer",
+      "DDSM",
+      "INbreast",
+      "LIDC_IDRI",
+      "NSCLC_Radiogenomics",
+      "Luna16",
+      "ISIC",
+      "HAM10000",
+      "BraTS",
+      "REMBRANDT",
+      "TCIA_Glioblastoma",
+      "cBioPortal",
+      "FireCloud_Terra",
+      "Google_Cloud_Healthcare",
+      "CCLE",
+      "GDSC",
+      "NCI_60"
+    ],
+    "failed_source_names": [
+      "COSMIC",
+      "ClinVar",
+      "OncoKB"
+    ],
+    "total_records_collected": 325158,
+    "total_samples_collected": 120,
+    "total_collection_time": 973.109436750412,
+    "average_time_per_source": 23.73437650610761,
+    "collection_timestamp": "2026-04-23T22:26:40.059623"
+  },
+  "collection_log": [
+    {
+      "timestamp": "2026-04-23T22:14:16.203529",
+      "source": "TCGA",
+      "status": "success",
+      "collection_time": 229.253342628479,
+      "records_collected": 0,
+      "samples_collected": 120
+    },
+    {
+      "timestamp": "2026-04-23T22:25:34.101881",
+      "source": "GEO",
+      "status": "success",
+      "collection_time": 677.8983521461487,
+      "records_collected": 320302,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:35.629510",
+      "source": "COSMIC",
+      "status": "failed",
+      "error": "Failed to download real mutation data from COSMIC API"
+    },
+    {
+      "timestamp": "2026-04-23T22:25:36.258598",
+      "source": "ICGC",
+      "status": "success",
+      "collection_time": 0.6290879249572754,
+      "records_collected": 23,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:37.635375",
+      "source": "EGA",
+      "status": "success",
+      "collection_time": 1.376776933670044,
+      "records_collected": 15,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:39.718812",
+      "source": "TCIA",
+      "status": "success",
+      "collection_time": 2.083437442779541,
+      "records_collected": 154,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:43.193378",
+      "source": "GDC",
+      "status": "success",
+      "collection_time": 3.4745657444000244,
+      "records_collected": 500,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:44.274024",
+      "source": "CDC",
+      "status": "success",
+      "collection_time": 1.08064603805542,
+      "records_collected": 20,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:45.421292",
+      "source": "NIH",
+      "status": "success",
+      "collection_time": 1.147268533706665,
+      "records_collected": 40,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:46.811571",
+      "source": "Kaggle",
+      "status": "success",
+      "collection_time": 1.3902783393859863,
+      "records_collected": 20,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:47.279906",
+      "source": "NCI",
+      "status": "success",
+      "collection_time": 0.4683353900909424,
+      "records_collected": 25,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:48.754047",
+      "source": "PubMed",
+      "status": "success",
+      "collection_time": 1.4741415977478027,
+      "records_collected": 100,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:49.330243",
+      "source": "NCBI",
+      "status": "success",
+      "collection_time": 0.576195478439331,
+      "records_collected": 1,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:50.278279",
+      "source": "MICCAI",
+      "status": "success",
+      "collection_time": 0.9480352401733398,
+      "records_collected": 25,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:50.740883",
+      "source": "NIH_Clinical",
+      "status": "success",
+      "collection_time": 0.462604284286499,
+      "records_collected": 25,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:53.525015",
+      "source": "Prostate_X",
+      "status": "success",
+      "collection_time": 2.784132242202759,
+      "records_collected": 5,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:53.955014",
+      "source": "PathLAION",
+      "status": "success",
+      "collection_time": 0.42999911308288574,
+      "records_collected": 15,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:56.035321",
+      "source": "CAMELYON",
+      "status": "success",
+      "collection_time": 2.0803072452545166,
+      "records_collected": 5,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:57.146861",
+      "source": "PanCancer_Atlas",
+      "status": "success",
+      "collection_time": 1.111539602279663,
+      "records_collected": 40,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:57.855543",
+      "source": "SEER",
+      "status": "success",
+      "collection_time": 0.7086818218231201,
+      "records_collected": 15,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:25:58.985376",
+      "source": "NCDB",
+      "status": "success",
+      "collection_time": 1.1298332214355469,
+      "records_collected": 25,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:00.414409",
+      "source": "MIMIC",
+      "status": "success",
+      "collection_time": 1.4280636310577393,
+      "records_collected": 229,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:01.439436",
+      "source": "Wisconsin_Breast_Cancer",
+      "status": "success",
+      "collection_time": 1.0250270366668701,
+      "records_collected": 569,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:03.481348",
+      "source": "DDSM",
+      "status": "success",
+      "collection_time": 2.041912317276001,
+      "records_collected": 1,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:05.207505",
+      "source": "INbreast",
+      "status": "success",
+      "collection_time": 1.7261569499969482,
+      "records_collected": 5,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:07.354644",
+      "source": "LIDC_IDRI",
+      "status": "success",
+      "collection_time": 2.147139072418213,
+      "records_collected": 1,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:09.526134",
+      "source": "NSCLC_Radiogenomics",
+      "status": "success",
+      "collection_time": 2.169482707977295,
+      "records_collected": 5,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:11.628698",
+      "source": "Luna16",
+      "status": "success",
+      "collection_time": 2.1019785404205322,
+      "records_collected": 1,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:12.887579",
+      "source": "ISIC",
+      "status": "success",
+      "collection_time": 1.2588818073272705,
+      "records_collected": 8,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:14.031128",
+      "source": "HAM10000",
+      "status": "success",
+      "collection_time": 1.1320610046386719,
+      "records_collected": 5,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:16.135775",
+      "source": "BraTS",
+      "status": "success",
+      "collection_time": 2.104647397994995,
+      "records_collected": 1,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:17.021583",
+      "source": "REMBRANDT",
+      "status": "success",
+      "collection_time": 0.8858075141906738,
+      "records_collected": 10,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:19.032928",
+      "source": "TCIA_Glioblastoma",
+      "status": "success",
+      "collection_time": 2.011345386505127,
+      "records_collected": 3,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:26.483507",
+      "source": "ClinVar",
+      "status": "failed",
+      "error": "No data returned from ClinVar for data_type='genetic_variants'"
+    },
+    {
+      "timestamp": "2026-04-23T22:26:33.196011",
+      "source": "OncoKB",
+      "status": "failed",
+      "error": "OncoKB requires ONCOKB_API_TOKEN or ONCOKB_API_KEY (Bearer token from https://www.oncokb.org/apiAccess)"
+    },
+    {
+      "timestamp": "2026-04-23T22:26:33.695516",
+      "source": "cBioPortal",
+      "status": "success",
+      "collection_time": 0.49950480461120605,
+      "records_collected": 897,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:37.452114",
+      "source": "FireCloud_Terra",
+      "status": "success",
+      "collection_time": 3.754589080810547,
+      "records_collected": 30,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:37.902654",
+      "source": "Google_Cloud_Healthcare",
+      "status": "success",
+      "collection_time": 0.45054078102111816,
+      "records_collected": 5,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:38.411802",
+      "source": "CCLE",
+      "status": "success",
+      "collection_time": 0.5091478824615479,
+      "records_collected": 1739,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:39.440523",
+      "source": "GDSC",
+      "status": "success",
+      "collection_time": 1.0287210941314697,
+      "records_collected": 282,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T22:26:40.059623",
+      "source": "NCI_60",
+      "status": "success",
+      "collection_time": 0.6170945167541504,
+      "records_collected": 12,
+      "samples_collected": 0
+    }
+  ]
+}

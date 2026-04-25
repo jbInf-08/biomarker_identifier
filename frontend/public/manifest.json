@@ -1,0 +1,10 @@
+{
+  "name": "Cancer Biomarker Identifier",
+  "short_name": "BiomarkerID",
+  "description": "Multi-omics biomarker discovery and analysis",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#f8f9fa",
+  "theme_color": "#2c3e50",
+  "icons": []
+}

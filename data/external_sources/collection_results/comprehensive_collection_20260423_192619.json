@@ -1,0 +1,111 @@
+{
+  "results": {
+    "GDC": {
+      "data_type": "cases",
+      "records_collected": 100,
+      "data": "                                      id  ...                              submitter_portion_ids\n0   e3935ce4-64d3-4a66-ba11-d308b844b410  ...  [TCGA-E9-A5FL-01A-11, TCGA-E9-A5FL-01A-21, TCG...\n1   e3b555aa-7f0a-49c6-9b13-182c61a144c1  ...  [TCGA-A2-A1G4-01A-11, TCGA-A2-A1G4-01A-21-A17I...\n2   17ca61a2-607a-45ff-88fa-ef72e80bf891  ...         [TCGA-BH-A0HF-01A-11, TCGA-BH-A0HF-10A-01]\n3   7d681cc6-689d-41c8-9e84-e13733089ec9  ...  [TCGA-AR-A1AS-01A-21-A13E-20, TCGA-AR-A1AS-01A...\n4   17f275c1-a0d4-487d-8f02-ea279584b4cd  ...  [TCGA-D8-A13Y-10A-01, TCGA-D8-A13Y-01A-22-A21W...\n..                                   ...  ...                                                ...\n95  70931617-b3df-4a12-8e3f-2b2307602f48  ...  [TCGA-A8-A06X-01A-12-A615-42, TCGA-A8-A06X-01A...\n96  dd67408e-46ba-4573-9415-d4814e9f84de  ...  [TCGA-E9-A226-01A-21, TCGA-E9-A226-01A-11-A17K...\n97  71229981-97c2-4ae1-a130-fe5de336b37d  ...  [TCGA-C8-A12T-01A-31-A615-42, TCGA-C8-A12T-01A...\n98  71626753-cc34-4731-abc0-ae188b0964e7  ...  [TCGA-AO-A12C-10A-01, TCGA-AO-A12C-01A-11, TCG...\n99  0bc5744c-5fa3-45bb-87d0-70a02068b392  ...  [TCGA-BH-A0DG-01A-11-A13B-20, TCGA-BH-A0DG-10A...\n\n[100 rows x 24 columns]",
+      "metadata": {
+        "source": "GDCCollector",
+        "data_type": "cases",
+        "collection_timestamp": "2026-04-23T19:26:09.954520",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "data_type": "cases",
+          "size": 100,
+          "project": "TCGA-BRCA"
+        },
+        "output_directory": "data\\external_sources\\gdc"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T19:26:09.946189",
+        "data_type": "DataFrame",
+        "is_valid": false,
+        "issues": [
+          "Validation error: unhashable type: 'list'"
+        ],
+        "metrics": {}
+      },
+      "collection_time": 2.0200018882751465,
+      "source": "GDC"
+    },
+    "ClinVar": {
+      "data_type": "genetic_variants",
+      "records_collected": 100,
+      "data": "        uid  ... rcv_accession\n0   4819605  ...  VCV004819605\n1   4812286  ...  VCV004812286\n2   4811916  ...  VCV004811916\n3   4805346  ...  VCV004805346\n4   4800662  ...  VCV004800662\n..      ...  ...           ...\n95  4539755  ...  VCV004539755\n96  4539754  ...  VCV004539754\n97  4539753  ...  VCV004539753\n98  4539752  ...  VCV004539752\n99  4539751  ...  VCV004539751\n\n[100 rows x 6 columns]",
+      "metadata": {
+        "source": "ClinVarCollector",
+        "data_type": "genetic_variants",
+        "collection_timestamp": "2026-04-23T19:26:11.975865",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "data_type": "genetic_variants",
+          "gene_symbol": "TP53",
+          "max_records": 100
+        },
+        "output_directory": "data\\external_sources\\clinvar"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T19:26:11.959323",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [
+          "High percentage of missing values"
+        ],
+        "metrics": {
+          "rows": 100,
+          "columns": 6,
+          "missing_values": "300",
+          "duplicate_rows": "0",
+          "memory_usage": "30348"
+        }
+      },
+      "collection_time": 2.0213449001312256,
+      "source": "ClinVar"
+    },
+    "OncoKB": {
+      "error": "OncoKB requires ONCOKB_API_TOKEN or ONCOKB_API_KEY (Bearer token from https://www.oncokb.org/apiAccess)",
+      "status": "failed"
+    }
+  },
+  "summary": {
+    "total_sources": 3,
+    "successful_sources": 2,
+    "failed_sources": 1,
+    "successful_source_names": [
+      "GDC",
+      "ClinVar"
+    ],
+    "failed_source_names": [
+      "OncoKB"
+    ],
+    "total_records_collected": 200,
+    "total_samples_collected": 0,
+    "total_collection_time": 11.360859632492065,
+    "average_time_per_source": 3.7869532108306885,
+    "collection_timestamp": "2026-04-23T19:26:19.295377"
+  },
+  "collection_log": [
+    {
+      "timestamp": "2026-04-23T19:26:09.954520",
+      "source": "GDC",
+      "status": "success",
+      "collection_time": 2.0200018882751465,
+      "records_collected": 100,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T19:26:11.975865",
+      "source": "ClinVar",
+      "status": "success",
+      "collection_time": 2.0213449001312256,
+      "records_collected": 100,
+      "samples_collected": 0
+    },
+    {
+      "timestamp": "2026-04-23T19:26:19.295377",
+      "source": "OncoKB",
+      "status": "failed",
+      "error": "OncoKB requires ONCOKB_API_TOKEN or ONCOKB_API_KEY (Bearer token from https://www.oncokb.org/apiAccess)"
+    }
+  ]
+}

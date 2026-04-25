@@ -1,0 +1,12 @@
+[
+  {
+    "id": "brca1_mention",
+    "mock_output": "BRCA1 is discussed in homologous recombination repair pathways.",
+    "must_mention_genes": ["BRCA1"]
+  },
+  {
+    "id": "tp53_mention",
+    "mock_output": "TP53 mutations are common in many cancers.",
+    "must_mention_genes": ["TP53"]
+  }
+]

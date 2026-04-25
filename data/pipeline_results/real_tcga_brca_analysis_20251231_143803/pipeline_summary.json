@@ -1,0 +1,46 @@
+{
+  "run_id": "real_tcga_brca_analysis_20251231_143803",
+  "run_name": "real_tcga_brca_analysis",
+  "timestamp": "2025-12-31T14:38:03.849005",
+  "pipeline_steps": [
+    "data_loading",
+    "quality_control",
+    "data_filtering",
+    "normalization",
+    "statistical_analysis",
+    "ml_selection",
+    "biomarker_list"
+  ],
+  "data_summary": {
+    "n_genes": 99,
+    "n_samples": 4,
+    "n_classes": 2,
+    "validation_status": "warning"
+  },
+  "results_summary": {
+    "total_biomarkers": 0,
+    "statistically_significant": 0,
+    "ml_selected": 0,
+    "high_confidence": 0
+  },
+  "step_summaries": {
+    "quality_control": {
+      "status": "passed",
+      "n_warnings": 0,
+      "n_recommendations": 0
+    },
+    "statistical_analysis": {
+      "n_significant_features": 0,
+      "methods_applied": [
+        "t_test"
+      ]
+    },
+    "ml_selection": {
+      "consensus_features_count": 0,
+      "methods_applied": [
+        "stability",
+        "ensemble"
+      ]
+    }
+  }
+}

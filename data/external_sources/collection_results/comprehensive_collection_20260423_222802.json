@@ -1,0 +1,62 @@
+{
+  "results": {
+    "ClinVar": {
+      "data_type": "genetic_variants",
+      "records_collected": 500,
+      "data": "         uid  ... rcv_accession\n0    4819605  ...  VCV004819605\n1    4812286  ...  VCV004812286\n2    4811916  ...  VCV004811916\n3    4805346  ...  VCV004805346\n4    4800662  ...  VCV004800662\n..       ...  ...           ...\n495  3460326  ...  VCV003460326\n496  3460325  ...  VCV003460325\n497  3460324  ...  VCV003460324\n498  3460323  ...  VCV003460323\n499  3460322  ...  VCV003460322\n\n[500 rows x 6 columns]",
+      "metadata": {
+        "source": "ClinVarCollector",
+        "data_type": "genetic_variants",
+        "collection_timestamp": "2026-04-23T22:28:02.939823",
+        "collector_version": "1.0.0",
+        "collection_params": {
+          "data_type": "genetic_variants",
+          "gene_symbol": "TP53",
+          "max_records": 500
+        },
+        "output_directory": "data\\external_sources\\clinvar"
+      },
+      "validation": {
+        "timestamp": "2026-04-23T22:28:02.935581",
+        "data_type": "DataFrame",
+        "is_valid": true,
+        "issues": [
+          "High percentage of missing values"
+        ],
+        "metrics": {
+          "rows": 500,
+          "columns": 6,
+          "missing_values": "1500",
+          "duplicate_rows": "0",
+          "memory_usage": "150375"
+        }
+      },
+      "collection_time": 4.9336488246917725,
+      "source": "ClinVar"
+    }
+  },
+  "summary": {
+    "total_sources": 1,
+    "successful_sources": 1,
+    "failed_sources": 0,
+    "successful_source_names": [
+      "ClinVar"
+    ],
+    "failed_source_names": [],
+    "total_records_collected": 500,
+    "total_samples_collected": 0,
+    "total_collection_time": 4.934605598449707,
+    "average_time_per_source": 4.934605598449707,
+    "collection_timestamp": "2026-04-23T22:28:02.940780"
+  },
+  "collection_log": [
+    {
+      "timestamp": "2026-04-23T22:28:02.939823",
+      "source": "ClinVar",
+      "status": "success",
+      "collection_time": 4.9336488246917725,
+      "records_collected": 500,
+      "samples_collected": 0
+    }
+  ]
+}

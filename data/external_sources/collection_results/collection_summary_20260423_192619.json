@@ -1,0 +1,17 @@
+{
+  "total_sources": 3,
+  "successful_sources": 2,
+  "failed_sources": 1,
+  "successful_source_names": [
+    "GDC",
+    "ClinVar"
+  ],
+  "failed_source_names": [
+    "OncoKB"
+  ],
+  "total_records_collected": 200,
+  "total_samples_collected": 0,
+  "total_collection_time": 11.360859632492065,
+  "average_time_per_source": 3.7869532108306885,
+  "collection_timestamp": "2026-04-23T19:26:19.295377"
+}

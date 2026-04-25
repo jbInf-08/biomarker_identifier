@@ -1,0 +1,14 @@
+{
+  "total_sources": 1,
+  "successful_sources": 1,
+  "failed_sources": 0,
+  "successful_source_names": [
+    "ClinVar"
+  ],
+  "failed_source_names": [],
+  "total_records_collected": 500,
+  "total_samples_collected": 0,
+  "total_collection_time": 4.934605598449707,
+  "average_time_per_source": 4.934605598449707,
+  "collection_timestamp": "2026-04-23T22:28:02.940780"
+}

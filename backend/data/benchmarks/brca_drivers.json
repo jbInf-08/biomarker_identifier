@@ -1,0 +1,5 @@
+{
+  "name": "brca_core_drivers",
+  "description": "Representative high-priority genes for BRCA overlap checks",
+  "genes": ["BRCA1", "BRCA2", "TP53", "ERBB2", "ESR1", "PGR", "MKI67"]
+}

@@ -1,0 +1,76 @@
+# Include all production requirements
+-r requirements.txt
+
+# Development and testing
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+pytest-xdist==3.5.0
+pytest-html==4.1.1
+pytest-benchmark==4.0.0
+
+# Code quality and formatting
+black==23.11.0
+flake8==6.1.0
+isort==5.12.0
+mypy==1.7.1
+pre-commit==3.6.0
+bandit==1.7.5
+safety==2.3.5
+
+# Documentation
+mkdocs==1.5.3
+mkdocs-material==9.4.8
+mkdocstrings[python]==0.24.0
+mkdocs-autorefs==0.4.1
+
+# Development tools
+ipython==8.18.1
+jupyter==1.0.0
+jupyterlab==4.0.9
+notebook==7.0.6
+
+# Debugging and profiling
+debugpy==1.8.0
+memory-profiler==0.61.0
+line-profiler==4.1.2
+
+# API testing
+httpx==0.25.2
+requests-mock==1.11.0
+
+# Database testing
+pytest-postgresql==4.1.4
+pytest-redis==2.0.0
+
+# Mock and test utilities
+factory-boy==3.3.0
+faker==20.1.0
+freezegun==1.2.2
+
+# Type checking
+types-requests==2.31.0.10
+types-PyYAML==6.0.12.12
+types-redis==4.6.0.9
+
+# Development utilities
+watchdog==3.0.0
+python-dotenv==1.0.0
+click==8.1.7
+rich==13.7.0
+tqdm==4.66.1
+
+# Optional: Performance testing
+locust==2.17.0
+
+# Week 5: Additional testing dependencies
+# R integration testing
+pytest-r==0.1.0
+
+# Multi-omics testing utilities
+pytest-mock==3.12.0
+pytest-benchmark==4.0.0
+
+# Survival analysis testing
+pytest-lifelines==0.1.0

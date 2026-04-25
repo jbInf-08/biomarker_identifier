@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend-config
+  namespace: biomarker-identifier
+data:
+  DATABASE_URL: "postgresql://postgres:postgres@postgres:5432/biomarker_db"
+  REDIS_URL: "redis://redis:6379/0"
+  DEBUG: "False"
+  LOG_LEVEL: "INFO"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: backend-secret
+  namespace: biomarker-identifier
+type: Opaque
+data:
+  SECRET_KEY: eW91ci1zZWNyZXQta2V5LWNoYW5nZS1pbi1wcm9kdWN0aW9u # base64 encoded
+  COSMIC_API_KEY: "" # base64 encoded
+  ONCOKB_API_KEY: "" # base64 encoded
+  PUBMED_API_KEY: "" # base64 encoded
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  namespace: biomarker-identifier
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: your-registry/biomarker-identifier-backend:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DATABASE_URL
+        - name: REDIS_URL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: REDIS_URL
+        - name: DEBUG
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: DEBUG
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: backend-config
+              key: LOG_LEVEL
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: SECRET_KEY
+        - name: COSMIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: COSMIC_API_KEY
+        - name: ONCOKB_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: ONCOKB_API_KEY
+        - name: PUBMED_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: backend-secret
+              key: PUBMED_API_KEY
+        livenessProbe:
+          httpGet:
+            path: /health/live
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8000
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+  namespace: biomarker-identifier
+spec:
+  selector:
+    app: backend
+  ports:
+  - port: 8000
+    targetPort: 8000
+  type: ClusterIP

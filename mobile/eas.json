@@ -1,0 +1,35 @@
+{
+  "cli": {
+    "version": ">= 10.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
+    },
+    "preview": {
+      "distribution": "internal",
+      "android": { "buildType": "apk" },
+      "ios": { "simulator": false }
+    },
+    "production": {
+      "autoIncrement": true,
+      "android": { "buildType": "app-bundle" },
+      "ios": { "resourceClass": "m-medium" }
+    }
+  },
+  "submit": {
+    "production": {
+      "android": {
+        "serviceAccountKeyPath": "GOOGLE_PLAY_SERVICE_ACCOUNT_JSON",
+        "track": "internal"
+      },
+      "ios": {
+        "appleId": "YOUR_APPLE_ID",
+        "ascAppId": "YOUR_APP_STORE_CONNECT_APP_ID",
+        "appleTeamId": "YOUR_TEAM_ID"
+      }
+    }
+  }
+}

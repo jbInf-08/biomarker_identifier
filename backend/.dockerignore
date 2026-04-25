@@ -1,0 +1,19 @@
+# Keep build context small; code is copied explicitly in Dockerfile
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.hypothesis/
+htmlcov/
+.coverage
+*.db
+test_*.db
+.git/
+*.md
+.env
+.venv/
+venv/
+env/
+tests/
+*.log

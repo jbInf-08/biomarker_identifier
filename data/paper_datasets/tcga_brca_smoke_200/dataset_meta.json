@@ -1,0 +1,75 @@
+{
+  "generated_at_utc": "2026-04-16T03:59:25.062939+00:00",
+  "source": "NCI GDC (TCGA-BRCA)",
+  "gdc_api_base": "https://api.gdc.cancer.gov",
+  "gdc_data_release": {
+    "data_release": "Data Release 45.0 - December 04, 2025",
+    "data_release_version": {
+      "major": 45,
+      "minor": 0,
+      "release_date": "2025-12-04"
+    },
+    "commit": "01164cfb077abadf1024d4ed6a5a937df9ba9f57",
+    "tag": "8.3.1"
+  },
+  "expression_file": "expression.tsv",
+  "labels_file": "labels_er.tsv",
+  "workflow_type_filter": "STAR - Counts",
+  "gdc_files_page_size": 500,
+  "expression_log_norm": "none",
+  "expression_processing_order": [
+    "dedupe_columns",
+    "numeric_coerce_median_impute",
+    "log_norm:none",
+    "variance_top_k_genes"
+  ],
+  "n_genes": 3000,
+  "n_samples_expression": 186,
+  "n_samples_labeled": 186,
+  "class_counts_er_positive": {
+    "0": 46,
+    "1": 140
+  },
+  "cases_missing_clinical_xml": [],
+  "n_missing_clinical_xml": 0,
+  "indeterminate_er_examples": [
+    [
+      "TCGA-E9-A1R3",
+      null
+    ],
+    [
+      "TCGA-B6-A0I9",
+      "Indeterminate"
+    ],
+    [
+      "TCGA-E9-A247",
+      null
+    ],
+    [
+      "TCGA-E9-A1R0",
+      null
+    ],
+    [
+      "TCGA-E9-A1RH",
+      null
+    ],
+    [
+      "TCGA-PL-A8LY",
+      null
+    ],
+    [
+      "TCGA-E9-A248",
+      null
+    ],
+    [
+      "TCGA-BH-A204",
+      null
+    ],
+    [
+      "TCGA-E9-A245",
+      null
+    ]
+  ],
+  "n_indeterminate_er": 9,
+  "gdc_frozen_data_release_note": "NCI GDC data release at fetch time: Data Release 45.0 - December 04, 2025 \u2014 45.0 (2025-12-04)"
+}
