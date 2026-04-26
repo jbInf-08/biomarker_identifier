@@ -2,7 +2,7 @@
 
 A comprehensive web application for identifying and analyzing cancer biomarkers from multi-omics data using advanced machine learning and statistical methods.
 
-## 🚀 Features
+## Features
 
 ### Core Functionality
 - **Multi-omics Data Integration**: Support for gene expression, clinical, and mutation data
@@ -25,7 +25,7 @@ A comprehensive web application for identifying and analyzing cancer biomarkers 
 - **Monitoring**: Prometheus and Grafana integration
 - **Testing**: Comprehensive test suite with unit, integration, and E2E tests
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [How to Run (step-by-step)](#how-to-run-step-by-step)
 - [Quick Start](#quick-start)
@@ -39,7 +39,7 @@ A comprehensive web application for identifying and analyzing cancer biomarkers 
 - [Contributing](#contributing)
 - [License](#license)
 
-## 🧭 How to Run (step-by-step)
+## How to Run (step-by-step)
 
 **New to the project? Start here:** [`HOW_TO_RUN.md`](HOW_TO_RUN.md) is a dedicated, numbered walkthrough that takes you from an empty machine to a running app in under 15 minutes. It covers:
 
@@ -50,7 +50,7 @@ A comprehensive web application for identifying and analyzing cancer biomarkers 
 
 The rest of this README is a **reference**: features, configuration variables, project layout, testing, deployment, etc. Reach for it when you already have the app running and want to go deeper.
 
-## 🏃‍♂️ Quick Start
+## Quick Start
 
 ### Using Docker Compose (Recommended)
 
@@ -106,7 +106,7 @@ npm start
 
 For the full narrative version of either path see [`HOW_TO_RUN.md`](HOW_TO_RUN.md).
 
-## 🔧 Installation
+## Installation
 
 ### Prerequisites
 
@@ -160,7 +160,7 @@ For the full narrative version of either path see [`HOW_TO_RUN.md`](HOW_TO_RUN.m
 
 For a fully annotated first-run walkthrough (including how to create an account and run your first analysis end-to-end), see [`HOW_TO_RUN.md`](HOW_TO_RUN.md).
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment files (secrets)
 
@@ -217,7 +217,7 @@ FDR_METHOD=benjamini_hochberg
 EFFECT_SIZE_METRIC=cohens_d
 ```
 
-## 📖 Usage
+## Usage
 
 ### 1. User Registration and Login
 
@@ -254,7 +254,7 @@ EFFECT_SIZE_METRIC=cohens_d
 - Customize report templates and content
 - Download and share reports
 
-## 📚 API Documentation
+## API Documentation
 
 ### Authentication Endpoints
 
@@ -298,7 +298,7 @@ WS /api/ws/progress/{run_id}
 - **Swagger UI**: `http://localhost:8000/docs`
 - **ReDoc**: `http://localhost:8000/redoc`
 
-## 🛠️ Development
+## Development
 
 ### Project Structure
 
@@ -362,7 +362,7 @@ npm run lint
 npm run type-check
 ```
 
-## 🧪 Testing
+## Testing
 
 ### Running Tests
 
@@ -418,7 +418,7 @@ python backend/run_tests.py --type unit --coverage  # Test runner script
 - **Backend:** `pytest` is configured in `backend/pytest.ini` (and often run with a `--cov-fail-under=80` target in scripts and CI; check your pipeline).
 - **Frontend:** Jest global minimums are in `frontend/package.json` under `jest.coverageThreshold` (intentionally modest for global gates; use `test:coverage` to see a full report).
 
-## 🚀 Deployment
+## Deployment
 
 ### Docker Deployment
 
@@ -441,7 +441,7 @@ Example manifests live under `k8s/`. Your namespace and image names will differ;
 
 See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 
-## 📊 Monitoring
+## Monitoring
 
 ### Metrics and Monitoring
 
@@ -464,7 +464,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 - **Database Performance**: Query performance and optimization
 - **Cache Performance**: Redis cache hit rates
 
-## 🔒 Security
+## Security
 
 ### Authentication and Authorization
 
@@ -487,7 +487,7 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 - **Container Security**: Secure container configurations
 - **Secrets Management**: Secure credential storage
 
-## 🤝 Contributing
+## Contributing
 
 ### Getting Started
 
@@ -512,11 +512,11 @@ See [DEPLOYMENT.md](DEPLOYMENT.md) for detailed deployment instructions.
 - Documentation must be updated
 - Security review for sensitive changes
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🆘 Support
+## Support
 
 ### Documentation
 
@@ -540,14 +540,14 @@ For enterprise support and consulting services, contact:
 - **Email**: jbautista0055@gmail.com
 - **Phone**: See GitHub profile for contact info
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Scientific Community**: For biomarker research and validation
 - **Open Source Projects**: For the amazing tools and libraries
 - **Contributors**: For their valuable contributions
 - **Users**: For feedback and feature requests
 
-## 📈 Roadmap
+## Roadmap
 
 Product themes (README), phased maintenance plan, and conference research next steps are **consolidated with implementation status** in [`docs/PRODUCT_ROADMAP.md`](docs/PRODUCT_ROADMAP.md). Update that file when priorities change; this section stays high level.
 
@@ -557,4 +557,3 @@ Product themes (README), phased maintenance plan, and conference research next s
 
 ---
 
-**Made with ❤️ for the cancer research community**
