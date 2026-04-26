@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Frontend for Cancer Biomarker Identifier",
   "private": true,
+  "overrides": {
+    "yaml": "2.8.3"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^14.3.1",
