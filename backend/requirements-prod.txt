@@ -32,7 +32,7 @@ statsmodels==0.14.6
 xgboost==2.0.3
 lightgbm==4.6.0
 # shap 0.51+ requires numpy>=2; stay on 0.44.x while the stack pins numpy<2 (pandas 2.1.x)
-shap==0.44.4
+shap==0.51.0
 joblib==1.5.3
 tqdm==4.67.3
 
