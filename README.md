@@ -1,7 +1,7 @@
 # Cancer Biomarker Identifier
 
 [![CI](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml/badge.svg)](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml)
-[![Coverage](https://img.shields.io/badge/coverage-target%2080%25-blue)](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml)
+[![Coverage](https://codecov.io/gh/jbInf-08/biomarker_identifier/branch/main/graph/badge.svg)](https://codecov.io/gh/jbInf-08/biomarker_identifier)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
 ## Golden path
