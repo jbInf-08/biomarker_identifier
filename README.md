@@ -2,6 +2,15 @@
 
 [![CI](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml/badge.svg)](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml)
 [![Coverage](https://img.shields.io/badge/coverage-target%2080%25-blue)](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
+
+## Golden path
+
+```bash
+cp production.env.example .env
+docker compose up -d --build
+docker compose ps
+```
 
 A comprehensive web application for identifying and analyzing cancer biomarkers from multi-omics data using advanced machine learning and statistical methods.
 
