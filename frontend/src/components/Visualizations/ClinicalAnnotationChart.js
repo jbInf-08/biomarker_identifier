@@ -91,13 +91,6 @@ const ClinicalAnnotationChart = ({ data, title = "Clinical Annotation Results" }
     'Low': '#ef4444'
   };
 
-  // Color scheme for databases
-  const databaseColors = {
-    'COSMIC': '#3b82f6',
-    'ClinVar': '#10b981',
-    'OncoKB': '#f59e0b'
-  };
-
   // Chart type options
   const chartTypes = [
     { value: 'bar', label: 'Bar Chart', icon: BarChart3 },

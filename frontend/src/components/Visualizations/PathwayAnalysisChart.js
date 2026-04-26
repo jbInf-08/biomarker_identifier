@@ -82,12 +82,6 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
     'Not Significant': '#6b7280'
   };
 
-  // Color scheme for enrichment status
-  const enrichmentColors = {
-    'Enriched': '#10b981',
-    'Depleted': '#ef4444'
-  };
-
   // Chart type options
   const chartTypes = [
     { value: 'bar', label: 'Bar Chart', icon: BarChart3 },

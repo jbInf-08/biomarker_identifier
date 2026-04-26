@@ -24,16 +24,10 @@ import {
   Tooltip, 
   ResponsiveContainer,
   ScatterChart,
-  Scatter,
-  LineChart,
-  Line,
-  PieChart,
-  Pie,
-  Cell
+  Scatter
 } from 'recharts';
 import toast from 'react-hot-toast';
 import { apiClient } from '../services/api';
-import { BiomarkerResultsChart, PathwayAnalysisChart } from '../components/Visualizations';
 
 const Results = () => {
   const { runId } = useParams();
@@ -53,25 +47,8 @@ const Results = () => {
   const [llmStatus, setLlmStatus] = useState(null);
   const [artifactSummary, setArtifactSummary] = useState(null);
 
-  useEffect(() => {
-    if (runId) {
-      loadResults();
-    } else {
-      setLoading(false);
-    }
-  }, [runId]);
-
-  useEffect(() => {
-    if (biomarkers) {
-      const filtered = biomarkers.biomarkers?.filter(biomarker =>
-        biomarker.gene?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        biomarker.description?.toLowerCase().includes(searchTerm.toLowerCase())
-      ) || [];
-      setFilteredBiomarkers(filtered);
-    }
-  }, [biomarkers, searchTerm]);
-
-  const loadResults = async () => {
+  const loadResults = useCallback(async () => {
+    if (!runId) return;
     try {
       setLoading(true);
       
@@ -103,7 +80,25 @@ const Results = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [runId, getRunResults, getBiomarkers, getRunStatus]);
+
+  useEffect(() => {
+    if (runId) {
+      loadResults();
+    } else {
+      setLoading(false);
+    }
+  }, [runId, loadResults]);
+
+  useEffect(() => {
+    if (biomarkers) {
+      const filtered = biomarkers.biomarkers?.filter(biomarker =>
+        biomarker.gene?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        biomarker.description?.toLowerCase().includes(searchTerm.toLowerCase())
+      ) || [];
+      setFilteredBiomarkers(filtered);
+    }
+  }, [biomarkers, searchTerm]);
 
   const handleRefresh = async () => {
     await loadResults();
@@ -267,8 +262,6 @@ const Results = () => {
     
     return distribution;
   };
-
-  const COLORS = ['#3b82f6', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
 
   if (loading) {
     return (

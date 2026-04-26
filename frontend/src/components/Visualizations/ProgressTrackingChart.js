@@ -201,7 +201,6 @@ const ProgressTrackingChart = ({ data, title = "Pipeline Progress Tracking" }) =
   const latestData = processedData[processedData.length - 1];
   const avgProgress = processedData.reduce((sum, item) => sum + item.progress, 0) / processedData.length;
   const maxProgress = Math.max(...processedData.map(item => item.progress));
-  const minProgress = Math.min(...processedData.map(item => item.progress));
 
   return (
     <div className="card">

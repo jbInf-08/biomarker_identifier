@@ -11,23 +11,18 @@ import {
   RefreshCw,
   Trash2,
   Eye,
-  Play,
-  Pause,
   Wifi,
   WifiOff
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { ProgressTrackingChart } from '../components/Visualizations';
 
 const PipelineMonitoring = () => {
   const { runs, fetchRuns, getRunStatus, deleteRun, loading } = usePipeline();
   const { 
     isConnected, 
-    connectionStatus, 
     progressUpdates, 
     getRunProgress, 
-    connectToRun, 
-    disconnectFromRun 
+    connectToRun
   } = useWebSocketContext();
   const [runStatuses, setRunStatuses] = useState({});
   const [refreshing, setRefreshing] = useState(false);

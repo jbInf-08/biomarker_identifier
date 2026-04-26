@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { apiClient } from '../services/api';
 
 const AuthContext = createContext();
@@ -24,11 +24,7 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
+  const checkAuthStatus = useCallback(async () => {
     // Optional: bypass auth in development when backend is unavailable (set in .env: REACT_APP_DEV_BYPASS_AUTH=true)
     const devBypass = process.env.REACT_APP_DEV_BYPASS_AUTH === 'true';
     if (devBypass) {
@@ -55,7 +51,11 @@ export const AuthProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, [checkAuthStatus]);
 
   const login = async (email, password) => {
     try {
