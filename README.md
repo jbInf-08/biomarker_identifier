@@ -1,5 +1,8 @@
 # Cancer Biomarker Identifier
 
+[![CI](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml/badge.svg)](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml)
+[![Coverage](https://img.shields.io/badge/coverage-target%2080%25-blue)](https://github.com/jbInf-08/biomarker_identifier/actions/workflows/ci.yml)
+
 A comprehensive web application for identifying and analyzing cancer biomarkers from multi-omics data using advanced machine learning and statistical methods.
 
 ## Features
@@ -191,6 +194,10 @@ For a fully annotated first-run walkthrough (including how to create an account 
 | Email (optional) | `SMTP_HOST`, `SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_FROM_EMAIL` |
 | Reports | `REPORT_TEMPLATE_DIR`, `REPORT_OUTPUT_FORMATS` (use a JSON array string in env, e.g. `["html","pdf"]`) |
 
+### Data layout policy
+
+`backend/data/` is the canonical runtime data root for uploads, processed files, and generated outputs. The top-level `data/` tree is retained for small, versioned reference assets only. Newly generated artifacts must never be committed.
+
 ### Analysis and ML parameters
 
 These map to the same names in `Settings` (defaults suit most installs):
@@ -256,6 +263,13 @@ EFFECT_SIZE_METRIC=cohens_d
 
 ## API Documentation
 
+### Versioning policy
+
+- `/api/v1` is the canonical public API for clients and integration tests.
+- `/api` is a backward-compatibility alias and should not be used for new integrations.
+- `/api/v2` is reserved for additive/next-generation endpoints and is only promoted after docs + tests are published.
+- Any endpoint behavior change must ship with explicit migration notes in release docs.
+
 ### Authentication Endpoints
 
 ```bash
@@ -268,7 +282,7 @@ PUT  /api/auth/me          # Update user profile
 
 ### Biomarker analysis endpoints (examples; prefer `/api/v1/...` for new code)
 
-The backend mounts the same routes under unversioned paths, `/api/v1/...`, and `/api/v2/...` (see `backend/app/main.py`).
+The backend currently mounts compatibility routes under `/api`, `/api/v1`, and `/api/v2` (see `backend/app/main.py`).
 
 ```bash
 GET  /api/biomarkers/runs                    # List analysis runs

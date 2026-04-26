@@ -94,6 +94,9 @@ models/*
 # Reports (optional)
 reports/*
 !reports/.gitkeep
+backend/app/reports/[0-9a-fA-F-]*/
+backend/reports/[0-9a-fA-F-]*/
+backend/data/uploads/[0-9a-fA-F-]*/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -116,3 +119,9 @@ data/paper_datasets/**/*.tsv
 # GEO / full TCGA CSVs over GitHub's file size limit (regenerate or store outside git)
 data/external_sources/geo/geo_expression_breast_cancer_*_datasets.csv
 data/paper_datasets/tcga_brca/gdc_raw/tcga_gene_expression_BRCA_520_samples.csv
+data/external_sources/tcga/tcga_gene_expression_BRCA_*.csv
+data/paper_datasets/tcga_brca/gdc_raw/tcga_gene_expression_BRCA_*_samples.csv
+data/paper_datasets/tcga_brca_smoke_200/gdc_raw/tcga_gene_expression_BRCA_*_samples.csv
+backend/data/raw/tcga_gene_expression_BRCA_*_samples.csv
+backend/data/raw/tmp*.csv
+backend/data/uploads/**/*.csv
