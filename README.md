@@ -557,12 +557,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **GitHub Discussions**: [Community discussions](https://github.com/jbInf-08/biomarker_identifier/discussions)
 - **Email Support**: jbautista0055@gmail.com
 
-### Professional Support
-
-For enterprise support and consulting services, contact:
-- **Email**: jbautista0055@gmail.com
-- **Phone**: See GitHub profile for contact info
-
 ## Acknowledgments
 
 - **Scientific Community**: For biomarker research and validation
@@ -572,11 +566,7 @@ For enterprise support and consulting services, contact:
 
 ## Roadmap
 
-Product themes (README), phased maintenance plan, and conference research next steps are **consolidated with implementation status** in [`docs/PRODUCT_ROADMAP.md`](docs/PRODUCT_ROADMAP.md). Update that file when priorities change; this section stays high level.
-
-**Themes:** multi-tenant isolation, advanced ML, real-time collaboration, mobile clients, API versioning (`/api/v1` and `/api/v2` mirrors in the backend), cloud-native scaling, AI-assisted interpretation, integrations, multi-region ops, collaborative research.
-
-**Research / pipeline:** cryptographic secure aggregation (planned; see `GET /api/v1/federated/capabilities`), optional deeper GNN stage, LLM literature grounding, non-TCGA validation harnesses, raw counts + DESeq2/edgeR via optional rpy2.
+Implementation phases and feature status: [`docs/PRODUCT_ROADMAP.md`](docs/PRODUCT_ROADMAP.md). **Research scope:** the application is designed to connect **high-dimensional omics and clinical tables** to **group phenotypes and survival** so you can test which features carry reproducible signal. A second goal is **transparency in the analysis path**—preprocessing, statistics, and resampling are exposed as decisions a reader can question, not a single opaque “AI score.” The third is **grounded interpretation** by linking candidate markers to **databases and literature**, so results read as biologically nameable claims rather than anonymous coefficients.
 
 ---
 
