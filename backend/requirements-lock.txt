@@ -1,0 +1,3 @@
+# Lock-style snapshot for reproducible local/CI installs.
+# Source of truth is requirements-dev.txt (which pins exact versions).
+-r requirements-dev.txt

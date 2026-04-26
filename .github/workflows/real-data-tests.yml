@@ -40,10 +40,10 @@ jobs:
           - 6379:6379
     
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
     
     - name: Set up Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
       with:
         python-version: '3.11'
         cache: 'pip'
@@ -68,7 +68,6 @@ jobs:
       working-directory: backend
       run: |
         python scripts/download_real_data_using_all_collectors.py
-      continue-on-error: true
     
     - name: Verify real data files
       working-directory: backend
@@ -106,8 +105,7 @@ jobs:
           -v \
           --tb=short \
           --maxfail=5 \
-          --continue-on-collection-errors \
-          || true
+          --continue-on-collection-errors
     
     - name: Generate coverage report
       working-directory: backend
@@ -121,11 +119,10 @@ jobs:
           --cov-report=xml \
           --cov-report=html \
           --cov-report=term \
-          --cov-fail-under=70 \
-          || true
+          --cov-fail-under=70
     
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+      uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5
       with:
         file: ./backend/coverage.xml
         flags: real_data_tests
@@ -134,7 +131,7 @@ jobs:
     
     - name: Upload test results
       if: always()
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
       with:
         name: test-results
         path: |
