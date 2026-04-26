@@ -5,10 +5,8 @@ import { useWebSocketContext } from '../contexts/WebSocketContext';
 import { useNavigate } from 'react-router-dom';
 import { 
   Upload, 
-  FileText, 
   X, 
   CheckCircle, 
-  AlertCircle,
   Settings,
   Play
 } from 'lucide-react';

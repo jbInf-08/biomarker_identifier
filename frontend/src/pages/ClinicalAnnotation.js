@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { usePipeline } from '../contexts/PipelineContext';
 import { apiClient } from '../services/api';
 import { 
   Database, 
   Search, 
-  Filter, 
   Download, 
   RefreshCw,
   Star,
@@ -18,12 +16,10 @@ import {
   Activity
 } from 'lucide-react';
 import toast from 'react-hot-toast';
-import { ClinicalAnnotationChart } from '../components/Visualizations';
 
 const ClinicalAnnotation = () => {
   const { runId } = useParams();
   const navigate = useNavigate();
-  const { runs, fetchRuns } = usePipeline();
   
   const [annotations, setAnnotations] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -52,14 +48,6 @@ const ClinicalAnnotation = () => {
     }
   }, [runId]);
 
-  useEffect(() => {
-    if (runId) {
-      loadAnnotations();
-    } else {
-      setAnnotations(null);
-    }
-  }, [runId]);
-
   const loadAnnotations = useCallback(async () => {
     if (!runId) return;
     setLoading(true);
@@ -77,6 +65,14 @@ const ClinicalAnnotation = () => {
       setLoading(false);
     }
   }, [runId, selectedDatabases]);
+
+  useEffect(() => {
+    if (runId) {
+      loadAnnotations();
+    } else {
+      setAnnotations(null);
+    }
+  }, [runId, loadAnnotations]);
 
   const handleDatabaseToggle = (database) => {
     setSelectedDatabases(prev => 
