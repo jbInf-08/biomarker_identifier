@@ -279,17 +279,19 @@ jobs:
   docker-build:
     runs-on: ubuntu-latest
     needs: [backend-tests, frontend-tests, docker-verify]
-    if: secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != ''
+    # Do not use `secrets` in job-level `if` — GitHub rejects the workflow before any job runs.
     steps:
     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
     - name: Login to Docker Hub
+      if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' }}
       uses: docker/login-action@c94ce9fb468520275223c153574b00df6fe4bcc9 # v3
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build and push backend image
+      if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' }}
       uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
       with:
         context: ./backend
@@ -301,6 +303,7 @@ jobs:
         cache-from: type=gha
         cache-to: type=gha,mode=max
     - name: Build and push frontend image
+      if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' }}
       uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
       with:
         context: ./frontend
