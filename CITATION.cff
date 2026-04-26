@@ -1,0 +1,9 @@
+cff-version: 1.2.0
+title: Cancer Biomarker Identifier
+message: "If you use this project, please cite it using the metadata below."
+type: software
+authors:
+  - family-names: Bautista
+    given-names: James
+repository-code: https://github.com/jbInf-08/biomarker_identifier
+license: MIT
