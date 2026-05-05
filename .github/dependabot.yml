@@ -5,34 +5,29 @@ updates:
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 3
-    labels:
-      - "dependencies"
-      - "python"
     groups:
-      backend-patch-minor:
-        update-types:
-          - "minor"
-          - "patch"
+      backend-patches:
+        update-types: ["patch"]
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "npm"
     directory: "/frontend"
     schedule:
       interval: "weekly"
     open-pull-requests-limit: 3
-    labels:
-      - "dependencies"
-      - "frontend"
     groups:
-      frontend-patch-minor:
-        update-types:
-          - "minor"
-          - "patch"
+      frontend-patches:
+        update-types: ["patch"]
+        patterns: ["*"]
+    ignore:
+      - dependency-name: "*"
+        update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "monthly"
     open-pull-requests-limit: 2
-    labels:
-      - "dependencies"
-      - "github-actions"
