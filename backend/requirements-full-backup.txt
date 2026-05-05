@@ -197,7 +197,7 @@ lz4==4.4.5
 jsonschema==4.26.0
 
 # XML processing
-lxml==4.9.3
+lxml==6.1.0
 
 # Regular expressions
 regex==2023.10.3
@@ -389,7 +389,7 @@ lz4==4.4.5
 orjson==3.11.8
 
 # XML processing
-lxml==4.9.3
+lxml==6.1.0
 
 # Regular expressions
 regex==2023.10.3
