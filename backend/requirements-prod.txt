@@ -3,11 +3,11 @@
 
 # Core web framework and API
 fastapi==0.136.1
-uvicorn[standard]==0.46.0
-pydantic==2.13.3
+uvicorn[standard]==0.47.0
+pydantic==2.13.4
 email-validator>=2.0.0
-pydantic-settings==2.14.0
-python-multipart==0.0.26
+pydantic-settings==2.14.1
+python-multipart==0.0.28
 websockets==12.0
 
 # Database and ORM
@@ -32,12 +32,12 @@ statsmodels==0.14.6
 xgboost==2.0.3
 lightgbm==4.6.0
 # shap 0.51+ requires numpy>=2; stay on 0.44.x while the stack pins numpy<2 (pandas 2.1.x)
-shap==0.44.1
+shap==0.51.0
 joblib==1.5.3
 tqdm==4.67.3
 
 # Deep learning (PyTorch)
-torch>=2.11.0
+torch>=2.12.0
 
 # LLM: Hugging Face + optional fine-tuning
 transformers>=4.30.0
@@ -60,11 +60,11 @@ matplotlib==3.10.9
 seaborn==0.13.2
 
 # Report generation
-reportlab==4.4.10
+reportlab==4.5.1
 jinja2==3.1.6
 
 # HTTP requests and API clients
-requests==2.33.1
+requests==2.34.2
 httpx==0.28.1
 
 # Data validation and processing
@@ -87,7 +87,7 @@ pyyaml==6.0.3
 python-dateutil==2.9.0.post0
 
 # JSON handling
-orjson==3.11.8
+orjson==3.11.9
 
 # Task scheduling
 apscheduler==3.11.2
@@ -106,7 +106,7 @@ jsonschema==4.26.0
 
 # Additional bioinformatics tools
 gseapy==0.14.0
-anndata==0.12.11
+anndata==0.12.14
 
 # Pathway analysis
 gprofiler-official==1.0.0
