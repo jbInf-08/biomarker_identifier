@@ -35,9 +35,7 @@ def expression_labels_to_xy(
         (
             c
             for c in labels_df.columns
-            if "class" in c.lower()
-            or "label" in c.lower()
-            or "group" in c.lower()
+            if "class" in c.lower() or "label" in c.lower() or "group" in c.lower()
         ),
         labels_df.columns[1] if len(labels_df.columns) > 1 else labels_df.columns[0],
     )
@@ -51,8 +49,10 @@ def expression_labels_to_xy(
         raise ValueError("Insufficient samples for ML pipeline (need at least 4)")
     X = X.loc[common].dropna(how="all")
     y = y.reindex(X.index).dropna()
-    y_series = y.astype(int) if y.dtype != object else pd.Series(
-        pd.Categorical(y).codes, index=y.index
+    y_series = (
+        y.astype(int)
+        if y.dtype != object
+        else pd.Series(pd.Categorical(y).codes, index=y.index)
     )
     return X, y_series
 

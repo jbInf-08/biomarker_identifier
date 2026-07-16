@@ -249,11 +249,7 @@ class ExportService:
             # Summary statistics sheet
             if len(biomarker_results) > 0:
                 results_data = [_biomarker_row_excel(r) for r in biomarker_results]
-                pvals = [
-                    r["P-value"]
-                    for r in results_data
-                    if r["P-value"] is not None
-                ]
+                pvals = [r["P-value"] for r in results_data if r["P-value"] is not None]
                 scores = [
                     r["Confidence Score"]
                     for r in results_data
@@ -353,9 +349,7 @@ class ExportService:
         # Add summary statistics
         if biomarker_results:
             p_values = [
-                float(r.p_value)
-                for r in biomarker_results
-                if r.p_value is not None
+                float(r.p_value) for r in biomarker_results if r.p_value is not None
             ]
             scores = [
                 float(r.confidence_score)
@@ -646,9 +640,7 @@ class ExportService:
             part = MIMEBase("application", "octet-stream")
             part.set_payload(attachment.read())
             encoders.encode_base64(part)
-            part.add_header(
-                "Content-Disposition", f"attachment; filename={path.name}"
-            )
+            part.add_header("Content-Disposition", f"attachment; filename={path.name}")
             msg.attach(part)
 
         # Send email

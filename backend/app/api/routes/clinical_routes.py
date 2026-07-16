@@ -7,8 +7,8 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Path, Query
-from pydantic import BaseModel, Field
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -16,12 +16,6 @@ from app.models.biomarker_model import BiomarkerResult
 from app.models.run_model import AnalysisRun
 from app.models.user_model import User
 from app.services.auth_service import auth_service
-from app.services.run_access import get_analysis_run_for_user
-from app.services.clinical_decision_support import (
-    clinical_recommendation_to_dict,
-    clinical_decision_support_service,
-    ensure_cds_ready,
-)
 from app.services.clinical_api_client import (
     fetch_clinvar_variants,
     fetch_cosmic_mutations,
@@ -29,6 +23,12 @@ from app.services.clinical_api_client import (
     fetch_oncokb_drugs,
     fetch_oncokb_genes,
 )
+from app.services.clinical_decision_support import (
+    clinical_decision_support_service,
+    clinical_recommendation_to_dict,
+    ensure_cds_ready,
+)
+from app.services.run_access import get_analysis_run_for_user
 from app.utils.logging_config import get_logger
 
 # Authentication dependency
@@ -671,5 +671,7 @@ async def cds_validate_decision(
     result = await clinical_decision_support_service.validate_clinical_decision(
         body.biomarker, body.clinical_decision, body.patient_context
     )
-    result["disclaimer"] = "Validation is heuristic; confirm against primary literature and guidelines."
+    result[
+        "disclaimer"
+    ] = "Validation is heuristic; confirm against primary literature and guidelines."
     return result

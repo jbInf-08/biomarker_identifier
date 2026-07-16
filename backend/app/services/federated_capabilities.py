@@ -11,9 +11,7 @@ from app.core.config import settings
 
 def get_federated_privacy_capabilities() -> Dict[str, Any]:
     """Static capability payload for API clients (honest about limitations)."""
-    bz = bool(
-        getattr(settings, "FEDERATED_BONAWITZ_MASK_AGGREGATION_ENABLED", False)
-    )
+    bz = bool(getattr(settings, "FEDERATED_BONAWITZ_MASK_AGGREGATION_ENABLED", False))
     return {
         "application_layer_encryption": True,
         "fernet_pickle_wrapping": True,

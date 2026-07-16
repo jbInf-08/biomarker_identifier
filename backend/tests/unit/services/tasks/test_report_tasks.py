@@ -33,7 +33,9 @@ class TestReportTasks:
                     ) as mock_html_gen:
                         mock_generator = MagicMock()
                         mock_html_gen.return_value = mock_generator
-                        mock_generator.generate_report.return_value = "<html>Test</html>"
+                        mock_generator.generate_report.return_value = (
+                            "<html>Test</html>"
+                        )
 
                         try:
                             result = generate_report.__wrapped__(

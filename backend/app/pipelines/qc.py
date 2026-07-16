@@ -634,9 +634,7 @@ class QualityControl:
 
             # Check zero inflation
             if zero_ratio > 0.8:
-                summary["warnings"].append(
-                    f"High zero inflation: {zero_ratio:.2%}"
-                )
+                summary["warnings"].append(f"High zero inflation: {zero_ratio:.2%}")
                 summary["recommendations"].append(
                     "Consider zero-inflated models or filtering low-expressed genes"
                 )
@@ -644,9 +642,7 @@ class QualityControl:
             # Check negative values
             neg = basic_qc.get("negative_values", 0)
             if neg > 0:
-                summary["warnings"].append(
-                    f"Negative values detected: {neg}"
-                )
+                summary["warnings"].append(f"Negative values detected: {neg}")
                 summary["recommendations"].append(
                     "Check data preprocessing and consider log transformation"
                 )
@@ -656,9 +652,8 @@ class QualityControl:
             sample_qc = qc_results["sample_qc"]
             if isinstance(sample_qc, pd.DataFrame) and not sample_qc.empty:
                 if "library_size" in sample_qc.columns:
-                    lib_size_cv = (
-                        sample_qc["library_size"].std()
-                        / (sample_qc["library_size"].mean() + 1e-12)
+                    lib_size_cv = sample_qc["library_size"].std() / (
+                        sample_qc["library_size"].mean() + 1e-12
                     )
                     if lib_size_cv > 0.5:
                         summary["warnings"].append(
@@ -669,9 +664,8 @@ class QualityControl:
                         )
 
                 if "detection_rate" in sample_qc.columns:
-                    det_rate_cv = (
-                        sample_qc["detection_rate"].std()
-                        / (sample_qc["detection_rate"].mean() + 1e-12)
+                    det_rate_cv = sample_qc["detection_rate"].std() / (
+                        sample_qc["detection_rate"].mean() + 1e-12
                     )
                     if det_rate_cv > 0.3:
                         summary["warnings"].append(

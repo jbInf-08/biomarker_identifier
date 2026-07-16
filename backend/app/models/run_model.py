@@ -95,7 +95,9 @@ class AnalysisRun(Base):
     cpu_usage_percent = Column(Float)
 
     # User relationship (must match users.id type for PostgreSQL FK)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True, index=True)
+    user_id = Column(
+        UUID(as_uuid=True), ForeignKey("users.id"), nullable=True, index=True
+    )
     tenant_id = Column(String, ForeignKey("tenants.id"), nullable=True, index=True)
 
     # Relationships

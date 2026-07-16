@@ -434,12 +434,16 @@ class ConsensusFeatureSelector:
         self.feature_names_ = X.columns.tolist()
         self.n_features_ = n_features
         default_m = ["random_forest", "lasso", "xgboost", "mutual_info", "f_test"]
-        self.consensus_methods_ = list(consensus_methods) if consensus_methods else default_m
+        self.consensus_methods_ = (
+            list(consensus_methods) if consensus_methods else default_m
+        )
 
         # Bootstrap sampling
         bootstrap_results = []
 
-        with ThreadPoolExecutor(max_workers=_thread_pool_workers(self.n_jobs)) as executor:
+        with ThreadPoolExecutor(
+            max_workers=_thread_pool_workers(self.n_jobs)
+        ) as executor:
             futures = []
 
             for i in range(n_bootstrap):

@@ -74,9 +74,7 @@ class FederatedLearningService:
 
     def __init__(self):
         self.config = FederatedConfig(
-            fedprox_mu=getattr(
-                settings, "FEDERATED_FEDPROX_MU", 0.01
-            )
+            fedprox_mu=getattr(settings, "FEDERATED_FEDPROX_MU", 0.01)
         )
         self.global_model = None
         self.participants = {}
@@ -169,9 +167,7 @@ class FederatedLearningService:
 
             if idempotency_key:
                 with db_session() as db:
-                    db.add(
-                        FederatedIdempotency(key=idempotency_key, round_id=round_id)
-                    )
+                    db.add(FederatedIdempotency(key=idempotency_key, round_id=round_id))
                     db.commit()
 
             logger.info(

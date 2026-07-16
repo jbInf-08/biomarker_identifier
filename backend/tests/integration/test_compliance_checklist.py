@@ -29,7 +29,10 @@ def test_complete_requires_evidence_link(client: TestClient, admin_headers: dict
 
     ok = client.patch(
         f"/api/v1/admin/compliance/checklist-items/{item_id}",
-        json={"status": "complete", "evidence_link": "https://example.org/evidence/TEST-CTRL-1"},
+        json={
+            "status": "complete",
+            "evidence_link": "https://example.org/evidence/TEST-CTRL-1",
+        },
         headers=admin_headers,
     )
     assert ok.status_code == 200
@@ -59,7 +62,9 @@ def test_waived_requires_substantive_notes(client: TestClient, admin_headers: di
     assert ok.json()["status"] == "waived"
 
 
-def test_researcher_cannot_change_status(client: TestClient, admin_headers: dict, auth_headers: dict):
+def test_researcher_cannot_change_status(
+    client: TestClient, admin_headers: dict, auth_headers: dict
+):
     item_id = _create_item(client, admin_headers)
     denied = client.patch(
         f"/api/v1/admin/compliance/checklist-items/{item_id}",

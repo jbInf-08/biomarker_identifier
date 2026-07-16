@@ -218,10 +218,7 @@ class MLSelectionPipeline:
             # Categories like stability and ensemble store one result dict at the top level
             # (with selected_features), not nested by sub-method like filter/embedded.
             top_sel = category_results.get("selected_features")
-            if (
-                isinstance(top_sel, (list, tuple))
-                and "error" not in category_results
-            ):
+            if isinstance(top_sel, (list, tuple)) and "error" not in category_results:
                 all_selected_features[category] = list(top_sel)
                 continue
 

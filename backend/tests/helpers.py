@@ -19,6 +19,4 @@ def patch_monitoring_service_db_session(mock_db):
     mock_ctx = MagicMock()
     mock_ctx.__enter__.return_value = mock_db
     mock_ctx.__exit__.return_value = None
-    return patch(
-        "app.services.monitoring_service.db_session", return_value=mock_ctx
-    )
+    return patch("app.services.monitoring_service.db_session", return_value=mock_ctx)

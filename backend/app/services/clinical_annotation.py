@@ -11,7 +11,9 @@ import asyncio
 import re
 from typing import Any, Dict, List, Optional
 
-from app.ml_models.advanced_models import ClinicalAnnotationService as _AsyncClinicalService
+from app.ml_models.advanced_models import (
+    ClinicalAnnotationService as _AsyncClinicalService,
+)
 
 
 def _normalize_source(name: str) -> str:
@@ -36,11 +38,7 @@ class ClinicalAnnotationService(_AsyncClinicalService):
         parameters: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         parameters = parameters or {}
-        sources = (
-            [_normalize_source(d) for d in databases]
-            if databases
-            else None
-        )
+        sources = [_normalize_source(d) for d in databases] if databases else None
         return asyncio.run(
             super().annotate_biomarker(biomarker=biomarker_id, sources=sources)
         )

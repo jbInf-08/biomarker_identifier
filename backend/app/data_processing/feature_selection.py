@@ -633,9 +633,7 @@ class FeatureSelection:
                         expression_data, labels, **en_kwargs
                     )
                 elif method == "random_forest":
-                    rf_kwargs = {
-                        k: v for k, v in kwargs.items() if k == "n_estimators"
-                    }
+                    rf_kwargs = {k: v for k, v in kwargs.items() if k == "n_estimators"}
                     selected = self._random_forest_embedded(
                         expression_data, labels, **rf_kwargs
                     )

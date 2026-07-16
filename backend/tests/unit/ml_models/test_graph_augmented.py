@@ -38,7 +38,10 @@ def _has_torch() -> bool:
 
 @pytest.mark.skipif(not _has_torch(), reason="torch not installed")
 def test_shallow_gcn_fit_predict():
-    from app.ml_models.graph_augmented import ShallowGeneGATClassifier, ShallowGeneGCNClassifier
+    from app.ml_models.graph_augmented import (
+        ShallowGeneGATClassifier,
+        ShallowGeneGCNClassifier,
+    )
 
     assert ShallowGeneGATClassifier is ShallowGeneGCNClassifier
     rng = np.random.default_rng(42)
@@ -48,7 +51,9 @@ def test_shallow_gcn_fit_predict():
     np.fill_diagonal(A, 1.0)
     X = rng.normal(size=(40, G))
     y = (rng.random(40) > 0.55).astype(int)
-    clf = ShallowGeneGATClassifier(adjacency=A, max_epochs=5, patience=2, random_state=0)
+    clf = ShallowGeneGATClassifier(
+        adjacency=A, max_epochs=5, patience=2, random_state=0
+    )
     clf.fit(pd.DataFrame(X), pd.Series(y))
     p = clf.predict_proba(pd.DataFrame(X))
     assert p.shape == (40, 2)

@@ -275,7 +275,6 @@ class SHAPExplainer:
             # This is a simplified interaction analysis
             # For full interaction analysis, you would need to compute SHAP interaction values
             # which is computationally expensive
-
             # Compute correlation between SHAP values and feature values
             interactions = {}
             for i, feature in enumerate(X.columns):

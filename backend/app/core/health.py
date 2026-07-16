@@ -24,7 +24,9 @@ def check_redis() -> bool:
     try:
         import redis
 
-        r = redis.Redis.from_url(settings.REDIS_URL, socket_connect_timeout=2.0, socket_timeout=2.0)
+        r = redis.Redis.from_url(
+            settings.REDIS_URL, socket_connect_timeout=2.0, socket_timeout=2.0
+        )
         return bool(r.ping())
     except Exception as e:
         logger.warning("Redis health check failed: %s", e)
@@ -63,7 +65,11 @@ def get_readiness_payload() -> Dict[str, Any]:
 
     celery_res = check_celery_workers()
     if celery_res is None:
-        checks["celery"] = {"ok": None, "skipped": True, "reason": "HEALTH_CHECK_CELERY=false"}
+        checks["celery"] = {
+            "ok": None,
+            "skipped": True,
+            "reason": "HEALTH_CHECK_CELERY=false",
+        }
     else:
         checks["celery"] = {"ok": celery_res}
 
@@ -110,8 +116,16 @@ def get_readiness_payload_for_request() -> Dict[str, Any]:
             "ready": db_ok,
             "checks": {
                 "database": {"ok": db_ok},
-                "redis": {"ok": None, "skipped": True, "reason": "test_or_skip_external"},
-                "celery": {"ok": None, "skipped": True, "reason": "test_or_skip_external"},
+                "redis": {
+                    "ok": None,
+                    "skipped": True,
+                    "reason": "test_or_skip_external",
+                },
+                "celery": {
+                    "ok": None,
+                    "skipped": True,
+                    "reason": "test_or_skip_external",
+                },
             },
             "timestamp": datetime.now(timezone.utc).isoformat(),
         }

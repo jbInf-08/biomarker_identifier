@@ -24,10 +24,11 @@ def wait_for_backend_ready():
         except Exception as e:
             last_err = e
         time.sleep(1)
-    msg = (
-        f"Backend did not become ready at {E2E_BASE_URL}/health (last error: {last_err!r})"
-    )
+    msg = f"Backend did not become ready at {E2E_BASE_URL}/health (last error: {last_err!r})"
     # CI must fail if the server step did not start; local full-suite runs skip live HTTP E2E.
-    if os.environ.get("CI") == "true" or os.environ.get("E2E_REQUIRE_LIVE_SERVER") == "1":
+    if (
+        os.environ.get("CI") == "true"
+        or os.environ.get("E2E_REQUIRE_LIVE_SERVER") == "1"
+    ):
         pytest.fail(msg)
     pytest.skip(msg + " (start: uvicorn app.main:app --host 127.0.0.1 --port 8000)")

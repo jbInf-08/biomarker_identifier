@@ -243,11 +243,7 @@ class LLMService:
         )
         summary_str = json.dumps(pipeline_summary or {}, indent=2)[:4000]
         genes_str = ", ".join(str(g) for g in genes[:40])
-        extra = (
-            f"\n\nAdditional notes: {extra_context[:2000]}"
-            if extra_context
-            else ""
-        )
+        extra = f"\n\nAdditional notes: {extra_context[:2000]}" if extra_context else ""
         json_tail = ""
         if structured:
             json_tail = """
@@ -270,7 +266,9 @@ TOP GENES FROM THIS RUN:
 {extra}
 
 Write 2-4 short paragraphs covering: (1) biological themes suggested by the genes given the context; (2) cautious interpretation of statistical scores; (3) limitations and suggested validation. Do not fabricate citations or clinical recommendations beyond the context.{json_tail}"""
-        system = "You are a careful biomedical assistant. Stay within the provided context."
+        system = (
+            "You are a careful biomedical assistant. Stay within the provided context."
+        )
         with timed_llm("interpret-grounded"):
             text = self.generate(user_prompt, system=system, max_tokens=max_tokens)
 

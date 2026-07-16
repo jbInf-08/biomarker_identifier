@@ -14,7 +14,9 @@ import pandas as pd
 from app.core.config import settings
 
 
-def _validate_raw_counts_inputs(counts: pd.DataFrame, coldata: pd.DataFrame) -> tuple[pd.DataFrame, pd.DataFrame]:
+def _validate_raw_counts_inputs(
+    counts: pd.DataFrame, coldata: pd.DataFrame
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Production-safe validation for DESeq2/edgeR inputs."""
     if counts.empty:
         raise ValueError("counts matrix is empty")
@@ -26,7 +28,9 @@ def _validate_raw_counts_inputs(counts: pd.DataFrame, coldata: pd.DataFrame) -> 
     counts = counts[common]
     coldata = coldata.loc[common]
     if "condition" not in coldata.columns:
-        raise ValueError("coldata must include a 'condition' column for design ~ condition")
+        raise ValueError(
+            "coldata must include a 'condition' column for design ~ condition"
+        )
     # Ensure integer-like non-negative counts.
     num = counts.apply(pd.to_numeric, errors="coerce")
     if num.isna().any().any():

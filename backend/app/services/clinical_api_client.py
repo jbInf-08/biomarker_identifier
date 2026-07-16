@@ -57,16 +57,20 @@ def fetch_cosmic_mutations(
         mutations = []
         for i, code in enumerate(codes):
             row = display_arr[i] if i < len(display_arr) else []
-            mutations.append({
-                "gene_symbol": row[1] if len(row) > 1 else "",
-                "mutation_id": str(code),
-                "mutation_type": row[6] if len(row) > 6 else (mutation_type or "Unknown"),
-                "cancer_type": row[4] if len(row) > 4 else (cancer_type or ""),
-                "cosmic_id": str(code),
-                "mutation_cds": row[2] if len(row) > 2 else "",
-                "mutation_aa": row[3] if len(row) > 3 else "",
-                "primary_site": row[5] if len(row) > 5 else "",
-            })
+            mutations.append(
+                {
+                    "gene_symbol": row[1] if len(row) > 1 else "",
+                    "mutation_id": str(code),
+                    "mutation_type": row[6]
+                    if len(row) > 6
+                    else (mutation_type or "Unknown"),
+                    "cancer_type": row[4] if len(row) > 4 else (cancer_type or ""),
+                    "cosmic_id": str(code),
+                    "mutation_cds": row[2] if len(row) > 2 else "",
+                    "mutation_aa": row[3] if len(row) > 3 else "",
+                    "primary_site": row[5] if len(row) > 5 else "",
+                }
+            )
             if len(mutations) >= limit:
                 break
 
@@ -78,7 +82,9 @@ def fetch_cosmic_mutations(
                 "cancer_type": cancer_type,
                 "mutation_type": mutation_type,
             },
-            "total_count": min(total, limit) if isinstance(total, int) else len(mutations),
+            "total_count": min(total, limit)
+            if isinstance(total, int)
+            else len(mutations),
             "mutations": mutations,
         }
     except Exception as e:
@@ -125,12 +131,14 @@ def fetch_oncokb_cancer_genes(
             ct = g.get("cancerTypes") or g.get("cancerTypesList") or []
             if cancer_type and cancer_type not in str(ct):
                 continue
-            result.append({
-                "gene_symbol": g.get("hugoSymbol") or g.get("gene") or "",
-                "tier": gene_tier,
-                "cancer_types": ct if isinstance(ct, list) else [ct],
-                "oncogenic": g.get("oncogenic", ""),
-            })
+            result.append(
+                {
+                    "gene_symbol": g.get("hugoSymbol") or g.get("gene") or "",
+                    "tier": gene_tier,
+                    "cancer_types": ct if isinstance(ct, list) else [ct],
+                    "oncogenic": g.get("oncogenic", ""),
+                }
+            )
 
         return {
             "database": "OncoKB",
@@ -208,13 +216,20 @@ def fetch_clinvar_variants(
         for vid in id_list:
             vdata = result.get(vid, {})
             if isinstance(vdata, dict) and vdata.get("title"):
-                variants.append({
-                    "variant_id": vid,
-                    "gene_symbol": gene_symbol or vdata.get("gene_symbol", "") or "",
-                    "clinical_significance": vdata.get("clinical_significance_description", "") or vdata.get("title", ""),
-                    "variant_type": variant_type or "Unknown",
-                    "title": vdata.get("title", ""),
-                })
+                variants.append(
+                    {
+                        "variant_id": vid,
+                        "gene_symbol": gene_symbol
+                        or vdata.get("gene_symbol", "")
+                        or "",
+                        "clinical_significance": vdata.get(
+                            "clinical_significance_description", ""
+                        )
+                        or vdata.get("title", ""),
+                        "variant_type": variant_type or "Unknown",
+                        "title": vdata.get("title", ""),
+                    }
+                )
             if len(variants) >= limit:
                 break
 
@@ -251,9 +266,7 @@ def fetch_oncokb_genes(
     limit: int = 100,
 ) -> Dict[str, Any]:
     """Fetch OncoKB curated genes. Uses cancer gene list filtered by params."""
-    result = fetch_oncokb_cancer_genes(
-        cancer_type=cancer_type, tier=None, limit=limit
-    )
+    result = fetch_oncokb_cancer_genes(cancer_type=cancer_type, tier=None, limit=limit)
     result["genes"] = result.get("cancer_genes", [])
     return result
 
@@ -284,14 +297,16 @@ def fetch_oncokb_drugs(
             genes = d.get("genes") or d.get("geneSymbols") or []
             if gene_symbol and gene_symbol not in str(genes):
                 continue
-            result.append({
-                "drug_name": d.get("name") or d.get("drugName", ""),
-                "drug_type": d.get("drugType", ""),
-                "target_genes": genes if isinstance(genes, list) else [genes],
-                "cancer_types": d.get("cancerTypes", []),
-                "evidence_level": d.get("level", ""),
-                "fda_approved": d.get("fdaApproved", False),
-            })
+            result.append(
+                {
+                    "drug_name": d.get("name") or d.get("drugName", ""),
+                    "drug_type": d.get("drugType", ""),
+                    "target_genes": genes if isinstance(genes, list) else [genes],
+                    "cancer_types": d.get("cancerTypes", []),
+                    "evidence_level": d.get("level", ""),
+                    "fda_approved": d.get("fdaApproved", False),
+                }
+            )
             if len(result) >= limit:
                 break
 

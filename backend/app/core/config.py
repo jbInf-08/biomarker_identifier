@@ -7,12 +7,11 @@ API keys, file paths, and application behavior parameters.
 
 import json
 import os
+from pathlib import Path
 from typing import List, Optional, Union
 
 from pydantic import field_validator, model_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-from pathlib import Path
 
 DEFAULT_SECRET_KEY = "your-secret-key-change-in-production"
 
@@ -35,7 +34,10 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     BASE_URL: str = "http://localhost:8000"
     # Union[str, List[str]] so .env comma-separated values are not JSON-decoded before validators run
-    ALLOWED_ORIGINS: Union[str, List[str]] = ["http://localhost:3000", "http://localhost:8000"]
+    ALLOWED_ORIGINS: Union[str, List[str]] = [
+        "http://localhost:3000",
+        "http://localhost:8000",
+    ]
 
     # Database settings
     DATABASE_URL: str = "sqlite:///./biomarker_app.db"

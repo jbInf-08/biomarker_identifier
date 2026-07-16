@@ -2,15 +2,20 @@
 Admin-only endpoints (federated API keys, etc.).
 """
 
-from typing import Any, Dict, List, Optional
-from datetime import datetime
 import uuid
+from datetime import datetime
+from typing import Any, Dict, List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
-from app.api.deps import create_service_api_key, get_current_user, log_audit, require_roles
+from app.api.deps import (
+    create_service_api_key,
+    get_current_user,
+    log_audit,
+    require_roles,
+)
 from app.core.database import get_db
 from app.middleware.rate_limit import limiter
 from app.models.platform_models import ComplianceChecklistItem, ServiceApiKey
@@ -62,7 +67,9 @@ class ComplianceItemCreateBody(BaseModel):
 
 
 class ComplianceItemUpdateBody(BaseModel):
-    status: Optional[str] = Field(default=None, pattern="^(open|in_progress|complete|waived)$")
+    status: Optional[str] = Field(
+        default=None, pattern="^(open|in_progress|complete|waived)$"
+    )
     evidence_link: Optional[str] = None
     notes: Optional[str] = None
     due_date: Optional[datetime] = None
@@ -195,7 +202,9 @@ async def list_compliance_items(
     user: User = Depends(get_current_user),
 ):
     del request
-    q = db.query(ComplianceChecklistItem).order_by(ComplianceChecklistItem.created_at.desc())
+    q = db.query(ComplianceChecklistItem).order_by(
+        ComplianceChecklistItem.created_at.desc()
+    )
     q = apply_tenant_scope(q, ComplianceChecklistItem, user)
     if framework:
         q = q.filter(ComplianceChecklistItem.framework == framework.lower())
@@ -232,9 +241,13 @@ async def update_compliance_item(
     q = apply_tenant_scope(q, ComplianceChecklistItem, user)
     row = q.first()
     if not row:
-        raise HTTPException(status_code=404, detail="Compliance checklist item not found")
+        raise HTTPException(
+            status_code=404, detail="Compliance checklist item not found"
+        )
     if body.status is not None and getattr(user, "role", None) != "admin":
-        raise HTTPException(status_code=403, detail="Only admin can update checklist status")
+        raise HTTPException(
+            status_code=403, detail="Only admin can update checklist status"
+        )
     if body.status is not None:
         row.status = body.status
     if body.evidence_link is not None:

@@ -161,14 +161,22 @@ app.include_router(
 )
 
 # v1 versioned paths (preferred for new integrations; same handlers as unversioned)
-app.include_router(biomarkers.router, prefix="/api/v1/biomarkers", tags=["biomarkers-v1"])
-app.include_router(analysis_routes.router, prefix="/api/v1/analysis", tags=["analysis-v1"])
+app.include_router(
+    biomarkers.router, prefix="/api/v1/biomarkers", tags=["biomarkers-v1"]
+)
+app.include_router(
+    analysis_routes.router, prefix="/api/v1/analysis", tags=["analysis-v1"]
+)
 app.include_router(
     federated_routes.router, prefix="/api/v1/federated", tags=["federated-learning-v1"]
 )
 app.include_router(data_routes.router, prefix="/api/v1/data", tags=["data-v1"])
-app.include_router(clinical_routes.router, prefix="/api/v1/clinical", tags=["clinical-v1"])
-app.include_router(auth_routes.router, prefix="/api/v1/auth", tags=["authentication-v1"])
+app.include_router(
+    clinical_routes.router, prefix="/api/v1/clinical", tags=["clinical-v1"]
+)
+app.include_router(
+    auth_routes.router, prefix="/api/v1/auth", tags=["authentication-v1"]
+)
 app.include_router(tenant_routes.router, prefix="/api/v1/tenants", tags=["tenants-v1"])
 
 # v2 aliases for core APIs (same handlers, different versioned paths)

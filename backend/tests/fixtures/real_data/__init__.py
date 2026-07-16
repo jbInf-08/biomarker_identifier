@@ -177,9 +177,9 @@ def _generate_single_sample_expression() -> pd.DataFrame:
 
 def _generate_single_sample_clinical() -> pd.DataFrame:
     """Clinical row aligned with single-sample expression columns."""
-    return pd.DataFrame(
-        {"sample_id": ["SAMPLE_001"], "group": [0]}
-    ).set_index("sample_id")
+    return pd.DataFrame({"sample_id": ["SAMPLE_001"], "group": [0]}).set_index(
+        "sample_id"
+    )
 
 
 def _generate_imbalanced_expression() -> pd.DataFrame:

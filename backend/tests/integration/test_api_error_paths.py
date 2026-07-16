@@ -21,9 +21,7 @@ class TestAnalysisErrorPaths:
         )
         assert response.status_code in [400, 422]
 
-    def test_correlation_analysis_missing_files(
-        self, client: TestClient, auth_headers
-    ):
+    def test_correlation_analysis_missing_files(self, client: TestClient, auth_headers):
         """Post correlation with no files."""
         response = client.post(
             "/api/analysis/statistical/correlation-analysis",
@@ -32,9 +30,7 @@ class TestAnalysisErrorPaths:
         )
         assert response.status_code in [400, 422]
 
-    def test_feature_selection_invalid_method(
-        self, client: TestClient, auth_headers
-    ):
+    def test_feature_selection_invalid_method(self, client: TestClient, auth_headers):
         """Feature selection with invalid method."""
         csv_content = b"gene,S1,S2,S3,S4,S5\nG1,1,2,3,4,5\nG2,2,3,4,5,6"
         response = client.post(
@@ -45,9 +41,7 @@ class TestAnalysisErrorPaths:
         )
         assert response.status_code in [400, 422, 500]
 
-    def test_pathway_enrichment_invalid_json(
-        self, client: TestClient, auth_headers
-    ):
+    def test_pathway_enrichment_invalid_json(self, client: TestClient, auth_headers):
         """Pathway enrichment with invalid body."""
         response = client.post(
             "/api/analysis/pathway/enrichment",
@@ -60,9 +54,7 @@ class TestAnalysisErrorPaths:
 class TestDataErrorPaths:
     """Error paths for data endpoints."""
 
-    def test_upload_expression_empty_file(
-        self, client: TestClient, auth_headers
-    ):
+    def test_upload_expression_empty_file(self, client: TestClient, auth_headers):
         """Upload empty file."""
         response = client.post(
             "/api/data/upload/expression",

@@ -17,9 +17,7 @@ class TestAnalysisAPIRoutes:
 
     def test_get_statistical_methods(self, client: TestClient, auth_headers):
         """Test GET /api/analysis/methods/statistical."""
-        response = client.get(
-            "/api/analysis/methods/statistical", headers=auth_headers
-        )
+        response = client.get("/api/analysis/methods/statistical", headers=auth_headers)
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
@@ -34,9 +32,7 @@ class TestAnalysisAPIRoutes:
 
     def test_get_pathway_methods(self, client: TestClient, auth_headers):
         """Test GET /api/analysis/methods/pathway."""
-        response = client.get(
-            "/api/analysis/methods/pathway", headers=auth_headers
-        )
+        response = client.get("/api/analysis/methods/pathway", headers=auth_headers)
         assert response.status_code == 200
         data = response.json()
         assert isinstance(data, list)
@@ -69,9 +65,7 @@ class TestAnalysisAPIRoutes:
 
     def test_correlation_analysis_unauthorized(self, client: TestClient):
         """Test correlation analysis without auth."""
-        response = client.post(
-            "/api/analysis/statistical/correlation-analysis"
-        )
+        response = client.post("/api/analysis/statistical/correlation-analysis")
         assert response.status_code in [401, 403, 422]
 
 

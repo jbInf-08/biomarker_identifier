@@ -86,7 +86,7 @@ jobs:
         echo "Running flake8 (linting)..."
         flake8 app/ tests/ --max-line-length=120 --extend-ignore=E203,W503
         echo "Running isort (import sorting)..."
-        isort --check-only app/ tests/
+        isort --profile black --check-only app/ tests/
         echo "Running mypy (type checking)..."
         mypy app/ --ignore-missing-imports --no-strict-optional
 
@@ -228,10 +228,7 @@ jobs:
     - name: Install frontend dependencies
       run: |
         cd frontend
-        # i18next's peerOptional typescript range (^5||^6) conflicts with the
-        # pinned devDependency (^4.9.5); the mismatch is peer-only, not a real
-        # incompatibility, so relax npm's strict peer resolution.
-        npm ci --legacy-peer-deps
+        npm ci
     
     - name: Run linting
       run: |

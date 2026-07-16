@@ -182,9 +182,7 @@ async def login_user(
         # Persist last_login with a single UPDATE (avoids SQLite + UUID ORM stale-row issues)
         uid = user.id
         db.execute(
-            update(User)
-            .where(User.id == uid)
-            .values(last_login=datetime.utcnow())
+            update(User).where(User.id == uid).values(last_login=datetime.utcnow())
         )
         db.commit()
         user = db.get(User, uid)

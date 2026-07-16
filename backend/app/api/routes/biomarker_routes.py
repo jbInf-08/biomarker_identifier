@@ -38,7 +38,10 @@ from app.pipelines.biomarker_pipeline import BiomarkerPipeline
 from app.reports.html_generator import HTMLReportGenerator
 from app.reports.pdf_generator import PDFReportGenerator
 from app.services.auth_service import auth_service
-from app.services.run_access import filter_user_analysis_runs_query, get_analysis_run_for_user
+from app.services.run_access import (
+    filter_user_analysis_runs_query,
+    get_analysis_run_for_user,
+)
 from app.services.tasks.biomarker_tasks import run_biomarker_analysis
 from app.utils.logging_config import get_logger
 from app.websocket.manager import manager

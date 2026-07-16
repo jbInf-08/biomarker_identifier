@@ -104,7 +104,9 @@ class TestAsyncExportService:
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_root):
                 with patch.object(
-                    export_service, "_send_email_with_attachment", new_callable=AsyncMock
+                    export_service,
+                    "_send_email_with_attachment",
+                    new_callable=AsyncMock,
                 ):
                     result = await export_service.share_analysis_results(
                         run_id=str(test_analysis_run.id),

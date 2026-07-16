@@ -11,11 +11,6 @@ from typing import Any, Dict, List, Optional
 import joblib
 import numpy as np
 import pandas as pd
-from sklearn.metrics import (
-    accuracy_score,
-    precision_recall_fscore_support,
-    roc_auc_score,
-)
 from fastapi import (
     APIRouter,
     Depends,
@@ -29,27 +24,32 @@ from fastapi import (
 )
 from fastapi.responses import FileResponse, PlainTextResponse
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from sklearn.metrics import (
+    accuracy_score,
+    precision_recall_fscore_support,
+    roc_auc_score,
+)
 from sqlalchemy.orm import Session
 
 from app.api.deps import log_audit, require_roles
 from app.core.config import settings
-from app.middleware.rate_limit import limiter
 from app.core.database import get_db
-from app.models.biomarker_model import BiomarkerResult
-from app.models.platform_models import InterpretationSnapshot
 from app.data_processing.feature_selection import FeatureSelection
+from app.middleware.rate_limit import limiter
 from app.ml_models.ml_pipeline import MLPipeline
 from app.ml_models.model_training import ModelTrainer
+from app.models.biomarker_model import BiomarkerResult
+from app.models.platform_models import InterpretationSnapshot
+from app.models.user_model import User
+from app.pipelines.pathways import PathwayAnalysis
+from app.pipelines.stats import StatisticalPipeline
+from app.services.auth_service import auth_service
+from app.services.llm_grounding import retrieve_all_sources
 from app.services.ml_pipeline_api import (
     expression_labels_to_xy,
     graph_edges_file_to_adjacency,
     summarize_binary_metrics_for_api,
 )
-from app.services.llm_grounding import retrieve_all_sources
-from app.models.user_model import User
-from app.pipelines.pathways import PathwayAnalysis
-from app.pipelines.stats import StatisticalPipeline
-from app.services.auth_service import auth_service
 from app.services.run_access import get_analysis_run_for_user
 from app.utils.logging_config import get_logger
 from app.utils.string_ppi import fetch_string_network_edges, to_cytoscape_elements
@@ -592,7 +592,11 @@ async def perform_feature_selection(
         labels_df = pd.read_csv(labels.file)
 
         gene_col = next(
-            (c for c in expression_df.columns if c.lower() in ("gene", "gene_id", "gene_symbol")),
+            (
+                c
+                for c in expression_df.columns
+                if c.lower() in ("gene", "gene_id", "gene_symbol")
+            ),
             None,
         )
         if gene_col:
@@ -601,28 +605,58 @@ async def perform_feature_selection(
             expression_df = expression_df.set_index(expression_df.columns[0])
         expr_numeric = expression_df.select_dtypes(include=[np.number])
         if expr_numeric.empty:
-            raise HTTPException(status_code=400, detail="No numeric expression columns found")
+            raise HTTPException(
+                status_code=400, detail="No numeric expression columns found"
+            )
 
         label_col = next(
-            (c for c in labels_df.columns if "class" in c.lower() or "label" in c.lower() or "group" in c.lower()),
-            labels_df.columns[1] if len(labels_df.columns) > 1 else labels_df.columns[0],
+            (
+                c
+                for c in labels_df.columns
+                if "class" in c.lower() or "label" in c.lower() or "group" in c.lower()
+            ),
+            labels_df.columns[1]
+            if len(labels_df.columns) > 1
+            else labels_df.columns[0],
         )
-        sample_col = next((c for c in labels_df.columns if "sample" in c.lower()), labels_df.columns[0])
+        sample_col = next(
+            (c for c in labels_df.columns if "sample" in c.lower()),
+            labels_df.columns[0],
+        )
         labels_indexed = labels_df.set_index(sample_col)[label_col]
         common = expr_numeric.columns.intersection(labels_indexed.index)
         if len(common) < 2:
-            raise HTTPException(status_code=400, detail="Insufficient overlap between expression samples and labels")
+            raise HTTPException(
+                status_code=400,
+                detail="Insufficient overlap between expression samples and labels",
+            )
         X = expr_numeric.loc[:, common].copy()
         y = labels_indexed.reindex(common).dropna()
         X = X.loc[:, y.index]
         expr_genes = X
 
         fs = FeatureSelection()
-        use_method = method if method in ("lasso", "elastic_net", "random_forest", "variance", "f_test", "mutual_info") else "lasso"
+        use_method = (
+            method
+            if method
+            in (
+                "lasso",
+                "elastic_net",
+                "random_forest",
+                "variance",
+                "f_test",
+                "mutual_info",
+            )
+            else "lasso"
+        )
         if use_method in ("lasso", "elastic_net", "random_forest"):
-            result = fs.embedded_methods(expr_genes, y, methods=[use_method], n_features=n_features)
+            result = fs.embedded_methods(
+                expr_genes, y, methods=[use_method], n_features=n_features
+            )
         else:
-            result = fs.filter_methods(expr_genes, y, methods=[use_method], n_features=n_features)
+            result = fs.filter_methods(
+                expr_genes, y, methods=[use_method], n_features=n_features
+            )
 
         key = use_method if use_method in result else list(result.keys())[0]
         sel = result.get(key, {})
@@ -631,8 +665,12 @@ async def perform_feature_selection(
         selected_features = sel.get("selected_features", [])[:n_features]
         feature_scores = sel.get("feature_scores", {})
         if not selected_features and feature_scores:
-            selected_features = sorted(feature_scores, key=lambda k: abs(feature_scores[k]), reverse=True)[:n_features]
-        feature_importance = {f: float(feature_scores.get(f, 1.0)) for f in selected_features}
+            selected_features = sorted(
+                feature_scores, key=lambda k: abs(feature_scores[k]), reverse=True
+            )[:n_features]
+        feature_importance = {
+            f: float(feature_scores.get(f, 1.0)) for f in selected_features
+        }
 
         logger.info(
             f"Completed feature selection",
@@ -697,30 +735,69 @@ async def train_ml_model(
         labels_df = pd.read_csv(labels.file)
 
         trainer = ModelTrainer(random_state=42)
-        gene_col = next((c for c in expression_df.columns if c.lower() in ("gene","gene_id","gene_symbol")), None)
+        gene_col = next(
+            (
+                c
+                for c in expression_df.columns
+                if c.lower() in ("gene", "gene_id", "gene_symbol")
+            ),
+            None,
+        )
         if gene_col:
             expression_df = expression_df.set_index(gene_col)
         X = expression_df.select_dtypes(include=[np.number]).T
-        label_col = next((c for c in labels_df.columns if "class" in c.lower() or "label" in c.lower() or "group" in c.lower()), labels_df.columns[1] if len(labels_df.columns) > 1 else labels_df.columns[0])
-        sample_col = next((c for c in labels_df.columns if "sample" in c.lower()), labels_df.columns[0])
+        label_col = next(
+            (
+                c
+                for c in labels_df.columns
+                if "class" in c.lower() or "label" in c.lower() or "group" in c.lower()
+            ),
+            labels_df.columns[1]
+            if len(labels_df.columns) > 1
+            else labels_df.columns[0],
+        )
+        sample_col = next(
+            (c for c in labels_df.columns if "sample" in c.lower()),
+            labels_df.columns[0],
+        )
         y = labels_df.set_index(sample_col)[label_col]
         common = X.index.intersection(y.index)
         if len(common) < 4:
-            raise HTTPException(status_code=400, detail="Insufficient samples for model training")
+            raise HTTPException(
+                status_code=400, detail="Insufficient samples for model training"
+            )
         X = X.loc[common].dropna(how="all")
         y = y.reindex(X.index).dropna()
         default_models = trainer._get_default_models()
-        models_config = {model_type: default_models[model_type]} if model_type in default_models else {"random_forest": default_models["random_forest"]}
-        training_results = trainer.train_models(X, y, models=models_config, optimize_hyperparameters=False, cv_folds=cv_folds)
-        model_name = list(training_results.keys())[0] if training_results else model_type
+        models_config = (
+            {model_type: default_models[model_type]}
+            if model_type in default_models
+            else {"random_forest": default_models["random_forest"]}
+        )
+        training_results = trainer.train_models(
+            X,
+            y,
+            models=models_config,
+            optimize_hyperparameters=False,
+            cv_folds=cv_folds,
+        )
+        model_name = (
+            list(training_results.keys())[0] if training_results else model_type
+        )
         model_info = training_results.get(model_name, {})
         best_score = float(model_info.get("best_score", 0))
         trained_model = model_info.get("model")
         importance = {}
         if trained_model and hasattr(trained_model, "feature_importances_"):
-            importance = dict(zip(X.columns, trained_model.feature_importances_.tolist()))
+            importance = dict(
+                zip(X.columns, trained_model.feature_importances_.tolist())
+            )
         elif trained_model and hasattr(trained_model, "coef_"):
-            coef = np.abs(trained_model.coef_[0]) if trained_model.coef_.ndim > 1 else np.abs(trained_model.coef_)
+            coef = (
+                np.abs(trained_model.coef_[0])
+                if trained_model.coef_.ndim > 1
+                else np.abs(trained_model.coef_)
+            )
             importance = dict(zip(X.columns, coef.tolist()))
         model_id = str(uuid.uuid4())
 
@@ -928,7 +1005,9 @@ async def run_biomarker_ml_pipeline(
 
 @router.post("/ml/model-evaluation", response_model=Dict[str, Any])
 async def evaluate_ml_model(
-    model_id: str = Query(..., description="Opaque model id (for logging; pair with trained_model file)"),
+    model_id: str = Query(
+        ..., description="Opaque model id (for logging; pair with trained_model file)"
+    ),
     test_data: UploadFile = File(...),
     test_labels: UploadFile = File(...),
     trained_model: UploadFile = File(
@@ -966,11 +1045,11 @@ async def evaluate_ml_model(
             (
                 c
                 for c in labels_df.columns
-                if "class" in c.lower()
-                or "label" in c.lower()
-                or "group" in c.lower()
+                if "class" in c.lower() or "label" in c.lower() or "group" in c.lower()
             ),
-            labels_df.columns[1] if len(labels_df.columns) > 1 else labels_df.columns[0],
+            labels_df.columns[1]
+            if len(labels_df.columns) > 1
+            else labels_df.columns[0],
         )
         sample_col = next(
             (c for c in labels_df.columns if "sample" in c.lower()),
@@ -980,7 +1059,8 @@ async def evaluate_ml_model(
         common = X.index.intersection(y.index)
         if len(common) < 2:
             raise HTTPException(
-                status_code=400, detail="Insufficient overlapping samples for evaluation"
+                status_code=400,
+                detail="Insufficient overlapping samples for evaluation",
             )
         X = X.loc[common].fillna(0)
         y = y.loc[common]
@@ -1010,7 +1090,11 @@ async def evaluate_ml_model(
 
         logger.info(
             "Model evaluation complete",
-            extra={"model_id": model_id, "n": len(common), "user": str(current_user.id)},
+            extra={
+                "model_id": model_id,
+                "n": len(common),
+                "user": str(current_user.id),
+            },
         )
         return {
             "analysis_type": "model_evaluation",
@@ -1065,14 +1149,27 @@ async def perform_pathway_enrichment(
     """
     try:
         genes_df = pd.read_csv(gene_list.file)
-        gene_col = next((c for c in genes_df.columns if c.lower() in ("gene", "gene_id", "gene_symbol")), genes_df.columns[0])
+        gene_col = next(
+            (
+                c
+                for c in genes_df.columns
+                if c.lower() in ("gene", "gene_id", "gene_symbol")
+            ),
+            genes_df.columns[0],
+        )
         genes = genes_df[gene_col].dropna().astype(str).unique().tolist()
         if len(genes) < 2:
-            raise HTTPException(status_code=400, detail="Gene list must contain at least 2 genes")
+            raise HTTPException(
+                status_code=400, detail="Gene list must contain at least 2 genes"
+            )
 
         pathway = PathwayAnalysis()
-        gene_sets = ["KEGG"] if pathway_database.lower() == "kegg" else ["KEGG", "REACTOME"]
-        results = pathway.run_pathway_analysis(genes, analysis_type="ora", gene_sets=gene_sets)
+        gene_sets = (
+            ["KEGG"] if pathway_database.lower() == "kegg" else ["KEGG", "REACTOME"]
+        )
+        results = pathway.run_pathway_analysis(
+            genes, analysis_type="ora", gene_sets=gene_sets
+        )
         ora = results.get("ora_results", {})
         enriched_pathways = []
         for gs_name, gs_data in ora.items():
@@ -1085,15 +1182,23 @@ async def perform_pathway_enrichment(
                 pval = float(r.get("pval", r.get("P-value", 1)))
                 if pval > p_value_threshold:
                     continue
-                enriched_pathways.append({
-                    "pathway_id": r.get("pathway", r.get("Term", ""))[:50],
-                    "pathway_name": r.get("pathway", r.get("Term", "")),
-                    "p_value": pval,
-                    "adjusted_p_value": float(r.get("adj_pval", r.get("Adjusted P-value", 1))),
-                    "enrichment_score": float(r.get("combined_score", r.get("Overlap", 0))),
-                    "gene_count": int(r.get("overlap_size", r.get("Overlap", 0))),
-                    "background_count": int(r.get("pathway_size", r.get("Pathway Size", 200))),
-                })
+                enriched_pathways.append(
+                    {
+                        "pathway_id": r.get("pathway", r.get("Term", ""))[:50],
+                        "pathway_name": r.get("pathway", r.get("Term", "")),
+                        "p_value": pval,
+                        "adjusted_p_value": float(
+                            r.get("adj_pval", r.get("Adjusted P-value", 1))
+                        ),
+                        "enrichment_score": float(
+                            r.get("combined_score", r.get("Overlap", 0))
+                        ),
+                        "gene_count": int(r.get("overlap_size", r.get("Overlap", 0))),
+                        "background_count": int(
+                            r.get("pathway_size", r.get("Pathway Size", 200))
+                        ),
+                    }
+                )
 
         logger.info(
             f"Completed pathway enrichment analysis",
@@ -1468,7 +1573,9 @@ async def llm_interpret_grounded(
         structured = bool(body.get("structured", True))
         out = svc.grounded_interpret_pipeline(
             genes=genes[:50],
-            pipeline_summary=pipeline_summary if isinstance(pipeline_summary, dict) else None,
+            pipeline_summary=pipeline_summary
+            if isinstance(pipeline_summary, dict)
+            else None,
             extra_context=str(extra) if extra else None,
             structured=structured,
         )
@@ -1540,7 +1647,9 @@ async def llm_literature_kg(
     if not isinstance(genes, list) or not genes:
         raise HTTPException(status_code=400, detail="genes[] is required")
     genes = [str(g).strip().upper() for g in genes if str(g).strip()][:100]
-    sources_for_prompt, matched, sources_for_api = retrieve_all_sources(genes, local_limit=10)
+    sources_for_prompt, matched, sources_for_api = retrieve_all_sources(
+        genes, local_limit=10
+    )
 
     # Co-mention KG: connect gene pairs that appear in the same source.
     edge_weight: Dict[tuple[str, str], int] = {}

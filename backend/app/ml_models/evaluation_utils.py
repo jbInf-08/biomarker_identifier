@@ -211,7 +211,11 @@ def bootstrap_paired_auc_delta(
         except ValueError:
             continue
     if not deltas:
-        return {"median_delta": float("nan"), "ci95_low": float("nan"), "ci95_high": float("nan")}
+        return {
+            "median_delta": float("nan"),
+            "ci95_low": float("nan"),
+            "ci95_high": float("nan"),
+        }
     d = np.array(deltas)
     q = np.quantile(d, [0.025, 0.5, 0.975])
     return {

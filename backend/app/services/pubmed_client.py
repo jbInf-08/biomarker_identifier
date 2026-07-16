@@ -99,7 +99,9 @@ def fetch_summaries(pmids: List[str]) -> List[Dict[str, Any]]:
     return out
 
 
-def retrieve_pubmed_for_genes(genes: List[str], max_per_query: int = 3) -> List[Dict[str, Any]]:
+def retrieve_pubmed_for_genes(
+    genes: List[str], max_per_query: int = 3
+) -> List[Dict[str, Any]]:
     """Gene-oriented PubMed retrieval for grounding."""
     if not genes:
         return []

@@ -5,9 +5,9 @@ Tests complex conditional logic and edge cases automatically.
 import numpy as np
 import pandas as pd
 import pytest
-from pandas.errors import InvalidIndexError
 from hypothesis import assume, given, settings
 from hypothesis import strategies as st
+from pandas.errors import InvalidIndexError
 
 from app.data_processing.feature_selection import FeatureSelection
 from app.data_processing.normalization import Normalization

@@ -12,13 +12,6 @@ from typing import Any, Dict, List, Optional, Tuple
 
 import joblib
 import numpy as np
-
-from app.services.clinical_api_client import (
-    fetch_clinvar_variants,
-    fetch_cosmic_mutations,
-    fetch_oncokb_cancer_genes,
-    fetch_oncokb_drugs,
-)
 import pandas as pd
 from sklearn.ensemble import (
     GradientBoostingClassifier,
@@ -37,6 +30,13 @@ from sklearn.metrics import (
 from sklearn.model_selection import GridSearchCV, StratifiedKFold, cross_val_score
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
+
+from app.services.clinical_api_client import (
+    fetch_clinvar_variants,
+    fetch_cosmic_mutations,
+    fetch_oncokb_cancer_genes,
+    fetch_oncokb_drugs,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -234,7 +234,10 @@ class AdvancedBiomarkerModel:
                     self.model = self._create_neural_network()
                 elif self.model_type == "gradient_boosting":
                     self.model = GradientBoostingClassifier(
-                        n_estimators=100, learning_rate=0.1, max_depth=5, random_state=42
+                        n_estimators=100,
+                        learning_rate=0.1,
+                        max_depth=5,
+                        random_state=42,
                     )
                 elif self.model_type == "svm":
                     self.model = SVC(kernel="rbf", probability=True, random_state=42)
@@ -426,11 +429,22 @@ class ClinicalAnnotationService:
     async def _annotate_cosmic(self, biomarker: str) -> Dict[str, Any]:
         """Annotate using COSMIC database via real API."""
         import asyncio
-        data = await asyncio.to_thread(fetch_cosmic_mutations, gene_symbol=biomarker, limit=50)
+
+        data = await asyncio.to_thread(
+            fetch_cosmic_mutations, gene_symbol=biomarker, limit=50
+        )
         if data.get("data_source") == "unavailable":
-            return {"source": "cosmic", "mutations": [], "cancer_types": [], "frequency": None, "clinical_significance": "unknown"}
+            return {
+                "source": "cosmic",
+                "mutations": [],
+                "cancer_types": [],
+                "frequency": None,
+                "clinical_significance": "unknown",
+            }
         mutations = data.get("mutations", [])
-        cancer_types = list({m.get("cancer_type") for m in mutations if m.get("cancer_type")})
+        cancer_types = list(
+            {m.get("cancer_type") for m in mutations if m.get("cancer_type")}
+        )
         return {
             "source": "cosmic",
             "mutations": mutations,
@@ -442,9 +456,17 @@ class ClinicalAnnotationService:
     async def _annotate_clinvar(self, biomarker: str) -> Dict[str, Any]:
         """Annotate using ClinVar database via real API."""
         import asyncio
-        data = await asyncio.to_thread(fetch_clinvar_variants, gene_symbol=biomarker, limit=50)
+
+        data = await asyncio.to_thread(
+            fetch_clinvar_variants, gene_symbol=biomarker, limit=50
+        )
         if data.get("data_source") == "unavailable":
-            return {"source": "clinvar", "variants": [], "clinical_significance": "unknown", "review_status": "unknown"}
+            return {
+                "source": "clinvar",
+                "variants": [],
+                "clinical_significance": "unknown",
+                "review_status": "unknown",
+            }
         variants = data.get("variants", [])
         sig = "high" if variants else "unknown"
         return {
@@ -457,15 +479,29 @@ class ClinicalAnnotationService:
     async def _annotate_oncokb(self, biomarker: str) -> Dict[str, Any]:
         """Annotate using OncoKB database via real API."""
         import asyncio
+
         data = await asyncio.to_thread(fetch_oncokb_cancer_genes, limit=500)
         genes = data.get("cancer_genes", []) if data.get("data_source") == "api" else []
-        gene_info = next((g for g in genes if (g.get("gene_symbol") or g.get("hugoSymbol", "")) == biomarker), None)
+        gene_info = next(
+            (
+                g
+                for g in genes
+                if (g.get("gene_symbol") or g.get("hugoSymbol", "")) == biomarker
+            ),
+            None,
+        )
         drugs_data = await asyncio.to_thread(fetch_oncokb_drugs, gene_symbol=biomarker)
-        drug_list = drugs_data.get("drugs", []) if drugs_data.get("data_source") == "api" else []
+        drug_list = (
+            drugs_data.get("drugs", [])
+            if drugs_data.get("data_source") == "api"
+            else []
+        )
         therapeutic = [d.get("drug_name", "") for d in drug_list if d.get("drug_name")]
         return {
             "source": "oncokb",
-            "oncogenic": gene_info.get("oncogenic", "unknown") if gene_info else "unknown",
+            "oncogenic": gene_info.get("oncogenic", "unknown")
+            if gene_info
+            else "unknown",
             "therapeutic_implications": therapeutic,
             "drug_targets": therapeutic,
         }

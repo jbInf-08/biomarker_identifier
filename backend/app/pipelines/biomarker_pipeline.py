@@ -335,10 +335,7 @@ class BiomarkerPipeline:
                     }
                     biomarker_entry["consensus_score"] = feature_info["consensus_score"]
                     break
-            if (
-                not biomarker_entry["ml_evidence"]
-                and feature in consensus_scores_map
-            ):
+            if not biomarker_entry["ml_evidence"] and feature in consensus_scores_map:
                 sc = float(consensus_scores_map[feature])
                 biomarker_entry["ml_evidence"] = {
                     "consensus_score": sc,

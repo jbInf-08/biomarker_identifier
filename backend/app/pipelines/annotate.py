@@ -282,12 +282,18 @@ class GeneAnnotation:
         data = fetch_cosmic_mutations(gene_symbol=gene, limit=20)
         if data.get("data_source") == "unavailable" or not data.get("mutations"):
             return {"mutations": [], "status": data.get("data_source", "unavailable")}
-        return {"mutations": data["mutations"], "status": "api", "total_count": data.get("total_count", 0)}
+        return {
+            "mutations": data["mutations"],
+            "status": "api",
+            "total_count": data.get("total_count", 0),
+        }
 
     def _query_oncokb(self, gene: str) -> Dict[str, Any]:
         """Query OncoKB via real API. Returns empty when unavailable."""
         data = fetch_oncokb_cancer_genes(limit=100)
-        genes = [g for g in data.get("cancer_genes", []) if g.get("gene_symbol") == gene]
+        genes = [
+            g for g in data.get("cancer_genes", []) if g.get("gene_symbol") == gene
+        ]
         if data.get("data_source") == "unavailable" or not genes:
             return {"genes": [], "status": data.get("data_source", "unavailable")}
         return {"genes": genes, "status": "api"}
@@ -301,7 +307,11 @@ class GeneAnnotation:
         data = fetch_clinvar_variants(gene_symbol=gene, limit=20)
         if data.get("data_source") == "unavailable" or not data.get("variants"):
             return {"variants": [], "status": data.get("data_source", "unavailable")}
-        return {"variants": data["variants"], "status": "api", "total_count": data.get("total_count", 0)}
+        return {
+            "variants": data["variants"],
+            "status": "api",
+            "total_count": data.get("total_count", 0),
+        }
 
     def _query_oncokb_clinical(self, gene: str) -> Dict[str, Any]:
         """Query OncoKB via real API. Delegates to _query_oncokb."""
@@ -323,12 +333,22 @@ class GeneAnnotation:
         """
         data = fetch_clinvar_variants(gene_symbol=gene, limit=50)
         if data.get("data_source") == "unavailable" or not data.get("variants"):
-            return {"pathogenic_variants": [], "status": data.get("data_source", "unavailable")}
+            return {
+                "pathogenic_variants": [],
+                "status": data.get("data_source", "unavailable"),
+            }
         pathogenic = [
-            {"variant": v.get("title", ""), "significance": v.get("clinical_significance", "Unknown")}
+            {
+                "variant": v.get("title", ""),
+                "significance": v.get("clinical_significance", "Unknown"),
+            }
             for v in data["variants"]
         ]
-        return {"pathogenic_variants": pathogenic, "status": "api", "total_count": len(pathogenic)}
+        return {
+            "pathogenic_variants": pathogenic,
+            "status": "api",
+            "total_count": len(pathogenic),
+        }
 
     def _generate_annotation_summary(self, results: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -357,8 +377,13 @@ class GeneAnnotation:
             cancer_info = annotation.get("cancer_info", {})
             if any(
                 db_info.get("status") == "api"
-                and (db_info.get("genes") or db_info.get("mutations") or db_info.get("variants"))
-                for db_info in list(cancer_info.values()) + list(annotation.get("clinical_info", {}).values())
+                and (
+                    db_info.get("genes")
+                    or db_info.get("mutations")
+                    or db_info.get("variants")
+                )
+                for db_info in list(cancer_info.values())
+                + list(annotation.get("clinical_info", {}).values())
             ):
                 cancer_genes.append(gene)
 
@@ -366,7 +391,11 @@ class GeneAnnotation:
             clinical_info = annotation.get("clinical_info", {})
             if any(
                 db_info.get("status") == "api"
-                and (db_info.get("genes") or db_info.get("variants") or db_info.get("clinical_significance"))
+                and (
+                    db_info.get("genes")
+                    or db_info.get("variants")
+                    or db_info.get("clinical_significance")
+                )
                 for db_info in clinical_info.values()
             ):
                 clinical_genes.append(gene)

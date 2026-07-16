@@ -89,7 +89,9 @@ async def list_projects(
     return out
 
 
-@router.post("/projects", response_model=ProjectRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/projects", response_model=ProjectRead, status_code=status.HTTP_201_CREATED
+)
 @limiter.limit("20/minute")
 async def create_project(
     request: Request,
@@ -149,7 +151,9 @@ async def add_member(
     if not proj:
         raise HTTPException(status_code=404, detail="Project not found")
     if proj.owner_user_id != user.id:
-        raise HTTPException(status_code=403, detail="Only project owner can add members")
+        raise HTTPException(
+            status_code=403, detail="Only project owner can add members"
+        )
     from uuid import UUID as PyUUID
 
     try:
@@ -167,8 +171,6 @@ async def add_member(
     if existing:
         existing.role = role
     else:
-        db.add(
-            ProjectMember(project_id=project_id, user_id=uid, role=role)
-        )
+        db.add(ProjectMember(project_id=project_id, user_id=uid, role=role))
     db.commit()
     return None

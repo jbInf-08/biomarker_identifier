@@ -15,6 +15,7 @@ from sqlalchemy import (
     String,
     Text,
 )
+
 from app.core.database import Base
 
 

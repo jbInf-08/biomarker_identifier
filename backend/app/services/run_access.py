@@ -42,7 +42,5 @@ def filter_user_analysis_runs_query(db: Session, user: User):
     q = db.query(AnalysisRun).filter(AnalysisRun.user_id == user.id)
     ut = getattr(user, "tenant_id", None)
     if ut:
-        q = q.filter(
-            or_(AnalysisRun.tenant_id == ut, AnalysisRun.tenant_id.is_(None))
-        )
+        q = q.filter(or_(AnalysisRun.tenant_id == ut, AnalysisRun.tenant_id.is_(None)))
     return q

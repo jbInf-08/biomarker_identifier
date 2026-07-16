@@ -17,9 +17,7 @@ def test_mcnemar_perfect_agreement():
     b = np.array([0, 1, 0, 1])
     r = mcnemar_test(y, a, b)
     assert r["pvalue"] == 1.0
-    assert (
-        r["table"]["n01_a_wrong_b_right"] + r["table"]["n10_a_right_b_wrong"] == 0
-    )
+    assert r["table"]["n01_a_wrong_b_right"] + r["table"]["n10_a_right_b_wrong"] == 0
 
 
 def test_compute_metrics_imbalance_warning():
@@ -32,9 +30,9 @@ def test_compute_metrics_imbalance_warning():
 
 
 def test_holdout_multimodel_report():
-    from sklearn.linear_model import LogisticRegression
-    from sklearn.ensemble import RandomForestClassifier
     import pandas as pd
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.linear_model import LogisticRegression
 
     rng = np.random.default_rng(0)
     X = pd.DataFrame(rng.normal(size=(80, 6)))

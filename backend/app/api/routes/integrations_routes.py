@@ -49,7 +49,9 @@ async def list_webhooks(
     return rows
 
 
-@router.post("/webhooks", response_model=WebhookRead, status_code=status.HTTP_201_CREATED)
+@router.post(
+    "/webhooks", response_model=WebhookRead, status_code=status.HTTP_201_CREATED
+)
 @limiter.limit("30/minute")
 async def create_webhook(
     request: Request,

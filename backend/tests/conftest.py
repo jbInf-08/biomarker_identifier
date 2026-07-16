@@ -7,7 +7,9 @@ from pathlib import Path
 # Align env with dedicated test DB file (CI keeps Postgres from the workflow).
 _worker = os.environ.get("PYTEST_XDIST_WORKER", "main")
 _backend_root = Path(__file__).resolve().parent.parent
-SQLALCHEMY_DATABASE_URL = f"sqlite:///{(_backend_root / f'test_{_worker}.db').as_posix()}"
+SQLALCHEMY_DATABASE_URL = (
+    f"sqlite:///{(_backend_root / f'test_{_worker}.db').as_posix()}"
+)
 if os.environ.get("CI") != "true":
     os.environ["DATABASE_URL"] = SQLALCHEMY_DATABASE_URL
 
@@ -41,20 +43,22 @@ TestingSessionLocal = sessionmaker(
 def _register_test_models() -> None:
     """Import model modules so every table is on Base.metadata before DDL (matches init_db)."""
     import app.models.biomarker_model  # noqa: F401
-    from app.models.biomarker_model import LiteratureEvidence  # noqa: F401 — literature_evidence DDL
     import app.models.data_model  # noqa: F401
     import app.models.run_model  # noqa: F401
     import app.models.tenant_model  # noqa: F401
     import app.models.user_model  # noqa: F401
-    from app.models.federated import (  # noqa: F401
-        FederatedEvaluation,
+    from app.models.biomarker_model import (  # noqa: F401 — literature_evidence DDL
+        LiteratureEvidence,
+    )
+    from app.models.federated import FederatedEvaluation  # noqa: F401
+    from app.models.federated import (
         FederatedGlobalModel,
         FederatedModel,
         FederatedParticipant,
         FederatedRound,
     )
-    from app.models.platform_models import (  # noqa: F401
-        AuditLog,
+    from app.models.platform_models import AuditLog  # noqa: F401
+    from app.models.platform_models import (
         ComplianceChecklistItem,
         FederatedIdempotency,
         InterpretationSnapshot,

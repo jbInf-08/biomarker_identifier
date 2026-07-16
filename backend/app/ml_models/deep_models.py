@@ -197,10 +197,12 @@ class PyTorchTabularClassifier(BaseEstimator, ClassifierMixin):
         else:
             alpha_pos = n_neg / max(n_pos + n_neg, 1.0)
 
-        def focal_loss(logits: "torch.Tensor", targets: "torch.Tensor") -> "torch.Tensor":
-            p_t = torch.softmax(logits, dim=1).gather(
-                1, targets.unsqueeze(1)
-            ).squeeze(1)
+        def focal_loss(
+            logits: "torch.Tensor", targets: "torch.Tensor"
+        ) -> "torch.Tensor":
+            p_t = (
+                torch.softmax(logits, dim=1).gather(1, targets.unsqueeze(1)).squeeze(1)
+            )
             ce_n = ce(logits, targets)
             focal = (1 - p_t) ** self.focal_gamma * ce_n
             w = torch.where(

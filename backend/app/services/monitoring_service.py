@@ -255,9 +255,7 @@ class MonitoringService:
                     .count()
                 )
                 failed_analyses = (
-                    db.query(AnalysisRun)
-                    .filter(AnalysisRun.status == "failed")
-                    .count()
+                    db.query(AnalysisRun).filter(AnalysisRun.status == "failed").count()
                 )
 
                 # User metrics
@@ -318,9 +316,7 @@ class MonitoringService:
                     disk_usage=metrics["system"]["disk_usage"],
                     database_status=metrics["database"]["status"],
                     redis_status=metrics["redis"]["status"],
-                    active_connections=metrics["database"].get(
-                        "active_connections", 0
-                    ),
+                    active_connections=metrics["database"].get("active_connections", 0),
                     error_rate=0.0,  # Calculate from logs
                     response_time_p95=metrics["database"].get("response_time", 0.0),
                 )

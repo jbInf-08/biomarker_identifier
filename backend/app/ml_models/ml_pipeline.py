@@ -341,7 +341,9 @@ class MLPipeline:
 
                 logger.info(f"Cross-validation completed in {cv_time:.2f} seconds")
             else:
-                logger.info("Skipping nested cross-validation (run_nested_cross_validation=False)")
+                logger.info(
+                    "Skipping nested cross-validation (run_nested_cross_validation=False)"
+                )
                 results["cross_validation"] = {"skipped": True}
 
             # Step 5: Get Best Model
@@ -584,10 +586,8 @@ class MLPipeline:
             ).total_seconds()
 
             cv_start = datetime.now()
-            results["cross_validation"] = (
-                self.cross_validator.nested_cross_validation(
-                    X_tr, y_train, cv_folds=cv_folds
-                )
+            results["cross_validation"] = self.cross_validator.nested_cross_validation(
+                X_tr, y_train, cv_folds=cv_folds
             )
             results["timing"]["cross_validation_seconds"] = (
                 datetime.now() - cv_start
@@ -602,10 +602,10 @@ class MLPipeline:
             }
 
             perm_start = datetime.now()
-            results["permutation_testing"] = (
-                self.permutation_tester.model_performance_permutation_test(
-                    best_model, X_tr, y_train, n_permutations=n_permutations
-                )
+            results[
+                "permutation_testing"
+            ] = self.permutation_tester.model_performance_permutation_test(
+                best_model, X_tr, y_train, n_permutations=n_permutations
             )
             results["timing"]["permutation_testing_seconds"] = (
                 datetime.now() - perm_start
@@ -728,7 +728,9 @@ class MLPipeline:
         )
         if adj_r is not None and graph_augment_mode:
             if adj_r.shape[0] != X_tr.shape[1]:
-                raise ValueError("Resolved graph adjacency must match selected features")
+                raise ValueError(
+                    "Resolved graph adjacency must match selected features"
+                )
             cols = list(X_tr.columns)
             X_tr = augment_expression_with_graph(
                 X_tr, cols, adj_r, mode=graph_augment_mode
@@ -850,9 +852,9 @@ class MLPipeline:
                     "balanced_accuracy": eval_results.get("balanced_accuracy", {}).get(
                         "mean", 0
                     ),
-                    "matthews_corrcoef": eval_results.get(
-                        "matthews_corrcoef", {}
-                    ).get("mean", 0),
+                    "matthews_corrcoef": eval_results.get("matthews_corrcoef", {}).get(
+                        "mean", 0
+                    ),
                 }
 
         # Statistical significance

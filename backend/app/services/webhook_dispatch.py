@@ -101,7 +101,9 @@ def dispatch_webhooks_for_user(
         last_err: str | None = None
         for attempt in range(_MAX_ATTEMPTS):
             try:
-                r = httpx.post(str(row.url), content=body, headers=headers, timeout=20.0)
+                r = httpx.post(
+                    str(row.url), content=body, headers=headers, timeout=20.0
+                )
                 log_row.attempts = attempt + 1
                 log_row.http_status = r.status_code
                 if 200 <= r.status_code < 400:

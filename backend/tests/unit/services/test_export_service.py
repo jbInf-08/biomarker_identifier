@@ -44,7 +44,6 @@ class TestExportService:
             with patch_module_db_session(
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_dir):
-
                 result = await service.export_analysis_results(
                     run_id=str(test_analysis_run.id),
                     export_format="csv",
@@ -76,7 +75,6 @@ class TestExportService:
             with patch_module_db_session(
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_dir):
-
                 result = await service.export_analysis_results(
                     run_id=str(test_analysis_run.id),
                     export_format="json",
@@ -108,7 +106,6 @@ class TestExportService:
             with patch_module_db_session(
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_dir):
-
                 result = await service.export_analysis_results(
                     run_id=str(test_analysis_run.id),
                     export_format="excel",
@@ -140,7 +137,6 @@ class TestExportService:
             with patch_module_db_session(
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_dir):
-
                 result = await service.export_analysis_results(
                     run_id=str(test_analysis_run.id),
                     export_format="pdf",
@@ -172,7 +168,6 @@ class TestExportService:
             with patch_module_db_session(
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_dir):
-
                 result = await service.export_analysis_results(
                     run_id=str(test_analysis_run.id),
                     export_format="zip",
@@ -250,7 +245,6 @@ class TestExportService:
             with patch_module_db_session(
                 "app.services.export_service", db_session
             ), patch.object(settings, "EXPORT_DIR", export_dir):
-
                 result = await service.generate_public_link(
                     run_id=str(test_analysis_run.id),
                     expiration_hours=24,

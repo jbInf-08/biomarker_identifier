@@ -16,7 +16,10 @@ _GROUNDING_CACHE: Optional[List[Dict[str, Any]]] = None
 def _snippets_path() -> Path:
     # backend/data/llm_grounding/snippets.json
     return (
-        Path(__file__).resolve().parent.parent.parent / "data" / "llm_grounding" / "snippets.json"
+        Path(__file__).resolve().parent.parent.parent
+        / "data"
+        / "llm_grounding"
+        / "snippets.json"
     )
 
 

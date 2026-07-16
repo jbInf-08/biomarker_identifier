@@ -24,8 +24,7 @@ from sqlalchemy import (
     inspect,
     text,
 )
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import Session, sessionmaker
+from sqlalchemy.orm import Session, declarative_base, sessionmaker
 from sqlalchemy.pool import StaticPool
 
 from .config import settings
@@ -108,15 +107,15 @@ async def init_db():
         # Import all models to ensure they are registered
         from ..models.biomarker_model import BiomarkerResult
         from ..models.data_model import ClinicalData, ExpressionData
-        from ..models.federated import (  # noqa: F401
-            FederatedEvaluation,
+        from ..models.federated import FederatedEvaluation  # noqa: F401
+        from ..models.federated import (
             FederatedGlobalModel,
             FederatedModel,
             FederatedParticipant,
             FederatedRound,
         )
-        from ..models.platform_models import (  # noqa: F401
-            AuditLog,
+        from ..models.platform_models import AuditLog  # noqa: F401
+        from ..models.platform_models import (
             ComplianceChecklistItem,
             FederatedIdempotency,
             InterpretationSnapshot,
@@ -129,7 +128,9 @@ async def init_db():
         )
         from ..models.run_model import AnalysisRun
         from ..models.tenant_model import Tenant
-        from ..models.user_model import User  # noqa: F401 — register users table for FKs
+        from ..models.user_model import (  # noqa: F401 — register users table for FKs
+            User,
+        )
 
         # Create all tables
         Base.metadata.create_all(bind=engine)
