@@ -57,7 +57,7 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y r-base r-base-dev
+        sudo apt-get install -y r-base r-base-dev libtirpc-dev
 
     - name: Install Python dependencies
       run: |
@@ -228,7 +228,10 @@ jobs:
     - name: Install frontend dependencies
       run: |
         cd frontend
-        npm ci
+        # i18next's peerOptional typescript range (^5||^6) conflicts with the
+        # pinned devDependency (^4.9.5); the mismatch is peer-only, not a real
+        # incompatibility, so relax npm's strict peer resolution.
+        npm ci --legacy-peer-deps
     
     - name: Run linting
       run: |
@@ -348,7 +351,7 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y r-base r-base-dev
+        sudo apt-get install -y r-base r-base-dev libtirpc-dev
 
     - name: Install dependencies
       run: |
