@@ -150,6 +150,10 @@ jobs:
         DATABASE_URL: postgresql://test_user:test_password@localhost:5432/test_db
         REDIS_URL: redis://localhost:6379/0
       run: |
+        # No --cov-fail-under here: this step only runs the single real-data
+        # smoke-test file to produce coverage.xml for the Codecov upload below.
+        # One file covers ~24% of app/, so a 70% gate could never pass and had
+        # nothing to do with this step's purpose (report generation, not gating).
         pytest tests/unit/test_with_real_data.py \
           --cov=app \
           --cov-report=xml \
