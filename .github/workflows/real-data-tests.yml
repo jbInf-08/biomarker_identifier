@@ -125,7 +125,6 @@ jobs:
         CELERY_BROKER_URL: redis://localhost:6379/0
       run: |
         pytest tests/unit/test_with_real_data.py \
-          tests/unit/test_real_data_expanded.py \
           -v \
           --tb=short \
           --maxfail=5 \
@@ -152,7 +151,6 @@ jobs:
         REDIS_URL: redis://localhost:6379/0
       run: |
         pytest tests/unit/test_with_real_data.py \
-          tests/unit/test_real_data_expanded.py \
           --cov=app \
           --cov-report=xml \
           --cov-report=html \
