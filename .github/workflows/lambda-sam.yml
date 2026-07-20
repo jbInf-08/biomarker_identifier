@@ -25,6 +25,13 @@ jobs:
         with:
           python-version: "3.11"
 
+      # requirements-prod.txt pins rpy2, which refuses to build in API mode
+      # without R on PATH/R_HOME, and its rinterface link step needs libtirpc.
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y r-base r-base-dev libtirpc-dev
+
       - name: Install backend + Mangum (Lambda adapter)
         run: |
           python -m pip install --upgrade pip

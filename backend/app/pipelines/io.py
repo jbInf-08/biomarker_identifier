@@ -515,10 +515,15 @@ class DataIO:
         """Generate a hash for the dataset."""
         if self.expression_data is not None and self.labels is not None:
             # Create a hash from expression data and labels
-            expr_hash = hashlib.md5(self.expression_data.values.tobytes()).hexdigest()[
-                :8
-            ]
-            label_hash = hashlib.md5(self.labels.values.tobytes()).hexdigest()[:8]
+            # usedforsecurity=False: this is a dataset fingerprint for cache/run
+            # identity, not a security control. Keeps the existing hash values
+            # byte-for-byte while telling hashlib (and Bandit) it is non-crypto.
+            expr_hash = hashlib.md5(
+                self.expression_data.values.tobytes(), usedforsecurity=False
+            ).hexdigest()[:8]
+            label_hash = hashlib.md5(
+                self.labels.values.tobytes(), usedforsecurity=False
+            ).hexdigest()[:8]
             return f"{expr_hash}_{label_hash}"
         return "unknown"
 

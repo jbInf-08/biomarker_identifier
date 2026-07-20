@@ -334,15 +334,25 @@ class ReportGenerator:
             Path to generated HTML report
         """
         try:
-            from jinja2 import Environment, FileSystemLoader, Template
+            from jinja2 import (
+                Environment,
+                FileSystemLoader,
+                Template,
+                select_autoescape,
+            )
 
             # Use default template if none provided
+            # autoescape on: report fields such as project_name, investigator and
+            # institution are user-supplied and rendered straight into HTML. The
+            # templates only interpolate scalars (no to_html()/|safe raw markup),
+            # so escaping does not alter legitimate output.
             if template_path is None:
                 template_content = self._get_default_html_template()
-                template = Template(template_content)
+                template = Template(template_content, autoescape=True)
             else:
                 env = Environment(
-                    loader=FileSystemLoader(os.path.dirname(template_path))
+                    loader=FileSystemLoader(os.path.dirname(template_path)),
+                    autoescape=select_autoescape(["html", "htm", "xml"]),
                 )
                 template = env.get_template(os.path.basename(template_path))
 
