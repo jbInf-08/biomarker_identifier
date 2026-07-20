@@ -488,8 +488,15 @@ class BatchCorrection:
             batch_data = expression_data[batch_samples]
             standardized = (batch_data.T - batch_mean) / np.sqrt(batch_var)
 
-            # Transform to global scale
-            corrected = standardized.T * np.sqrt(global_var) + global_mean
+            # Transform to global scale.
+            # Stay in the samples x genes orientation for the arithmetic:
+            # global_var/global_mean are indexed by gene, and pandas aligns a
+            # Series against the frame's COLUMNS. Transposing first (genes x
+            # samples) aligned those gene labels against sample columns, which
+            # broadcast on the wrong axis and produced a frame whose columns no
+            # longer matched batch_samples ("Columns must be same length as
+            # key"). Transpose only after scaling.
+            corrected = (standardized * np.sqrt(global_var) + global_mean).T
 
             corrected_data[batch_samples] = corrected
 
