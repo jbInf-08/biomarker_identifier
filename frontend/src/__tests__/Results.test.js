@@ -25,11 +25,22 @@ jest.mock('react-hot-toast', () => ({
   },
 }));
 
+// These must be stable across renders. Results.js wraps loadResults in a
+// useCallback keyed on these functions and calls it from a useEffect, so
+// returning fresh jest.fn()s from usePipeline() on every render changed the
+// dep identities each pass, re-fired the effect, and re-entered setLoading(true)
+// forever -- the component never left its spinner and no heading ever rendered.
+const mockGetRunResults = jest.fn().mockResolvedValue(null);
+const mockGetBiomarkers = jest.fn().mockResolvedValue(null);
+const mockGetRunStatus = jest.fn().mockResolvedValue(null);
+const mockGenerateReport = jest.fn().mockResolvedValue(null);
+
 jest.mock('../contexts/PipelineContext', () => ({
   usePipeline: () => ({
-    getRunResults: jest.fn().mockResolvedValue(null),
-    getBiomarkers: jest.fn().mockResolvedValue(null),
-    getRunStatus: jest.fn().mockResolvedValue(null),
+    getRunResults: mockGetRunResults,
+    getBiomarkers: mockGetBiomarkers,
+    getRunStatus: mockGetRunStatus,
+    generateReport: mockGenerateReport,
   }),
 }));
 
