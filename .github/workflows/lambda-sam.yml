@@ -52,7 +52,11 @@ jobs:
 
       - name: SAM validate
         working-directory: deployment/serverless
-        run: sam validate -t template.yaml
+        # sam validate parses the template locally and needs no credentials, but
+        # the CLI still refuses to run without a region ("AWS Region was not
+        # found"). Pass one explicitly; the commented-out deploy job below sets
+        # its own region via configure-aws-credentials, so this does not clash.
+        run: sam validate -t template.yaml --region us-east-1
 
       # --- Uncomment to deploy (set repo secrets: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION) ---
       # - name: Configure AWS credentials
