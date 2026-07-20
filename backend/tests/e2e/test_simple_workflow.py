@@ -37,11 +37,37 @@ class TestSimpleWorkflow:
 
     def test_tenant_creation_workflow(self):
         """Test tenant creation via API (multi-tenant feature)."""
+        # Every /api/tenants/ route is admin-only (require_roles("admin")), so
+        # these calls need a bearer token -- unauthenticated they just 401.
+        admin_data = {
+            "name": "E2E Tenant Admin",
+            "email": "tenant_admin_e2e@example.com",
+            "password": "adminpassword123",
+            "role": "admin",
+        }
+        # Registration may 400 if a previous run already created this admin;
+        # only the login below has to succeed.
+        requests.post(
+            f"{BASE_URL}/api/auth/register",
+            json=admin_data,
+            timeout=REQUEST_TIMEOUT,
+        )
+        login_response = requests.post(
+            f"{BASE_URL}/api/auth/login",
+            json={"email": admin_data["email"], "password": admin_data["password"]},
+            timeout=REQUEST_TIMEOUT,
+        )
+        assert login_response.status_code == 200
+        headers = {"Authorization": f"Bearer {login_response.json()['access_token']}"}
+
         # Create a test tenant
         tenant_data = {"id": "test_tenant_e2e", "name": "E2E Test Tenant"}
 
         response = requests.post(
-            f"{BASE_URL}/api/tenants/", json=tenant_data, timeout=REQUEST_TIMEOUT
+            f"{BASE_URL}/api/tenants/",
+            json=tenant_data,
+            headers=headers,
+            timeout=REQUEST_TIMEOUT,
         )
 
         # Should succeed (201) or return conflict if exists (400)
@@ -49,7 +75,9 @@ class TestSimpleWorkflow:
 
         # Verify tenant exists
         get_response = requests.get(
-            f"{BASE_URL}/api/tenants/{tenant_data['id']}", timeout=REQUEST_TIMEOUT
+            f"{BASE_URL}/api/tenants/{tenant_data['id']}",
+            headers=headers,
+            timeout=REQUEST_TIMEOUT,
         )
         assert get_response.status_code == 200
         tenant = get_response.json()
