@@ -348,7 +348,7 @@ class TestCompleteWorkflow:
 
         # Test accessing protected endpoint without authentication
         protected_response = client.get("/api/biomarkers/runs")
-        assert protected_response.status_code == 403
+        assert protected_response.status_code == 401
 
         # Test accessing non-existent run
         # First create a user and get a token

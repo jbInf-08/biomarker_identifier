@@ -124,7 +124,7 @@ class TestAuthAPI:
         """Test getting current user without authentication."""
         response = client.get("/api/auth/me")
 
-        assert response.status_code == 403  # No authorization header
+        assert response.status_code == 401  # No authorization header
 
     def test_get_current_user_invalid_token(self, client: TestClient):
         """Test getting current user with invalid token."""
@@ -152,7 +152,7 @@ class TestAuthAPI:
 
         response = client.put("/api/auth/me", json=update_data)
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_change_password_success(self, client: TestClient, auth_headers):
         """Test successful password change."""
@@ -191,7 +191,7 @@ class TestAuthAPI:
 
         response = client.post("/api/auth/change-password", json=password_data)
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_logout_success(self, client: TestClient, auth_headers):
         """Test successful user logout."""
@@ -204,7 +204,7 @@ class TestAuthAPI:
         """Test logout without authentication."""
         response = client.post("/api/auth/logout")
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_verify_token_success(self, client: TestClient, auth_headers):
         """Test token verification."""
@@ -248,7 +248,7 @@ class TestAuthAPI:
         """Test getting user activities without authentication."""
         response = client.get("/api/auth/activities")
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_get_all_users_admin(self, client: TestClient, admin_headers):
         """Test getting all users as admin."""

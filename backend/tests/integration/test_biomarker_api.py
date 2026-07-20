@@ -12,7 +12,7 @@ class TestBiomarkerAPI:
         """Test getting runs without authentication."""
         response = client.get("/api/biomarkers/runs")
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_get_runs_success(self, client: TestClient, auth_headers):
         """Test getting runs with authentication."""
@@ -67,7 +67,7 @@ class TestBiomarkerAPI:
         """Test getting a run without authentication."""
         response = client.get(f"/api/biomarkers/runs/{test_analysis_run.id}")
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_start_analysis_unauthorized(self, client: TestClient):
         """Test starting analysis without authentication."""
@@ -81,7 +81,7 @@ class TestBiomarkerAPI:
 
         response = client.post("/api/biomarkers/analysis/start", json=analysis_data)
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_start_analysis_success(
         self, client: TestClient, auth_headers, test_data_files
@@ -270,7 +270,7 @@ class TestBiomarkerAPI:
         """Test deleting a run without authentication."""
         response = client.delete(f"/api/biomarkers/runs/{test_analysis_run.id}")
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_generate_report_success(
         self, client: TestClient, auth_headers, test_analysis_run
@@ -320,7 +320,7 @@ class TestBiomarkerAPI:
             f"/api/biomarkers/runs/{test_analysis_run.id}/report", json=report_data
         )
 
-        assert response.status_code == 403
+        assert response.status_code == 401
 
     def test_download_report_success(
         self, client: TestClient, auth_headers, test_analysis_run
@@ -362,4 +362,4 @@ class TestBiomarkerAPI:
             f"/api/biomarkers/runs/{test_analysis_run.id}/download-report?format=html"
         )
 
-        assert response.status_code == 403
+        assert response.status_code == 401

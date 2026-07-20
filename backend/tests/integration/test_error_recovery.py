@@ -14,7 +14,7 @@ from app.services.export_service import ExportService
 class TestErrorRecovery:
     """Tests for error recovery scenarios."""
 
-    def test_pipeline_error_recovery_partial_results(self):
+    def test_pipeline_error_recovery_partial_results(self, tmp_path):
         """Test pipeline error recovery with partial results."""
         pipeline = BiomarkerPipeline()
 
@@ -27,13 +27,13 @@ class TestErrorRecovery:
                 result = pipeline.run_pipeline(
                     expression_file="/nonexistent/expression.csv",
                     labels_file="/nonexistent/labels.csv",
-                    output_dir="/nonexistent/output",
+                    output_dir=str(tmp_path / "output"),
                 )
             except Exception:
                 # Expected to fail, but should have partial results or error info
                 assert pipeline.run_id is not None or True
 
-    def test_pipeline_error_recovery_data_validation_failure(self):
+    def test_pipeline_error_recovery_data_validation_failure(self, tmp_path):
         """Test pipeline error recovery when data validation fails."""
         pipeline = BiomarkerPipeline()
 
@@ -54,7 +54,7 @@ class TestErrorRecovery:
                 result = pipeline.run_pipeline(
                     expression_file="/nonexistent/expression.csv",
                     labels_file="/nonexistent/labels.csv",
-                    output_dir="/nonexistent/output",
+                    output_dir=str(tmp_path / "output"),
                 )
             except ValueError as e:
                 # Expected to raise ValueError for validation failure
