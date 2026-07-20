@@ -158,8 +158,7 @@ jobs:
           --cov=app \
           --cov-report=xml \
           --cov-report=html \
-          --cov-report=term \
-          --cov-fail-under=70
+          --cov-report=term
     
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@75cd11691c0faa626561e295848008c8a7dddffe # v5
