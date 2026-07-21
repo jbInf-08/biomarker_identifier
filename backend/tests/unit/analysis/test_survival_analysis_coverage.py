@@ -401,6 +401,40 @@ def test_kaplan_meier_auto_median_split(analyzer):
     assert analyzer.km_results["main"] is results
 
 
+def test_kaplan_meier_survival_at_times_is_evaluated_by_day_not_row():
+    """survival_at_1yr/5yr must be the KM survival at 365/1825 DAYS.
+
+    Regression guard for a bug where these were read by row position in
+    survival_function_ (iloc[365]/iloc[1825]). Real cohorts have far fewer
+    than 366 distinct event times, so both silently collapsed to the final
+    survival probability -- making 1-year and 5-year survival identical and
+    usually near zero. Here survival declines steadily from day 50 to 2000,
+    so the correct 1-year survival is high and clearly differs from 5-year.
+    """
+    from lifelines import KaplanMeierFitter
+
+    n = 40
+    times = np.linspace(50, 2000, n)
+    events = np.ones(n)  # all deaths, no censoring
+    frame = pd.DataFrame({TIME_COL: times, EVENT_COL: events})
+
+    analyzer = SurvivalAnalyzer()
+    analyzer.survival_data = frame
+    all_one = pd.Series(True, index=frame.index)
+    results = analyzer.kaplan_meier_analysis(groups={"All": all_one})
+
+    expected = KaplanMeierFitter().fit(times, events)
+    exp_1yr = float(expected.predict(365))
+    exp_5yr = float(expected.predict(1825))
+
+    group = results["All"]
+    assert group["survival_at_1yr"] == pytest.approx(exp_1yr, abs=1e-6)
+    assert group["survival_at_5yr"] == pytest.approx(exp_5yr, abs=1e-6)
+    # The whole point: 1-year survival is well above 5-year survival here.
+    # The old row-indexing bug made them equal (both = final survival).
+    assert group["survival_at_1yr"] > group["survival_at_5yr"] + 0.3
+
+
 def test_kaplan_meier_missing_group_column_raises(analyzer):
     with pytest.raises(ValueError, match="Group column 'nope' not found"):
         analyzer.kaplan_meier_analysis(group_column="nope")

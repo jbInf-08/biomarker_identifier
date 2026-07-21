@@ -416,14 +416,18 @@ class SurvivalAnalyzer:
                         label=group_name,
                     )
 
-                    # Calculate statistics
+                    # Calculate statistics.
+                    # survival_function_ is indexed by the distinct observed
+                    # event times, so iloc[365]/iloc[1825] indexed by ROW
+                    # POSITION, not by day: with fewer than 366 distinct event
+                    # times (i.e. almost every real cohort) both collapsed to
+                    # the final survival probability instead of 1-/5-year
+                    # survival. Use predict(), which evaluates the KM step
+                    # function at the requested time. time_column is in days,
+                    # matching the 365/1825-day constants used originally.
                     median_survival = kmf.median_survival_time_
-                    survival_at_1yr = kmf.survival_function_.iloc[
-                        min(365, len(kmf.survival_function_) - 1), 0
-                    ]
-                    survival_at_5yr = kmf.survival_function_.iloc[
-                        min(1825, len(kmf.survival_function_) - 1), 0
-                    ]
+                    survival_at_1yr = float(kmf.predict(365))
+                    survival_at_5yr = float(kmf.predict(1825))
 
                     km_results[group_name] = {
                         "kmf": kmf,
