@@ -472,6 +472,14 @@ class Normalization:
                         color_col = labels.values
                     elif batch_info is not None:
                         color_col = batch_info.values
+                    # Plotly's marker.color only accepts numbers or CSS colors;
+                    # categorical values such as batch names ("B1", "B2") or
+                    # string labels ("tumor") must be encoded to integer codes
+                    # first, otherwise add_trace raises on the raw strings.
+                    if color_col is not None and not np.issubdtype(
+                        np.asarray(color_col).dtype, np.number
+                    ):
+                        color_col = pd.factorize(color_col)[0]
 
                     # Original PCA
                     fig_pca.add_trace(

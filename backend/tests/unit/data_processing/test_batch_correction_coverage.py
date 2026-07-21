@@ -20,6 +20,7 @@ more realistic) string-labelled case.
 import importlib
 import sys
 import types
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
@@ -235,13 +236,16 @@ class TestComponentBatchScore:
         batches = pd.Series(["A", "A", "A", "B", "B", "B"], index=range(6))
         assert bc._calculate_component_batch_score(component, batches) < 0.2
 
-    def test_string_labels_raise_index_error(self):
-        """Documents the real behaviour: numpy cannot fancy-index with labels."""
+    def test_string_sample_labels_are_scored_positionally(self):
+        """String sample IDs (the realistic case) are handled via a boolean
+        mask, so a clean batch separation still scores high."""
         bc = BatchCorrection()
-        component = np.arange(4, dtype=float)
+        # Perfectly separated: batch A low, batch B high.
+        component = np.array([-1.0, -1.0, 1.0, 1.0])
         batches = pd.Series(["A", "A", "B", "B"], index=["s0", "s1", "s2", "s3"])
-        with pytest.raises(IndexError):
-            bc._calculate_component_batch_score(component, batches)
+        score = bc._calculate_component_batch_score(component, batches)
+        assert np.isfinite(score)
+        assert score > 0.5
 
 
 # ---------------------------------------------------------------------------
@@ -435,11 +439,16 @@ class TestDetectBatchEffects:
         )
         assert "age" in res["correlation_analysis"]["correlations"]
 
-    def test_string_sample_labels_propagate_index_error(self):
+    def test_string_sample_labels_are_supported(self):
+        # Realistic string sample IDs must work (they used to IndexError in the
+        # PCA batch-score path). detect_batch_effects should return a result
+        # dict for the same data whether columns are integer- or string-labelled.
         data = _make_expression(int_columns=False)
         batches = _two_batch_series(int_columns=False)
-        with pytest.raises(IndexError):
-            BatchCorrection().detect_batch_effects(data, batches)
+        result = BatchCorrection().detect_batch_effects(data, batches)
+        assert isinstance(result, dict)
+        assert "overall_batch_effect_score" in result
+        assert np.isfinite(result["overall_batch_effect_score"])
 
 
 # ---------------------------------------------------------------------------
@@ -653,16 +662,16 @@ class TestCorrectBatchEffects:
         assert bc.corrected_data is None
 
     def test_underlying_failure_is_logged_and_reraised(self):
+        # correct_batch_effects wraps the dispatch in try/except that logs and
+        # re-raises. Force the chosen method to blow up so that contract is
+        # exercised deterministically (rather than relying on a specific bad
+        # input that happens to fail).
         bc = BatchCorrection()
-        # The batch series must be indexed by the SAME labels as the frame's
-        # columns, otherwise selection yields an empty frame and the PCA path
-        # is never reached. With them aligned, _pca_correction indexes a numpy
-        # array with string labels and raises IndexError, which
-        # correct_batch_effects logs and re-raises.
-        bad = _make_expression(int_columns=False)
-        aligned = _two_batch_series(int_columns=False)
-        with pytest.raises(IndexError):
-            bc.correct_batch_effects(bad, aligned, method="pca")
+        data = _make_expression()
+        batches = _two_batch_series()
+        with patch.object(bc, "_combat_correction", side_effect=RuntimeError("boom")):
+            with pytest.raises(RuntimeError, match="boom"):
+                bc.correct_batch_effects(data, batches, method="combat")
 
 
 # ---------------------------------------------------------------------------
@@ -703,10 +712,15 @@ class TestEvaluateCorrection:
         assert res["correction_effective"] is False
 
     def test_failure_is_logged_and_reraised(self):
-        bad = _make_expression(int_columns=False)
-        batches = _two_batch_series(int_columns=False)
-        with pytest.raises(IndexError):
-            BatchCorrection().evaluate_correction(bad, bad.copy(), batches)
+        # evaluate_correction wraps its work in try/except that logs and
+        # re-raises; force its internal detect_batch_effects to fail so the
+        # contract is exercised deterministically.
+        bc = BatchCorrection()
+        data = _make_expression()
+        batches = _two_batch_series()
+        with patch.object(bc, "detect_batch_effects", side_effect=RuntimeError("boom")):
+            with pytest.raises(RuntimeError, match="boom"):
+                bc.evaluate_correction(data, data.copy(), batches)
 
 
 # ---------------------------------------------------------------------------

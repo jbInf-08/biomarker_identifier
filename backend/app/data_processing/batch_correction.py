@@ -216,9 +216,13 @@ class BatchCorrection:
         between_batch_var = 0
 
         for batch in unique_batches:
-            batch_samples = batch_info[batch_info == batch].index
-            batch_mean = np.mean(component_data[batch_samples])
-            batch_size = len(batch_samples)
+            # component_data is a positional numpy array; index it with a
+            # boolean mask, not batch_info's label index. Using the label index
+            # only worked when sample IDs were positional integers 0..n-1 and
+            # raised IndexError for real string sample IDs.
+            batch_mask = (batch_info == batch).to_numpy()
+            batch_mean = np.mean(component_data[batch_mask])
+            batch_size = int(batch_mask.sum())
             between_batch_var += batch_size * (batch_mean - overall_mean) ** 2
 
         between_batch_var /= len(component_data)
