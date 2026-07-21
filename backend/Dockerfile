@@ -14,7 +14,11 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1 \
     DEBIAN_FRONTEND=noninteractive
 
-RUN apt-get update && apt-get install -y \
+# apt-get upgrade applies the current Debian security patches to the base
+# image's OS packages, clearing the fixable OS-level CVEs the container scan
+# would otherwise flag (the remaining unfixed ones are skipped via
+# ignore-unfixed in the Trivy step).
+RUN apt-get update && apt-get upgrade -y && apt-get install -y \
     build-essential \
     curl \
     libpq-dev \

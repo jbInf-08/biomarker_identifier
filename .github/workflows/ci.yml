@@ -287,12 +287,14 @@ jobs:
         load: true
         cache-from: type=gha
         cache-to: type=gha,mode=max
-    # Report-only: the production base image carries CVEs with no fix available
-    # (e.g. a CRITICAL perl advisory with no patched version), so a hard gate
-    # here can never pass without swapping the base image, and the remaining
-    # findings are fixable only by a separate dependency-bump effort. The scan
-    # still runs and prints its table for review; exit-code 0 keeps it from
-    # blocking, matching how the dependency audit is treated.
+    # Real gate on FIXABLE CRITICAL/HIGH vulnerabilities. ignore-unfixed drops
+    # advisories with no released fix (e.g. the base image's CRITICAL perl CVE
+    # and the ecdsa Minerva issue, which upstream will not patch) so the gate
+    # reflects only what is actually actionable here. The fixable Python CVEs
+    # (Pillow, cryptography) are addressed by the pinned bumps in
+    # requirements-prod.txt, and fixable OS packages by apt-get upgrade in the
+    # Dockerfile, so this should pass while still catching any newly introduced
+    # fixable vulnerability.
     - name: Trivy container scan
       uses: aquasecurity/trivy-action@master
       with:
@@ -300,7 +302,7 @@ jobs:
         format: table
         severity: CRITICAL,HIGH
         ignore-unfixed: true
-        exit-code: "0"
+        exit-code: "1"
 
   docker-build:
     runs-on: ubuntu-latest
