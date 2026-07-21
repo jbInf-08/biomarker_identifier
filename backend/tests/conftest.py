@@ -776,8 +776,16 @@ def real_large_dataset():
 
 @pytest.fixture
 def real_network_timeout_url():
-    """Real network timeout URL fixture."""
-    return "http://httpbin.org/delay/10"
+    """URL whose connection is guaranteed to time out.
+
+    Previously http://httpbin.org/delay/10, which made the timeout test flaky:
+    when httpbin was rate-limited or returned a fast error the request finished
+    within the 1s client timeout and the "should have timed out" assertion
+    fired. 192.0.2.1 is in the RFC 5737 TEST-NET-1 block, which is never routed
+    on the public internet, so a connect always hangs and reliably raises a
+    requests.Timeout (ConnectTimeout) instead of depending on a third party.
+    """
+    return "http://192.0.2.1/"
 
 
 @pytest.fixture
