@@ -2,7 +2,7 @@
 fastapi==0.136.1
 uvicorn[standard]==0.46.0
 pydantic==2.13.3
-python-multipart==0.0.26
+python-multipart==0.0.27
 websockets==12.0
 
 # Database and ORM
@@ -57,7 +57,7 @@ python-dotenv==1.2.2
 # Security and authentication
 python-jose[cryptography]==3.5.0
 passlib[bcrypt]==1.7.4
-python-multipart==0.0.26
+python-multipart==0.0.27
 
 # Testing
 pytest==7.4.3
@@ -315,7 +315,7 @@ pre-commit==3.6.0
 black[jupyter]==23.11.0
 
 # Production dependencies
-gunicorn==21.2.0
+gunicorn==23.0.0
 uvloop==0.22.1
 
 # Monitoring and logging
@@ -341,7 +341,7 @@ celery[redis]==5.6.3
 rq==1.15.1
 
 # File upload
-python-multipart==0.0.26
+python-multipart==0.0.27
 
 # Data validation
 marshmallow==3.20.1
@@ -478,5 +478,5 @@ types-PyYAML==6.0.12.12
 pre-commit==3.6.0
 
 # Production
-gunicorn==21.2.0
+gunicorn==23.0.0
 uvloop==0.22.1
