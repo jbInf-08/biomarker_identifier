@@ -107,7 +107,7 @@ mkdocs-material==9.7.6
 
 # Performance monitoring
 memory-profiler==0.61.0
-psutil==5.9.6
+psutil==7.2.2
 
 # Error tracking (optional)
 sentry-sdk[fastapi]==1.38.0
@@ -371,10 +371,10 @@ tqdm==4.67.3
 joblib==1.5.3
 
 # Memory optimization
-psutil==5.9.6
+psutil==7.2.2
 
 # System monitoring
-psutil==5.9.6
+psutil==7.2.2
 
 # Process management
 # subprocess32 - only needed for Python 2, subprocess is built-in for Python 3
