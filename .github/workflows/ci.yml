@@ -303,6 +303,12 @@ jobs:
         severity: CRITICAL,HIGH
         ignore-unfixed: true
         exit-code: "1"
+        # This image is large (torch/tensorflow/CUDA/R), so the default 5m scan
+        # with secret-scanning on hit "context deadline exceeded". We only want
+        # the vulnerability gate, so scan vuln only (Trivy's own recommended
+        # speedup) and give it a generous timeout.
+        scanners: vuln
+        timeout: 20m
 
   docker-build:
     runs-on: ubuntu-latest
