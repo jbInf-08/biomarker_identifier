@@ -3,7 +3,7 @@ fastapi==0.139.2
 uvicorn[standard]==0.51.0
 pydantic==2.13.4
 python-multipart==0.0.32
-websockets==12.0
+websockets==13.1
 
 # Database and ORM
 sqlalchemy==2.0.51
@@ -137,7 +137,7 @@ pymongo[srv]==4.17.0
 apscheduler==3.11.3
 
 # WebSocket support
-websockets==12.0
+websockets==13.1
 
 # Image processing (for plots)
 pillow==10.4.0
@@ -359,7 +359,7 @@ alembic==1.18.5
 # fastapi-openapi removed - FastAPI has built-in OpenAPI support
 
 # WebSocket support
-websockets==12.0
+websockets==13.1
 
 # Task scheduling
 apscheduler==3.11.3
