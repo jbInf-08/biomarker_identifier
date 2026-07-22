@@ -140,7 +140,7 @@ apscheduler==3.11.3
 websockets==13.1
 
 # Image processing (for plots)
-pillow==10.4.0
+pillow==12.3.0
 
 # Compression
 # gzip - built-in Python module, no package needed
