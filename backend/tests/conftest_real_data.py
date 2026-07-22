@@ -34,15 +34,43 @@ except ImportError:
             load_real_survival_data,
         )
     except ImportError:
-        # Define fallback functions
+        # Last-resort fallbacks used only when the fixtures package cannot be
+        # imported at all. They generate small, realistically-distributed
+        # datasets inline so tests degrade to synthetic data instead of raising
+        # a confusing NameError.
+        def _fallback_expression(name, n_genes=200, n_samples=20):
+            rng = np.random.default_rng(42)
+            data = rng.lognormal(mean=5, sigma=2, size=(n_genes, n_samples))
+            data[rng.random((n_genes, n_samples)) < 0.1] = 0  # realistic dropout
+            return pd.DataFrame(
+                data,
+                index=[f"GENE_{i:05d}" for i in range(n_genes)],
+                columns=[f"SAMPLE_{i:03d}" for i in range(n_samples)],
+            )
+
         def load_real_expression_data(name):
-            return _generate_realistic_expression_data(name)
+            return _fallback_expression(name)
 
-        def load_real_clinical_data(name):
-            return _generate_realistic_clinical_data(name)
+        def load_real_clinical_data(name, n_samples=20):
+            rng = np.random.default_rng(42)
+            return pd.DataFrame(
+                {
+                    "age": rng.integers(30, 85, n_samples),
+                    "sex": rng.choice(["M", "F"], n_samples),
+                    "stage": rng.choice(["I", "II", "III", "IV"], n_samples),
+                },
+                index=[f"SAMPLE_{i:03d}" for i in range(n_samples)],
+            )
 
-        def load_real_survival_data(name):
-            return _generate_realistic_survival_data(name)
+        def load_real_survival_data(name, n_samples=20):
+            rng = np.random.default_rng(42)
+            return pd.DataFrame(
+                {
+                    "time": rng.exponential(500, n_samples).round(1),
+                    "event": rng.integers(0, 2, n_samples),
+                },
+                index=[f"SAMPLE_{i:03d}" for i in range(n_samples)],
+            )
 
         def get_real_edge_case_datasets():
             return {}
