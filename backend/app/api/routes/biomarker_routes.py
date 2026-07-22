@@ -42,7 +42,10 @@ from app.services.run_access import (
     filter_user_analysis_runs_query,
     get_analysis_run_for_user,
 )
-from app.services.tasks.biomarker_tasks import run_biomarker_analysis
+
+# NOTE: ``run_biomarker_analysis`` is defined locally below as a synchronous
+# function for FastAPI BackgroundTasks; it intentionally shadows (and replaces)
+# the Celery task of the same name, so that task is not imported here.
 from app.utils.logging_config import get_logger
 from app.websocket.manager import manager
 

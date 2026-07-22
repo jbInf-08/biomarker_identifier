@@ -87,11 +87,17 @@ jobs:
         black --check app/ tests/
         echo "Running isort (import sorting)..."
         isort --profile black --check-only app/ tests/
-        # flake8 and mypy are report-only. The tree carries ~690 pre-existing
-        # flake8 findings (413 of them unused imports) and mypy has never run
-        # to completion here, so as blocking gates they only ever hard-failed
-        # the job. Left visible in the log as tracked debt rather than deleted
-        # wholesale: stripping "unused" imports from modules that register
+        # Blocking pass: hard-fail on genuine errors only -- syntax errors (E9),
+        # undefined names (F82), broken f-strings/comparisons (F63) and misplaced
+        # break/continue/return (F7). These are real bugs, not style, so they can
+        # never regress. The tree is clean against this set today.
+        echo "Running flake8 critical-errors (blocking)..."
+        flake8 app/ tests/ --select=E9,F63,F7,F82 --show-source
+        # The broad flake8 and mypy passes stay report-only. The tree carries
+        # ~690 pre-existing style findings (413 of them unused imports) and mypy
+        # has never run to completion here, so as blocking gates they only ever
+        # hard-failed the job. Left visible in the log as tracked debt rather than
+        # deleted wholesale: stripping "unused" imports from modules that register
         # SQLAlchemy models and Celery tasks risks breaking import side effects.
         echo "Running flake8 (linting, non-blocking)..."
         flake8 app/ tests/ --max-line-length=120 --extend-ignore=E203,W503 || true
