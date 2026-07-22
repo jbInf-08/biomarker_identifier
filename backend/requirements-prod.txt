@@ -24,7 +24,7 @@ flower==2.0.1
 pandas==2.1.4
 # scipy 1.17+ requires numpy>=1.26.4,<2.7; pandas 2.1.x on Python 3.11 needs numpy<2,>=1.23.2
 numpy==1.26.4
-scipy==1.18.0
+scipy==1.17.1
 scikit-learn==1.9.0
 statsmodels==0.14.6
 
