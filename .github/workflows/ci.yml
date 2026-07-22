@@ -286,7 +286,7 @@ jobs:
         tags: biomarker-identifier-backend:ci
         load: true
         cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-to: type=gha,mode=min
     # Report-only for now (exit-code 0) but a functioning scan: scanners:vuln +
     # a generous timeout so it actually completes on this multi-GB image (the
     # default 5m run with secret-scanning hit "context deadline exceeded"), and
@@ -325,7 +325,7 @@ jobs:
         load: true
         tags: biomarker-identifier-backend:ci
         cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-to: type=gha,mode=min
     - name: Build frontend image (no push)
       uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
       with:
@@ -334,7 +334,7 @@ jobs:
         load: true
         tags: biomarker-identifier-frontend:ci
         cache-from: type=gha
-        cache-to: type=gha,mode=max
+        cache-to: type=gha,mode=min
 
   deployment:
     runs-on: ubuntu-latest
