@@ -25,7 +25,7 @@ statsmodels==0.14.6
 # Machine learning
 xgboost==2.0.3
 lightgbm==4.7.0
-shap==0.52.0
+shap==0.44.1
 joblib==1.5.3
 tqdm==4.69.0
 
@@ -97,7 +97,7 @@ jsonschema==4.26.0
 
 # Additional bioinformatics tools
 gseapy==0.14.0
-anndata==0.13.2
+anndata==0.12.11
 
 # Pathway analysis
 gprofiler-official==1.0.0
