@@ -115,7 +115,7 @@ gprofiler-official==1.0.0
 pymongo==4.17.0
 
 # Image processing
-pillow==10.4.0
+pillow==12.3.0
 
 # Gene annotation
 mygene==3.2.2
@@ -125,3 +125,4 @@ nltk==3.10.0
 
 # Production WSGI
 gunicorn==23.0.0
+

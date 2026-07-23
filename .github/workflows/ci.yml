@@ -295,16 +295,17 @@ jobs:
         # ignore-error keeps a flaky GHA cache export ("failed to solve:
         # not_found") from failing the build -- the image itself is already built.
         cache-to: type=gha,mode=min,ignore-error=true
-    # Report-only for now (exit-code 0) but a functioning scan: scanners:vuln +
-    # a generous timeout so it actually completes on this multi-GB image (the
-    # default 5m run with secret-scanning hit "context deadline exceeded"), and
-    # ignore-unfixed so only actionable advisories are shown. The headline
-    # findings are fixed in requirements-prod.txt -- the CRITICAL Pillow CVE,
-    # the cryptography OpenSSL CVE, gunicorn HTTP request smuggling, and
-    # python-multipart. A zero-finding HARD gate additionally needs a Pillow
-    # 10->12 two-major bump plus a couple of transitive build deps; that is a
-    # larger, riskier change best landed through the per-package Dependabot PRs
-    # rather than a blind bulk bump, so the gate stays report-only until then.
+    # Hard gate (exit-code 1): fail the build on any fixable CRITICAL/HIGH
+    # advisory. scanners:vuln + a generous timeout so it completes on this
+    # multi-GB image (the default 5m run with secret-scanning hit "context
+    # deadline exceeded"), and ignore-unfixed so only actionable advisories
+    # count. The previously-blocking findings are resolved in
+    # requirements-prod.txt -- the CRITICAL Pillow CVE (Pillow now 12.x), the
+    # cryptography OpenSSL CVE, gunicorn HTTP request smuggling and
+    # python-multipart. The only remaining fixable advisories are in base-image
+    # build tooling (wheel, jaraco.context) that the service never runs; those
+    # are documented and accepted in .trivyignore. So the gate can finally hold
+    # instead of only report.
     - name: Trivy container scan
       uses: aquasecurity/trivy-action@master
       with:
@@ -312,8 +313,9 @@ jobs:
         format: table
         severity: CRITICAL,HIGH
         ignore-unfixed: true
-        exit-code: "0"
+        exit-code: "1"
         scanners: vuln
+        trivyignores: .trivyignore
         timeout: 20m
 
   docker-build:

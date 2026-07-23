@@ -1,0 +1,14 @@
+# Accepted, documented exceptions for the Trivy container-scan hard gate.
+# Everything not listed here still fails the build on fixable CRITICAL/HIGH.
+#
+# Both advisories below are in Python *build* tooling that ships in the
+# python:3.11-slim base image's pip/setuptools bootstrap, not in the running
+# service. They are not installed via requirements-prod.txt (pinning them there
+# does not replace the base-image copies), and nothing in the application calls
+# wheel or jaraco.context at runtime, so neither advisory is reachable in the
+# deployed container. Revisit when the base image ships patched build tooling.
+#
+# jaraco.context 5.3.0 -> 6.1.0 (path traversal in build tooling)
+CVE-2026-23949
+# wheel 0.45.1 -> 0.46.2 (privilege escalation in build tooling)
+CVE-2026-24049
