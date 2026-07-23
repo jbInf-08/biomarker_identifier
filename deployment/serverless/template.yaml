@@ -12,7 +12,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler.handler
-      Runtime: python3.11
+      Runtime: python3.12
       CodeUri: ../lambda_package/
       Environment:
         Variables:

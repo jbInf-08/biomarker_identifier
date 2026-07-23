@@ -1,12 +1,12 @@
 # Multi-stage build: production uses requirements-prod.txt only (no pytest/linters).
-# Python 3.11 aligns with CI (.github/workflows/ci.yml).
+# Python 3.12 aligns with CI (.github/workflows/ci.yml).
 #
 # Build production image:
 #   docker build --target production -t biomarker-backend:prod .
 # Development image (tests + linters in image — not for production runtime):
 #   docker build --target development -t biomarker-backend:dev .
 
-FROM python:3.11-slim AS base
+FROM python:3.12-slim AS base
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
