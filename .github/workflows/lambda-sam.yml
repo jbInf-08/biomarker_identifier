@@ -23,7 +23,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: "3.12"
 
       # requirements-prod.txt pins rpy2, which refuses to build in API mode
       # without R on PATH/R_HOME, and its rinterface link step needs libtirpc.
