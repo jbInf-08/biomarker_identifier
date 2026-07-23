@@ -281,6 +281,14 @@ jobs:
     needs: [backend-tests, frontend-tests]
     steps:
     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+    - name: Free up disk space
+      run: |
+        # The torch + CUDA production image is multi-GB and can exhaust the
+        # runner's free disk mid-build ("no space left on device"). Reclaim
+        # space from large preinstalled toolchains this job never uses.
+        sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android \
+          /opt/hostedtoolcache/CodeQL /usr/local/share/boost || true
+        df -h /
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
     - name: Build production backend image (no push)
@@ -324,6 +332,14 @@ jobs:
     # CI validates Dockerfiles only (no registry push). Publish images from a release workflow with secrets.
     steps:
     - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+    - name: Free up disk space
+      run: |
+        # The torch + CUDA production image is multi-GB and can exhaust the
+        # runner's free disk mid-build ("no space left on device"). Reclaim
+        # space from large preinstalled toolchains this job never uses.
+        sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android \
+          /opt/hostedtoolcache/CodeQL /usr/local/share/boost || true
+        df -h /
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
     - name: Build backend image (no push)
