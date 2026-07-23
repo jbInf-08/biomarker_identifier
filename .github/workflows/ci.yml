@@ -299,10 +299,13 @@ jobs:
     # advisory. scanners:vuln + a generous timeout so it completes on this
     # multi-GB image (the default 5m run with secret-scanning hit "context
     # deadline exceeded"), and ignore-unfixed so only actionable advisories
-    # count. The previously-blocking findings are all resolved in
+    # count. The previously-blocking findings are resolved in
     # requirements-prod.txt -- the CRITICAL Pillow CVE (Pillow now 12.x), the
     # cryptography OpenSSL CVE, gunicorn HTTP request smuggling and
-    # python-multipart -- so the gate can finally hold instead of only report.
+    # python-multipart. The only remaining fixable advisories are in base-image
+    # build tooling (wheel, jaraco.context) that the service never runs; those
+    # are documented and accepted in .trivyignore. So the gate can finally hold
+    # instead of only report.
     - name: Trivy container scan
       uses: aquasecurity/trivy-action@master
       with:
@@ -312,6 +315,7 @@ jobs:
         ignore-unfixed: true
         exit-code: "1"
         scanners: vuln
+        trivyignores: .trivyignore
         timeout: 20m
 
   docker-build:

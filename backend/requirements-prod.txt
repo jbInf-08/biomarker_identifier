@@ -126,7 +126,3 @@ nltk==3.10.0
 # Production WSGI
 gunicorn==23.0.0
 
-# Security floor for transitive build tooling flagged by the Trivy gate
-# (jaraco.context CVE-2026-23949, wheel CVE-2026-24049).
-jaraco.context>=6.1.0
-wheel>=0.46.2
