@@ -81,6 +81,13 @@ class SHAPExplainer:
             if isinstance(shap_values, list):
                 shap_values = shap_values[1] if len(shap_values) > 1 else shap_values[0]
 
+            # shap >= 0.45 returns a 3D array (n_samples, n_features, n_classes)
+            # for classifiers where older versions returned a list or 2D array.
+            # Reduce to the positive class so the downstream 2D analysis (which
+            # aggregates over axis 0) works unchanged.
+            if isinstance(shap_values, np.ndarray) and shap_values.ndim == 3:
+                shap_values = shap_values[..., -1]
+
             results["shap_values"] = shap_values
             results["expected_value"] = explainer.expected_value
 
