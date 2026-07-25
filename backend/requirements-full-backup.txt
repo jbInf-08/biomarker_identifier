@@ -85,7 +85,7 @@ configparser==6.0.0
 
 # Date and time handling
 python-dateutil==2.9.0.post0
-pytz==2023.3
+pytz==2026.2
 
 # JSON handling
 orjson==3.11.9
