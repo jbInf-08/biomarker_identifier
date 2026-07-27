@@ -40,7 +40,7 @@ jobs:
           - 6379:6379
     
     steps:
-    - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+    - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v4
 
     # requirements-prod.txt pulls torch (plus the bundled nvidia CUDA libs),
     # and this job then downloads GBs of TCGA/GEO matrices on top of that.
