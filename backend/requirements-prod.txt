@@ -77,7 +77,7 @@ passlib[bcrypt]==1.7.4
 cryptography==48.0.1
 
 # Logging and monitoring
-structlog==23.2.0
+structlog==26.1.0
 prometheus-client==0.26.0
 
 # Configuration management
