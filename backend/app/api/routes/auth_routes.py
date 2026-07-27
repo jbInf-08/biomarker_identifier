@@ -153,7 +153,7 @@ async def register_user(
     except ValueError as e:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=str(e))
     except Exception as e:
-        logger.error(f"Registration failed: {str(e)}")
+        logger.error(f"Registration failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Registration failed",
@@ -242,7 +242,7 @@ async def login_user(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Login failed: {str(e)}")
+        logger.error(f"Login failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Login failed"
         )
@@ -269,7 +269,7 @@ async def logout_user(
         return {"message": "Successfully logged out"}
 
     except Exception as e:
-        logger.error(f"Logout failed: {str(e)}")
+        logger.error(f"Logout failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Logout failed"
         )
@@ -313,7 +313,7 @@ async def update_current_user(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"User update failed: {str(e)}")
+        logger.error(f"User update failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="User update failed",
@@ -355,7 +355,7 @@ async def change_password(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Password change failed: {str(e)}")
+        logger.error(f"Password change failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Password change failed",
@@ -380,7 +380,7 @@ async def get_user_activities(
         }
 
     except Exception as e:
-        logger.error(f"Failed to get user activities: {str(e)}")
+        logger.error(f"Failed to get user activities: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to get user activities",
@@ -402,7 +402,7 @@ async def verify_token(credentials: HTTPAuthorizationCredentials = Depends(secur
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Token verification failed: {str(e)}")
+        logger.error(f"Token verification failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Token verification failed",
@@ -428,7 +428,7 @@ async def get_all_users(
         return [UserResponse(**user.to_dict()) for user in users]
 
     except Exception as e:
-        logger.error(f"Failed to get users: {str(e)}")
+        logger.error(f"Failed to get users: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Failed to get users",
@@ -464,7 +464,7 @@ async def update_user(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"User update failed: {str(e)}")
+        logger.error(f"User update failed: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="User update failed",
