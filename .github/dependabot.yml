@@ -13,21 +13,6 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Paused until the numpy 1.x -> 2.0 migration. These versions all require
-    # numpy>=2, but the project pins numpy==1.26.4 (and pandas 2.1.4 itself
-    # requires numpy<2 on Python 3.12), so pip cannot resolve them and every
-    # group PR containing one has to be hand-pinned back. Patch/minor updates
-    # below these floors still come through. Remove these entries as part of
-    # the numpy 2.0 migration.
-    ignore:
-      - dependency-name: "scipy"
-        versions: [">= 1.18"]
-      - dependency-name: "shap"
-        versions: [">= 0.50"]
-      - dependency-name: "anndata"
-        versions: [">= 0.13"]
-      - dependency-name: "scanpy"
-        versions: [">= 1.12.3"]
 
   - package-ecosystem: "npm"
     directory: "/frontend"
