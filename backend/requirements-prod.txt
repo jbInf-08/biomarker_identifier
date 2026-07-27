@@ -23,7 +23,7 @@ flower==2.0.1
 # Data processing and analysis
 pandas==2.3.3
 # scipy 1.17+ requires numpy>=1.26.4,<2.7; pandas 2.1.x on Python 3.11 needs numpy<2,>=1.23.2
-numpy==2.5.1
+numpy==2.4.6
 scipy==1.18.0
 scikit-learn==1.9.0
 statsmodels==0.14.6
