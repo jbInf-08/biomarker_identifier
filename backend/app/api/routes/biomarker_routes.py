@@ -198,7 +198,7 @@ async def start_pipeline(
                 # In test environment, background tasks may not work - continue anyway
 
         logger.info(
-            f"Started biomarker pipeline",
+            "Started biomarker pipeline",
             extra={"run_id": run_id, "run_name": run_name},
         )
 
@@ -211,7 +211,7 @@ async def start_pipeline(
 
     except Exception as e:
         logger.error(
-            f"Failed to start pipeline", extra={"error": str(e), "run_name": run_name}
+            "Failed to start pipeline", extra={"error": str(e), "run_name": run_name}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to start pipeline: {str(e)}"
@@ -251,7 +251,7 @@ async def get_runs(
         return runs_data
 
     except Exception as e:
-        logger.error(f"Failed to get runs", extra={"error": str(e)})
+        logger.error("Failed to get runs", extra={"error": str(e)})
         raise HTTPException(status_code=500, detail=f"Failed to get runs: {str(e)}")
 
 
@@ -284,7 +284,7 @@ async def get_run_by_id(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Failed to get run", extra={"run_id": run_id, "error": str(e)})
+        logger.error("Failed to get run", extra={"run_id": run_id, "error": str(e)})
         raise HTTPException(status_code=500, detail=f"Failed to get run: {str(e)}")
 
 
@@ -327,7 +327,7 @@ async def get_run_status(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to get run status", extra={"run_id": run_id, "error": str(e)}
+            "Failed to get run status", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to get run status: {str(e)}"
@@ -387,7 +387,7 @@ async def get_run_results(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to get run results", extra={"run_id": run_id, "error": str(e)}
+            "Failed to get run results", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to get run results: {str(e)}"
@@ -494,7 +494,7 @@ async def get_biomarkers(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to get biomarkers", extra={"run_id": run_id, "error": str(e)}
+            "Failed to get biomarkers", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to get biomarkers: {str(e)}"
@@ -522,7 +522,7 @@ async def delete_run(
         db.delete(analysis_run)
         db.commit()
 
-        logger.info(f"Deleted run", extra={"run_id": run_id})
+        logger.info("Deleted run", extra={"run_id": run_id})
 
         return {
             "run_id": run_id,
@@ -533,7 +533,7 @@ async def delete_run(
     except HTTPException:
         raise
     except Exception as e:
-        logger.error(f"Failed to delete run", extra={"run_id": run_id, "error": str(e)})
+        logger.error("Failed to delete run", extra={"run_id": run_id, "error": str(e)})
         raise HTTPException(status_code=500, detail=f"Failed to delete run: {str(e)}")
 
 
@@ -556,7 +556,7 @@ async def generate_report(
         # In production, you might want to restrict to completed runs only
         if analysis_run.status == RunStatus.FAILED.value:
             raise HTTPException(
-                status_code=400, detail=f"Cannot generate report for failed run"
+                status_code=400, detail="Cannot generate report for failed run"
             )
 
         # Create reports directory if it doesn't exist
@@ -623,7 +623,7 @@ async def generate_report(
             raise HTTPException(status_code=400, detail="Unsupported report format")
 
         logger.info(
-            f"Generated report",
+            "Generated report",
             extra={
                 "run_id": run_id,
                 "format": request.report_format,
@@ -646,7 +646,7 @@ async def generate_report(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to generate report", extra={"run_id": run_id, "error": str(e)}
+            "Failed to generate report", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to generate report: {str(e)}"
@@ -694,7 +694,7 @@ async def download_report(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to download report", extra={"run_id": run_id, "error": str(e)}
+            "Failed to download report", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to download report: {str(e)}"
@@ -859,7 +859,7 @@ async def start_biomarker_analysis(
                 # In test environment, background tasks may not work - continue anyway
 
         logger.info(
-            f"Started biomarker analysis",
+            "Started biomarker analysis",
             extra={"run_id": run_id, "project_name": request.project_name},
         )
 
@@ -874,7 +874,7 @@ async def start_biomarker_analysis(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to start analysis",
+            "Failed to start analysis",
             extra={"error": str(e), "project_name": request.project_name},
         )
         raise HTTPException(
@@ -928,7 +928,7 @@ async def get_analysis_status(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to get analysis status", extra={"run_id": run_id, "error": str(e)}
+            "Failed to get analysis status", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to get analysis status: {str(e)}"
@@ -1034,7 +1034,7 @@ async def get_analysis_results(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to get analysis results", extra={"run_id": run_id, "error": str(e)}
+            "Failed to get analysis results", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to get analysis results: {str(e)}"
@@ -1082,11 +1082,11 @@ async def cancel_analysis(
             celery_app.control.revoke(tid, terminate=True)
         except Exception as e:
             logger.warning(
-                f"Failed to revoke Celery task",
+                "Failed to revoke Celery task",
                 extra={"run_id": run_id, "error": str(e)},
             )
 
-        logger.info(f"Cancelled biomarker analysis", extra={"run_id": run_id})
+        logger.info("Cancelled biomarker analysis", extra={"run_id": run_id})
 
         return {
             "run_id": run_id,
@@ -1098,7 +1098,7 @@ async def cancel_analysis(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to cancel analysis", extra={"run_id": run_id, "error": str(e)}
+            "Failed to cancel analysis", extra={"run_id": run_id, "error": str(e)}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to cancel analysis: {str(e)}"
@@ -1182,7 +1182,7 @@ async def list_biomarker_results(
         return results_data
 
     except Exception as e:
-        logger.error(f"Failed to list biomarker results", extra={"error": str(e)})
+        logger.error("Failed to list biomarker results", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to list biomarker results: {str(e)}"
         )
@@ -1260,7 +1260,7 @@ async def get_biomarker_result(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to get biomarker result",
+            "Failed to get biomarker result",
             extra={"result_id": result_id, "error": str(e)},
         )
         raise HTTPException(
@@ -1285,7 +1285,7 @@ def run_biomarker_analysis(run_id: str, config: Optional[Dict[str, Any]] = None)
 
     db = None
     try:
-        logger.info(f"Starting background biomarker analysis", extra={"run_id": run_id})
+        logger.info("Starting background biomarker analysis", extra={"run_id": run_id})
 
         # Update database status
         db = SessionLocal()
@@ -1312,9 +1312,7 @@ def run_biomarker_analysis(run_id: str, config: Optional[Dict[str, Any]] = None)
             analysis_run.progress = 1.0
             analysis_run.completed_at = datetime.utcnow()
             db.commit()
-            logger.info(
-                f"Marked run as completed (test mode)", extra={"run_id": run_id}
-            )
+            logger.info("Marked run as completed (test mode)", extra={"run_id": run_id})
             return
 
         # Initialize pipeline
@@ -1336,7 +1334,7 @@ def run_biomarker_analysis(run_id: str, config: Optional[Dict[str, Any]] = None)
         db.commit()
 
         logger.info(
-            f"Completed biomarker analysis",
+            "Completed biomarker analysis",
             extra={
                 "run_id": run_id,
                 "results_count": len(results.get("biomarker_list", [])),
@@ -1345,7 +1343,7 @@ def run_biomarker_analysis(run_id: str, config: Optional[Dict[str, Any]] = None)
 
     except Exception as e:
         logger.error(
-            f"Background analysis failed", extra={"run_id": run_id, "error": str(e)}
+            "Background analysis failed", extra={"run_id": run_id, "error": str(e)}
         )
 
         # Update run status to failed
@@ -1361,7 +1359,7 @@ def run_biomarker_analysis(run_id: str, config: Optional[Dict[str, Any]] = None)
                     db.commit()
             except Exception as db_error:
                 logger.error(
-                    f"Failed to update run status",
+                    "Failed to update run status",
                     extra={"run_id": run_id, "error": str(db_error)},
                 )
     finally:

@@ -278,7 +278,7 @@ async def perform_differential_expression(
             significant_results = results_df
 
         logger.info(
-            f"Completed differential expression analysis",
+            "Completed differential expression analysis",
             extra={
                 "total_genes": len(results_df),
                 "significant_genes": len(significant_results),
@@ -329,7 +329,7 @@ async def perform_differential_expression(
 
     except Exception as e:
         logger.error(
-            f"Failed to perform differential expression analysis",
+            "Failed to perform differential expression analysis",
             extra={"error": str(e), "test_method": test_method},
         )
         raise HTTPException(
@@ -427,7 +427,7 @@ async def perform_survival_analysis(
                 os.unlink(temp_file.name)
 
         logger.info(
-            f"Completed survival analysis",
+            "Completed survival analysis",
             extra={"analysis_type": analysis_type, "samples": len(survival_df)},
         )
 
@@ -477,7 +477,7 @@ async def perform_survival_analysis(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to perform survival analysis",
+            "Failed to perform survival analysis",
             extra={"error": str(e), "analysis_type": analysis_type},
         )
         raise HTTPException(
@@ -531,7 +531,7 @@ async def perform_correlation_analysis(
                     )
 
         logger.info(
-            f"Completed correlation analysis",
+            "Completed correlation analysis",
             extra={
                 "method": method,
                 "variables": len(correlation_matrix.columns),
@@ -551,7 +551,7 @@ async def perform_correlation_analysis(
 
     except Exception as e:
         logger.error(
-            f"Failed to perform correlation analysis",
+            "Failed to perform correlation analysis",
             extra={"error": str(e), "method": method},
         )
         raise HTTPException(
@@ -673,7 +673,7 @@ async def perform_feature_selection(
         }
 
         logger.info(
-            f"Completed feature selection",
+            "Completed feature selection",
             extra={
                 "method": method,
                 "total_features": expr_genes.shape[0],
@@ -695,7 +695,7 @@ async def perform_feature_selection(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to perform feature selection",
+            "Failed to perform feature selection",
             extra={"error": str(e), "method": method},
         )
         raise HTTPException(
@@ -802,7 +802,7 @@ async def train_ml_model(
         model_id = str(uuid.uuid4())
 
         logger.info(
-            f"Completed model training",
+            "Completed model training",
             extra={"model_type": model_type, "model_id": model_id, "samples": len(X)},
         )
 
@@ -828,7 +828,7 @@ async def train_ml_model(
 
     except Exception as e:
         logger.error(
-            f"Failed to train model", extra={"error": str(e), "model_type": model_type}
+            "Failed to train model", extra={"error": str(e), "model_type": model_type}
         )
         raise HTTPException(status_code=500, detail=f"Failed to train model: {str(e)}")
 
@@ -1113,7 +1113,7 @@ async def evaluate_ml_model(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to evaluate model", extra={"error": str(e), "model_id": model_id}
+            "Failed to evaluate model", extra={"error": str(e), "model_id": model_id}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to evaluate model: {str(e)}"
@@ -1201,7 +1201,7 @@ async def perform_pathway_enrichment(
                 )
 
         logger.info(
-            f"Completed pathway enrichment analysis",
+            "Completed pathway enrichment analysis",
             extra={
                 "pathway_database": pathway_database,
                 "organism": organism,
@@ -1224,7 +1224,7 @@ async def perform_pathway_enrichment(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to perform pathway enrichment",
+            "Failed to perform pathway enrichment",
             extra={"error": str(e), "pathway_database": pathway_database},
         )
         raise HTTPException(
@@ -1303,7 +1303,7 @@ async def perform_network_analysis(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to perform network analysis",
+            "Failed to perform network analysis",
             extra={"error": str(e), "network_type": network_type},
         )
         raise HTTPException(
