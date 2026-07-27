@@ -145,7 +145,7 @@ async def get_cosmic_mutations(
         )
 
         logger.info(
-            f"Retrieved COSMIC mutations",
+            "Retrieved COSMIC mutations",
             extra={
                 "gene_symbol": gene_symbol,
                 "cancer_type": cancer_type,
@@ -156,7 +156,7 @@ async def get_cosmic_mutations(
         return result
 
     except Exception as e:
-        logger.error(f"Failed to get COSMIC mutations", extra={"error": str(e)})
+        logger.error("Failed to get COSMIC mutations", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to get COSMIC mutations: {str(e)}"
         )
@@ -178,7 +178,7 @@ async def get_cosmic_cancer_genes(
             cancer_type=cancer_type, tier=tier, limit=limit
         )
         logger.info(
-            f"Retrieved cancer genes",
+            "Retrieved cancer genes",
             extra={
                 "cancer_type": cancer_type,
                 "tier": tier,
@@ -187,7 +187,7 @@ async def get_cosmic_cancer_genes(
         )
         return result
     except Exception as e:
-        logger.error(f"Failed to get cancer genes", extra={"error": str(e)})
+        logger.error("Failed to get cancer genes", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to get cancer genes: {str(e)}"
         )
@@ -217,7 +217,7 @@ async def get_clinvar_variants(
         )
 
         logger.info(
-            f"Retrieved ClinVar variants",
+            "Retrieved ClinVar variants",
             extra={
                 "gene_symbol": gene_symbol,
                 "clinical_significance": clinical_significance,
@@ -228,7 +228,7 @@ async def get_clinvar_variants(
         return result
 
     except Exception as e:
-        logger.error(f"Failed to get ClinVar variants", extra={"error": str(e)})
+        logger.error("Failed to get ClinVar variants", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to get ClinVar variants: {str(e)}"
         )
@@ -253,7 +253,7 @@ async def get_oncokb_genes(
         result = _get_oncokb_genes_data(cancer_type, oncogenic, limit)
 
         logger.info(
-            f"Retrieved OncoKB genes",
+            "Retrieved OncoKB genes",
             extra={
                 "cancer_type": cancer_type,
                 "oncogenic": oncogenic,
@@ -264,7 +264,7 @@ async def get_oncokb_genes(
         return result
 
     except Exception as e:
-        logger.error(f"Failed to get OncoKB genes", extra={"error": str(e)})
+        logger.error("Failed to get OncoKB genes", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to get OncoKB genes: {str(e)}"
         )
@@ -289,7 +289,7 @@ async def get_oncokb_drugs(
             limit=limit,
         )
         logger.info(
-            f"Retrieved OncoKB drugs",
+            "Retrieved OncoKB drugs",
             extra={
                 "gene_symbol": gene_symbol,
                 "cancer_type": cancer_type,
@@ -299,7 +299,7 @@ async def get_oncokb_drugs(
         )
         return result
     except Exception as e:
-        logger.error(f"Failed to get OncoKB drugs", extra={"error": str(e)})
+        logger.error("Failed to get OncoKB drugs", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to get OncoKB drugs: {str(e)}"
         )
@@ -393,7 +393,7 @@ async def annotate_biomarkers(
             annotated_biomarkers.append(annotation)
 
         logger.info(
-            f"Annotated biomarkers",
+            "Annotated biomarkers",
             extra={"biomarker_count": len(biomarkers), "databases": databases},
         )
 
@@ -407,7 +407,7 @@ async def annotate_biomarkers(
         }
 
     except Exception as e:
-        logger.error(f"Failed to annotate biomarkers", extra={"error": str(e)})
+        logger.error("Failed to annotate biomarkers", extra={"error": str(e)})
         raise HTTPException(
             status_code=500, detail=f"Failed to annotate biomarkers: {str(e)}"
         )
@@ -545,7 +545,7 @@ async def annotate_run_biomarkers(
         )
 
         logger.info(
-            f"Annotated run biomarkers",
+            "Annotated run biomarkers",
             extra={
                 "run_id": run_id,
                 "biomarker_count": len(annotated_biomarkers),
@@ -574,7 +574,7 @@ async def annotate_run_biomarkers(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to annotate run biomarkers",
+            "Failed to annotate run biomarkers",
             extra={"run_id": run_id, "error": str(e)},
         )
         raise HTTPException(

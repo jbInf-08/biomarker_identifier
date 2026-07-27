@@ -358,7 +358,7 @@ def monitor_system_resources(self):
         },
     }
 
-    logger.info(f"System resource monitoring completed")
+    logger.info("System resource monitoring completed")
     return resource_metrics
 
 

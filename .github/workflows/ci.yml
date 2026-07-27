@@ -87,14 +87,25 @@ jobs:
         black --check app/ tests/
         echo "Running isort (import sorting)..."
         isort --profile black --check-only app/ tests/
-        # Blocking pass: hard-fail on genuine errors only -- syntax errors (E9),
-        # undefined names (F82), broken f-strings/comparisons (F63) and misplaced
-        # break/continue/return (F7). These are real bugs, not style, so they can
-        # never regress. The tree is clean against this set today.
+        # Blocking pass: hard-fail on genuine errors, not style. The tree is
+        # clean against every rule in this set, so it can only ever catch a
+        # regression:
+        #   E9              syntax errors
+        #   F82             undefined names
+        #   F63             broken comparisons / assertions on tuples
+        #   F7              misplaced break/continue/return
+        #   F5              bad %-format and .format() calls, and f-strings with
+        #                   no placeholders (the 75 pre-existing F541s are fixed)
+        #   F601,F602       `in`/`not in` misuse on str
+        #   E711            comparison to None with ==
+        #   E713,E714       `not x in y` / `not x is y`
+        #   E731,E741       lambda assignment, ambiguous names (l/I/O)
         echo "Running flake8 critical-errors (blocking)..."
-        flake8 app/ tests/ --select=E9,F63,F7,F82 --show-source
+        flake8 app/ tests/ \
+          --select=E9,F63,F7,F82,F5,F601,F602,E711,E713,E714,E731,E741 \
+          --show-source
         # The broad flake8 and mypy passes stay report-only. The tree carries
-        # ~690 pre-existing style findings (413 of them unused imports) and mypy
+        # ~616 pre-existing style findings (413 of them unused imports) and mypy
         # has never run to completion here, so as blocking gates they only ever
         # hard-failed the job. Left visible in the log as tracked debt rather than
         # deleted wholesale: stripping "unused" imports from modules that register

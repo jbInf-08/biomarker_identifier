@@ -470,7 +470,7 @@ class ConsensusFeatureSelector:
         # Compute consensus
         self._compute_bootstrap_consensus(bootstrap_results, stability_threshold)
 
-        logger.info(f"Consensus feature selection completed")
+        logger.info("Consensus feature selection completed")
         return self
 
     def _bootstrap_selection(

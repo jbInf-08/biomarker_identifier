@@ -216,7 +216,7 @@ async def upload_expression_data(
         )
 
         logger.info(
-            f"Uploaded expression data",
+            "Uploaded expression data",
             extra={
                 "file_id": file_id,
                 "filename": file.filename,
@@ -237,7 +237,7 @@ async def upload_expression_data(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to upload expression data",
+            "Failed to upload expression data",
             extra={"error": str(e), "filename": file.filename},
         )
         raise HTTPException(
@@ -324,7 +324,7 @@ async def upload_clinical_data(
         }
 
         logger.info(
-            f"Uploaded clinical data",
+            "Uploaded clinical data",
             extra={
                 "file_id": file_id,
                 "filename": file.filename,
@@ -345,7 +345,7 @@ async def upload_clinical_data(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to upload clinical data",
+            "Failed to upload clinical data",
             extra={"error": str(e), "filename": file.filename},
         )
         raise HTTPException(
@@ -414,7 +414,7 @@ async def upload_multi_omics_data(
             uploaded_files["proteomics"] = proteomics_result
 
         logger.info(
-            f"Uploaded multi-omics data package",
+            "Uploaded multi-omics data package",
             extra={
                 "study_id": study_id,
                 "study_name": study_name,
@@ -432,7 +432,7 @@ async def upload_multi_omics_data(
 
     except Exception as e:
         logger.error(
-            f"Failed to upload multi-omics data",
+            "Failed to upload multi-omics data",
             extra={"error": str(e), "study_name": study_name},
         )
         raise HTTPException(
@@ -545,7 +545,7 @@ async def validate_expression_data(
             validation_results["issues"].append("No gene identifier column found")
 
         logger.info(
-            f"Validated expression data",
+            "Validated expression data",
             extra={
                 "file_id": file_id,
                 "status": validation_results["overall_status"],
@@ -559,7 +559,7 @@ async def validate_expression_data(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to validate expression data",
+            "Failed to validate expression data",
             extra={"error": str(e), "file_id": file_id},
         )
         raise HTTPException(
@@ -656,7 +656,7 @@ async def validate_clinical_data(
             validation_results["issues"].append("High percentage of missing values")
 
         logger.info(
-            f"Validated clinical data",
+            "Validated clinical data",
             extra={
                 "file_id": file_id,
                 "status": validation_results["overall_status"],
@@ -670,7 +670,7 @@ async def validate_clinical_data(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to validate clinical data",
+            "Failed to validate clinical data",
             extra={"error": str(e), "file_id": file_id},
         )
         raise HTTPException(
@@ -746,7 +746,7 @@ async def normalize_expression_data(
         normalized_df.to_csv(processed_filepath, index=False)
 
         logger.info(
-            f"Normalized expression data",
+            "Normalized expression data",
             extra={
                 "original_file_id": file_id,
                 "processed_file_id": processed_file_id,
@@ -767,7 +767,7 @@ async def normalize_expression_data(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to normalize data",
+            "Failed to normalize data",
             extra={"error": str(e), "file_id": file_id, "method": method},
         )
         raise HTTPException(
@@ -844,7 +844,7 @@ async def perform_quality_control(
         qc_df.to_csv(qc_filepath, index=False)
 
         logger.info(
-            f"Performed quality control",
+            "Performed quality control",
             extra={
                 "original_file_id": file_id,
                 "qc_file_id": qc_file_id,
@@ -872,7 +872,7 @@ async def perform_quality_control(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to perform quality control",
+            "Failed to perform quality control",
             extra={"error": str(e), "file_id": file_id},
         )
         raise HTTPException(
@@ -940,7 +940,7 @@ async def list_uploaded_files(
         return files
 
     except Exception as e:
-        logger.error(f"Failed to list files", extra={"error": str(e)})
+        logger.error("Failed to list files", extra={"error": str(e)})
         raise HTTPException(status_code=500, detail=f"Failed to list files: {str(e)}")
 
 
@@ -973,7 +973,7 @@ async def delete_file(
         # Delete file
         os.remove(filepath)
 
-        logger.info(f"Deleted file", extra={"file_id": file_id})
+        logger.info("Deleted file", extra={"file_id": file_id})
 
         return {
             "status": "success",
@@ -985,7 +985,7 @@ async def delete_file(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to delete file", extra={"error": str(e), "file_id": file_id}
+            "Failed to delete file", extra={"error": str(e), "file_id": file_id}
         )
         raise HTTPException(status_code=500, detail=f"Failed to delete file: {str(e)}")
 
@@ -1026,7 +1026,7 @@ async def download_file(
         raise
     except Exception as e:
         logger.error(
-            f"Failed to download file", extra={"error": str(e), "file_id": file_id}
+            "Failed to download file", extra={"error": str(e), "file_id": file_id}
         )
         raise HTTPException(
             status_code=500, detail=f"Failed to download file: {str(e)}"
