@@ -16,7 +16,7 @@
     "lucide-react": "^1.27.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-dropzone": "^14.2.3",
+    "react-dropzone": "^19.1.1",
     "react-hot-toast": "^2.4.0",
     "react-i18next": "^14.1.0",
     "react-router-dom": "^6.3.0",
