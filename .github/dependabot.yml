@@ -13,6 +13,13 @@ updates:
         update-types:
           - "minor"
           - "patch"
+    # Paused: numba (a transitive dep) requires numpy<2.5, so numpy 2.5+
+    # cannot resolve -- pip backtracks numba into versions that predate
+    # Python 3.12 and the build fails on "Cannot install on Python version
+    # 3.12". Lift when numba supports numpy 2.5.
+    ignore:
+      - dependency-name: "numpy"
+        versions: [">= 2.5"]
 
   - package-ecosystem: "npm"
     directory: "/frontend"
