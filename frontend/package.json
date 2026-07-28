@@ -40,8 +40,7 @@
     "test:ci": "react-scripts test --watchAll=false --runInBand",
     "test:coverage": "react-scripts test --coverage --watchAll=false --runInBand",
     "eject": "react-scripts eject",
-    "lint": "react-scripts lint",
-    "type-check": "tsc --noEmit"
+    "lint": "react-scripts lint"
   },
   "eslintConfig": {
     "extends": [
