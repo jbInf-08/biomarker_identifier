@@ -1,5 +1,5 @@
 # Core web framework and API
-fastapi==0.140.7
+fastapi==0.140.9
 uvicorn[standard]==0.51.0
 pydantic==2.13.4
 python-multipart==0.0.32
@@ -62,7 +62,7 @@ python-multipart==0.0.32
 # Testing
 pytest==7.4.3
 pytest-asyncio==0.21.1
-pytest-cov==4.1.0
+pytest-cov==7.1.0
 httpx==0.28.1
 
 # Code quality and formatting
@@ -188,7 +188,7 @@ cryptography==48.0.1
 # subprocess32 - only needed for Python 2, subprocess is built-in for Python 3
 
 # File system monitoring
-watchdog==3.0.0
+watchdog==6.0.0
 
 # Data compression
 lz4==4.4.5
@@ -380,7 +380,7 @@ psutil==7.2.2
 # subprocess32 - only needed for Python 2, subprocess is built-in for Python 3
 
 # File system
-watchdog==3.0.0
+watchdog==6.0.0
 
 # Data compression
 lz4==4.4.5
