@@ -188,7 +188,7 @@ cryptography==48.0.1
 # subprocess32 - only needed for Python 2, subprocess is built-in for Python 3
 
 # File system monitoring
-watchdog==3.0.0
+watchdog==6.0.0
 
 # Data compression
 lz4==4.4.5
@@ -380,7 +380,7 @@ psutil==7.2.2
 # subprocess32 - only needed for Python 2, subprocess is built-in for Python 3
 
 # File system
-watchdog==3.0.0
+watchdog==6.0.0
 
 # Data compression
 lz4==4.4.5
