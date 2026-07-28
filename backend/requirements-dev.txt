@@ -4,7 +4,7 @@
 # Testing
 pytest==7.4.3
 pytest-asyncio==0.21.1
-pytest-cov==4.1.0
+pytest-cov==7.1.0
 pytest-xdist==3.8.0
 # Required by tests/unit/data_processing/test_property_based.py
 hypothesis==6.161.7
