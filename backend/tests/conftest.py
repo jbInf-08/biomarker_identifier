@@ -4,14 +4,25 @@ Pytest configuration and fixtures for the Cancer Biomarker Identifier tests.
 import os
 from pathlib import Path
 
-# Align env with dedicated test DB file (CI keeps Postgres from the workflow).
+# Point the whole pytest process at one dedicated, per-xdist-worker SQLite file.
+#
+# This override must happen before app.core.database is imported, because that
+# module builds `engine`/`SessionLocal` from settings.DATABASE_URL at import
+# time. It is applied unconditionally, including under CI: previously CI was
+# exempted so that the workflow's PostgreSQL URL stayed in effect, which split
+# the test process across two databases --
+#   * routes reached through Depends(get_db)  -> SQLite (the `client` fixture
+#     overrides get_db with the fixture session)
+#   * anything calling SessionLocal() directly -> PostgreSQL
+# The two dialects return different Python types for the same column, so a row
+# written through one engine and read through the other could disagree. Using a
+# single URL keeps the app and the fixtures on the same database.
 _worker = os.environ.get("PYTEST_XDIST_WORKER", "main")
 _backend_root = Path(__file__).resolve().parent.parent
 SQLALCHEMY_DATABASE_URL = (
     f"sqlite:///{(_backend_root / f'test_{_worker}.db').as_posix()}"
 )
-if os.environ.get("CI") != "true":
-    os.environ["DATABASE_URL"] = SQLALCHEMY_DATABASE_URL
+os.environ["DATABASE_URL"] = SQLALCHEMY_DATABASE_URL
 
 # Ensure local pytest runs without manual env (matches CI)
 os.environ.setdefault("SECRET_KEY", "test-secret-key-for-local-pytest")
