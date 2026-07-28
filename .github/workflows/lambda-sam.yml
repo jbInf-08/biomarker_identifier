@@ -46,7 +46,7 @@ jobs:
           pytest tests/integration/test_api_surface.py tests/unit/test_run_access.py -q --tb=short
 
       - name: Set up SAM CLI
-        uses: aws-actions/setup-sam@v2
+        uses: aws-actions/setup-sam@v3
         with:
           version: "1.110.0"
 
