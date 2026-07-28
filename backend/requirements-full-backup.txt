@@ -259,7 +259,7 @@ ray==2.56.1
 pika==1.4.2
 
 # Graph databases
-neo4j==5.14.1
+neo4j==6.2.0
 
 # Time series analysis
 statsmodels==0.14.6
@@ -444,7 +444,7 @@ ray==2.56.1
 pika==1.4.2
 
 # Graph databases
-neo4j==5.14.1
+neo4j==6.2.0
 
 # Bayesian statistics
 pymc==5.28.4
