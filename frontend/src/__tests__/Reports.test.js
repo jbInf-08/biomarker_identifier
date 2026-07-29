@@ -7,24 +7,24 @@ import Reports from '../pages/Reports';
 import { usePipeline } from '../contexts/PipelineContext';
 import toast from 'react-hot-toast';
 
-jest.mock('../services/api', () => ({
-  apiClient: { get: jest.fn(), post: jest.fn(), delete: jest.fn() },
+vi.mock('../services/api', () => ({
+  apiClient: { get: vi.fn(), post: vi.fn(), delete: vi.fn() },
 }));
-jest.mock('../contexts/PipelineContext');
-jest.mock('react-hot-toast', () => ({
+vi.mock('../contexts/PipelineContext');
+vi.mock('react-hot-toast', () => ({
   __esModule: true,
   default: {
-    error: jest.fn(),
-    success: jest.fn(),
+    error: vi.fn(),
+    success: vi.fn(),
   },
 }));
 
 describe('Reports page', () => {
-  const mockFetchRuns = jest.fn();
-  const mockGenerateReport = jest.fn();
+  const mockFetchRuns = vi.fn();
+  const mockGenerateReport = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     usePipeline.mockReturnValue({
       runs: [
         { run_id: 'run-1', status: 'completed', created_at: '2025-01-01' },

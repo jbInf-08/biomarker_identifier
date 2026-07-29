@@ -6,21 +6,21 @@ import { ROUTER_FUTURE } from '../routerFuture';
 import Header from '../components/Layout/Header';
 import { useAuth } from '../contexts/AuthContext';
 
-jest.mock('../services/api', () => ({
-  apiClient: { get: jest.fn(), post: jest.fn(), delete: jest.fn() },
+vi.mock('../services/api', () => ({
+  apiClient: { get: vi.fn(), post: vi.fn(), delete: vi.fn() },
 }));
-jest.mock('../contexts/AuthContext');
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: jest.fn(),
+vi.mock('../contexts/AuthContext');
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useNavigate: vi.fn(),
 }));
 
 describe('Header component', () => {
-  const mockLogout = jest.fn();
-  const mockNavigate = jest.fn();
+  const mockLogout = vi.fn();
+  const mockNavigate = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     useAuth.mockReturnValue({
       user: { name: 'Test User', email: 'test@example.com', role: 'researcher' },
       logout: mockLogout,
@@ -31,7 +31,7 @@ describe('Header component', () => {
   test('renders app title', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Header onMenuClick={jest.fn()} />
+        <Header onMenuClick={vi.fn()} />
       </MemoryRouter>
     );
     expect(
@@ -42,7 +42,7 @@ describe('Header component', () => {
   test('renders user name when available', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Header onMenuClick={jest.fn()} />
+        <Header onMenuClick={vi.fn()} />
       </MemoryRouter>
     );
     expect(screen.getByText('Test User')).toBeInTheDocument();
@@ -51,7 +51,7 @@ describe('Header component', () => {
   test('opens user menu on click', async () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Header onMenuClick={jest.fn()} />
+        <Header onMenuClick={vi.fn()} />
       </MemoryRouter>
     );
     const userButton = screen.getByRole('button', { name: /user menu/i });
@@ -63,7 +63,7 @@ describe('Header component', () => {
   });
 
   test('calls onMenuClick when menu button clicked', async () => {
-    const onMenuClick = jest.fn();
+    const onMenuClick = vi.fn();
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
         <Header onMenuClick={onMenuClick} />

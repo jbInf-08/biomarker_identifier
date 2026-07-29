@@ -1,20 +1,23 @@
 import React from 'react';
 import { render, screen, act, waitFor, fireEvent } from '@testing-library/react';
 import { PipelineProvider, usePipeline } from '../contexts/PipelineContext';
+// Static import, not require(): a CommonJS require bypasses Vite's transform,
+// so the real module would load without import.meta.env being injected. vi.mock
+// is hoisted above imports, so this still receives the mock below.
+import { apiClient } from '../services/api';
 
-jest.mock('../services/api', () => ({
+vi.mock('../services/api', () => ({
   apiClient: {
-    get: jest.fn(),
-    post: jest.fn(),
-    delete: jest.fn(),
+    get: vi.fn(),
+    post: vi.fn(),
+    delete: vi.fn(),
   },
 }));
-jest.mock('react-hot-toast', () => ({
+vi.mock('react-hot-toast', () => ({
   __esModule: true,
-  default: { success: jest.fn(), error: jest.fn() },
+  default: { success: vi.fn(), error: vi.fn() },
 }));
 
-const { apiClient } = require('../services/api');
 
 function TestConsumer() {
   const { runs, loading, fetchRuns, startPipeline } = usePipeline();
@@ -30,7 +33,7 @@ function TestConsumer() {
 
 describe('PipelineContext', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   test('fetchRuns loads runs from API', async () => {

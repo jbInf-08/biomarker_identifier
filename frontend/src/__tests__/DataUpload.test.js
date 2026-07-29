@@ -4,16 +4,16 @@ import { MemoryRouter } from 'react-router-dom';
 import { ROUTER_FUTURE } from '../routerFuture';
 
 // Mock contexts used by DataUpload
-jest.mock('../contexts/PipelineContext', () => ({
+vi.mock('../contexts/PipelineContext', () => ({
   usePipeline: () => ({
-    startPipeline: jest.fn().mockResolvedValue({ success: false }),
+    startPipeline: vi.fn().mockResolvedValue({ success: false }),
     loading: false,
   }),
 }));
 
-jest.mock('../contexts/WebSocketContext', () => ({
+vi.mock('../contexts/WebSocketContext', () => ({
   useWebSocketContext: () => ({
-    connectToRun: jest.fn(),
+    connectToRun: vi.fn(),
   }),
 }));
 

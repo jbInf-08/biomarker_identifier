@@ -4,17 +4,17 @@ import { MemoryRouter } from 'react-router-dom';
 import { ROUTER_FUTURE } from '../routerFuture';
 
 // Minimal mock for PipelineContext
-jest.mock('../contexts/PipelineContext', () => ({
+vi.mock('../contexts/PipelineContext', () => ({
   usePipeline: () => ({
     runs: [],
     loading: false,
-    fetchRuns: jest.fn(),
+    fetchRuns: vi.fn(),
   }),
 }));
-jest.mock('../services/api', () => ({
+vi.mock('../services/api', () => ({
   api: {
     pipeline: {
-      getRunAnalyticsDashboard: jest.fn(() => Promise.reject(new Error('no data'))),
+      getRunAnalyticsDashboard: vi.fn(() => Promise.reject(new Error('no data'))),
     },
   },
 }));

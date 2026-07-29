@@ -25,8 +25,8 @@ export const AuthProvider = ({ children }) => {
   };
 
   const checkAuthStatus = useCallback(async () => {
-    // Optional: bypass auth in development when backend is unavailable (set in .env: REACT_APP_DEV_BYPASS_AUTH=true)
-    const devBypass = process.env.REACT_APP_DEV_BYPASS_AUTH === 'true';
+    // Optional: bypass auth in development when backend is unavailable (set in .env: VITE_DEV_BYPASS_AUTH=true)
+    const devBypass = import.meta.env.VITE_DEV_BYPASS_AUTH === 'true';
     if (devBypass) {
       setUser({ id: 'dev-local', email: 'dev@local', name: 'Dev User', role: 'researcher' });
       setIsAuthenticated(true);

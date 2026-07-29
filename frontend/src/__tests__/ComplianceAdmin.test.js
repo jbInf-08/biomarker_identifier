@@ -5,10 +5,10 @@ import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { ROUTER_FUTURE } from '../routerFuture';
 import ComplianceAdmin from '../pages/ComplianceAdmin';
 
-const mockListChecklistItems = jest.fn();
-const mockPatchChecklistItem = jest.fn();
+const mockListChecklistItems = vi.fn();
+const mockPatchChecklistItem = vi.fn();
 
-jest.mock('../contexts/AuthContext', () => {
+vi.mock('../contexts/AuthContext', () => {
   const adminUser = { id: 'admin-1', role: 'admin', email: 'a@example.com' };
   return {
     useAuth: () => ({
@@ -18,12 +18,12 @@ jest.mock('../contexts/AuthContext', () => {
   };
 });
 
-jest.mock('../services/api', () => ({
+vi.mock('../services/api', () => ({
   api: {
     admin: {
       compliance: {
         listChecklistItems: (...args) => mockListChecklistItems(...args),
-        createChecklistItem: jest.fn(() => Promise.resolve({ data: { id: 'new' } })),
+        createChecklistItem: vi.fn(() => Promise.resolve({ data: { id: 'new' } })),
         patchChecklistItem: (...args) => mockPatchChecklistItem(...args),
       },
     },

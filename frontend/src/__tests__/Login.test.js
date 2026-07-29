@@ -5,13 +5,13 @@ import { ROUTER_FUTURE } from '../routerFuture';
 import { useAuth } from '../contexts/AuthContext';
 import Login from '../pages/Login';
 
-jest.mock('../services/api', () => ({
-  apiClient: { get: jest.fn(), post: jest.fn(), delete: jest.fn() },
+vi.mock('../services/api', () => ({
+  apiClient: { get: vi.fn(), post: vi.fn(), delete: vi.fn() },
 }));
-jest.mock('../contexts/AuthContext');
-jest.mock('react-router-dom', () => ({
-  ...jest.requireActual('react-router-dom'),
-  useNavigate: () => jest.fn(),
+vi.mock('../contexts/AuthContext');
+vi.mock('react-router-dom', async () => ({
+  ...(await vi.importActual('react-router-dom')),
+  useNavigate: () => vi.fn(),
 }));
 
 function renderLogin() {
@@ -24,10 +24,10 @@ function renderLogin() {
 
 describe('Login page', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     useAuth.mockReturnValue({
-      login: jest.fn().mockResolvedValue({ success: true }),
-      register: jest.fn().mockResolvedValue({ success: true }),
+      login: vi.fn().mockResolvedValue({ success: true }),
+      register: vi.fn().mockResolvedValue({ success: true }),
       isAuthenticated: false,
     });
   });
@@ -49,10 +49,10 @@ describe('Login page', () => {
   });
 
   test('calls login on sign in submit', async () => {
-    const mockLoginFn = jest.fn().mockResolvedValue({ success: true });
+    const mockLoginFn = vi.fn().mockResolvedValue({ success: true });
     useAuth.mockReturnValue({
       login: mockLoginFn,
-      register: jest.fn(),
+      register: vi.fn(),
       isAuthenticated: false,
     });
     renderLogin();

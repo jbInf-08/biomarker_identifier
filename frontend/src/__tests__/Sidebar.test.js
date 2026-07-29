@@ -9,7 +9,7 @@ describe('Sidebar component', () => {
   test('renders main navigation links', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Sidebar isOpen={true} onClose={jest.fn()} />
+        <Sidebar isOpen={true} onClose={vi.fn()} />
       </MemoryRouter>
     );
     expect(screen.getByRole('link', { name: /dashboard/i })).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('Sidebar component', () => {
   test('renders secondary navigation links', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Sidebar isOpen={true} onClose={jest.fn()} />
+        <Sidebar isOpen={true} onClose={vi.fn()} />
       </MemoryRouter>
     );
     expect(screen.getByRole('link', { name: /clinical databases/i })).toBeInTheDocument();
@@ -31,7 +31,7 @@ describe('Sidebar component', () => {
   });
 
   test('calls onClose when close button clicked', async () => {
-    const onClose = jest.fn();
+    const onClose = vi.fn();
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
         <Sidebar isOpen={true} onClose={onClose} />
@@ -45,7 +45,7 @@ describe('Sidebar component', () => {
   test('renders app branding from i18n', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Sidebar isOpen={true} onClose={jest.fn()} />
+        <Sidebar isOpen={true} onClose={vi.fn()} />
       </MemoryRouter>
     );
     const branding = screen.getAllByText('Cancer Biomarker Identifier');
@@ -55,7 +55,7 @@ describe('Sidebar component', () => {
   test('renders Tools & Resources section', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Sidebar isOpen={true} onClose={jest.fn()} />
+        <Sidebar isOpen={true} onClose={vi.fn()} />
       </MemoryRouter>
     );
     expect(screen.getByText('Tools & Resources')).toBeInTheDocument();
@@ -64,7 +64,7 @@ describe('Sidebar component', () => {
   test('shows compliance admin link for admin users', () => {
     render(
       <MemoryRouter future={ROUTER_FUTURE}>
-        <Sidebar isOpen={true} onClose={jest.fn()} user={{ id: '1', role: 'admin' }} />
+        <Sidebar isOpen={true} onClose={vi.fn()} user={{ id: '1', role: 'admin' }} />
       </MemoryRouter>
     );
     expect(screen.getByRole('link', { name: /compliance \(admin\)/i })).toBeInTheDocument();

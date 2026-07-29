@@ -91,7 +91,7 @@ const resources = {
 i18n.use(initReactI18next).init({
   resources,
   lng:
-    process.env.NODE_ENV === 'test'
+    import.meta.env.MODE === 'test'
       ? 'en'
       : (localStorage.getItem('locale') || 'en'),
   fallbackLng: 'en',

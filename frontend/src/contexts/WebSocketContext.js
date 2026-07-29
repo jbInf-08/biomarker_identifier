@@ -20,7 +20,7 @@ export const WebSocketProvider = ({ children }) => {
   const [connectionStatus, setConnectionStatus] = useState('disconnected');
 
   // WebSocket for user-specific updates (skip when no user id, e.g. dev bypass or backend down)
-  const devBypassAuth = process.env.REACT_APP_DEV_BYPASS_AUTH === 'true';
+  const devBypassAuth = import.meta.env.VITE_DEV_BYPASS_AUTH === 'true';
   const userWsUrl = user?.id && isAuthenticated && !devBypassAuth
     ? `ws://localhost:8000/api/ws/user/${user.id}`
     : null;
