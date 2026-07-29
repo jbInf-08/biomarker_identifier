@@ -23,7 +23,7 @@ describe('managedLifecycle', () => {
 
   test('markDestroyed clears initialized and is idempotent', () => {
     const o = { is_initialized: true, is_destroyed: false };
-    const fn = jest.fn();
+    const fn = vi.fn();
     markDestroyed(o, fn);
     expect(fn).toHaveBeenCalledTimes(1);
     expect(o.is_destroyed).toBe(true);

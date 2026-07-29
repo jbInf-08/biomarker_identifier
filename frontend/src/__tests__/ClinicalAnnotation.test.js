@@ -7,26 +7,26 @@ import { usePipeline } from '../contexts/PipelineContext';
 import { apiClient } from '../services/api';
 import toast from 'react-hot-toast';
 
-jest.mock('../contexts/PipelineContext');
-jest.mock('../services/api', () => ({
+vi.mock('../contexts/PipelineContext');
+vi.mock('../services/api', () => ({
   apiClient: {
-    get: jest.fn(),
-    post: jest.fn(),
-    delete: jest.fn(),
+    get: vi.fn(),
+    post: vi.fn(),
+    delete: vi.fn(),
   },
 }));
-jest.mock('react-hot-toast', () => ({
+vi.mock('react-hot-toast', () => ({
   __esModule: true,
   default: {
-    error: jest.fn(),
+    error: vi.fn(),
   },
 }));
 
 describe('ClinicalAnnotation page', () => {
-  const mockFetchRuns = jest.fn();
+  const mockFetchRuns = vi.fn();
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
     usePipeline.mockReturnValue({
       runs: [],
       fetchRuns: mockFetchRuns,

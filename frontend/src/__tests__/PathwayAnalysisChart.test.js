@@ -2,7 +2,7 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import PathwayAnalysisChart from '../components/Visualizations/PathwayAnalysisChart';
 
-jest.mock('recharts', () => ({
+vi.mock('recharts', () => ({
   BarChart: ({ children }) => <div data-testid="bar-chart">{children}</div>,
   Bar: () => null,
   XAxis: () => null,

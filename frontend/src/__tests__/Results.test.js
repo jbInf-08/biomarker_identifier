@@ -3,39 +3,39 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Routes, Route } from 'react-router-dom';
 import { ROUTER_FUTURE } from '../routerFuture';
 
-jest.mock('../services/api', () => ({
+vi.mock('../services/api', () => ({
   apiClient: {
-    get: jest.fn().mockResolvedValue({
+    get: vi.fn().mockResolvedValue({
       data: { available: false, message: 'OK' },
     }),
-    post: jest.fn().mockResolvedValue({ data: {} }),
+    post: vi.fn().mockResolvedValue({ data: {} }),
     interceptors: {
-      request: { use: jest.fn() },
-      response: { use: jest.fn() },
+      request: { use: vi.fn() },
+      response: { use: vi.fn() },
     },
   },
   api: {},
 }));
 
-jest.mock('react-hot-toast', () => ({
+vi.mock('react-hot-toast', () => ({
   __esModule: true,
   default: {
-    error: jest.fn(),
-    success: jest.fn(),
+    error: vi.fn(),
+    success: vi.fn(),
   },
 }));
 
 // These must be stable across renders. Results.js wraps loadResults in a
 // useCallback keyed on these functions and calls it from a useEffect, so
-// returning fresh jest.fn()s from usePipeline() on every render changed the
+// returning fresh vi.fn()s from usePipeline() on every render changed the
 // dep identities each pass, re-fired the effect, and re-entered setLoading(true)
 // forever -- the component never left its spinner and no heading ever rendered.
-const mockGetRunResults = jest.fn().mockResolvedValue(null);
-const mockGetBiomarkers = jest.fn().mockResolvedValue(null);
-const mockGetRunStatus = jest.fn().mockResolvedValue(null);
-const mockGenerateReport = jest.fn().mockResolvedValue(null);
+const mockGetRunResults = vi.fn().mockResolvedValue(null);
+const mockGetBiomarkers = vi.fn().mockResolvedValue(null);
+const mockGetRunStatus = vi.fn().mockResolvedValue(null);
+const mockGenerateReport = vi.fn().mockResolvedValue(null);
 
-jest.mock('../contexts/PipelineContext', () => ({
+vi.mock('../contexts/PipelineContext', () => ({
   usePipeline: () => ({
     getRunResults: mockGetRunResults,
     getBiomarkers: mockGetBiomarkers,
