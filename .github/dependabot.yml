@@ -13,13 +13,18 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Paused: numba (a transitive dep) requires numpy<2.5, so numpy 2.5+
-    # cannot resolve -- pip backtracks numba into versions that predate
-    # Python 3.12 and the build fails on "Cannot install on Python version
-    # 3.12". Lift when numba supports numpy 2.5.
     ignore:
+      # Paused: numba (a transitive dep) requires numpy<2.5, so numpy 2.5+
+      # cannot resolve -- pip backtracks numba into versions that predate
+      # Python 3.12 and the build fails on "Cannot install on Python version
+      # 3.12". Lift when numba supports numpy 2.5.
       - dependency-name: "numpy"
         versions: [">= 2.5"]
+      # Paused: lifelines caps pandas<3.0 and 0.30.3 is its newest release, so
+      # pandas 3 is a hard ResolutionImpossible rather than a migration we can
+      # do here. Lift when lifelines supports pandas 3.
+      - dependency-name: "pandas"
+        versions: [">= 3"]
 
   - package-ecosystem: "npm"
     directory: "/frontend"
