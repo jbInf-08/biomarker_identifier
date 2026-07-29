@@ -99,7 +99,7 @@ const ClinicalAnnotationChart = ({ data, title = "Clinical Annotation Results" }
   ];
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -145,7 +145,7 @@ const ClinicalAnnotationChart = ({ data, title = "Clinical Annotation Results" }
           </ResponsiveContainer>
         );
 
-      case 'pie':
+      case 'pie': {
         // Group by relevance level
         const relevanceData = processedData.reduce((acc, item) => {
           const level = item.relevance_level;
@@ -181,8 +181,9 @@ const ClinicalAnnotationChart = ({ data, title = "Clinical Annotation Results" }
             </PieChart>
           </ResponsiveContainer>
         );
+      }
 
-      case 'radar':
+      case 'radar': {
         // Create radar data for database annotation counts
         const radarData = [
           {
@@ -220,6 +221,7 @@ const ClinicalAnnotationChart = ({ data, title = "Clinical Annotation Results" }
             </RadarChart>
           </ResponsiveContainer>
         );
+      }
 
       default:
         return null;

@@ -66,7 +66,7 @@ const Login = () => {
       } else {
         toast.error(result.error);
       }
-    } catch (error) {
+    } catch (_) {
       toast.error(t('auth.unexpectedError'));
     } finally {
       setLoading(false);

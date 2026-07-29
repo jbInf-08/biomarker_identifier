@@ -1,11 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { ROUTER_FUTURE } from '../routerFuture';
 import Reports from '../pages/Reports';
 import { usePipeline } from '../contexts/PipelineContext';
-import toast from 'react-hot-toast';
 
 vi.mock('../services/api', () => ({
   apiClient: { get: vi.fn(), post: vi.fn(), delete: vi.fn() },

@@ -10,8 +10,6 @@ import {
   FileText, 
   Stethoscope,
   User,
-  Settings,
-  LogOut
 } from 'lucide-react';
 
 const MobileLayout = ({ children }) => {

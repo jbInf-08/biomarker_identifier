@@ -70,7 +70,7 @@ const ProgressTrackingChart = ({ data, title = "Pipeline Progress Tracking" }) =
   ];
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (

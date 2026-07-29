@@ -51,16 +51,29 @@ module.exports = [
       // React plugin uses the automatic runtime regardless, so the imports are
       // merely redundant rather than wrong.
 
-      // Pre-existing findings that the react-app preset also reported as
-      // warnings. Kept at 'warn' so this config matches the previous
-      // strictness rather than failing the build on debt it did not create.
-      // Accessibility is separately gated for real by the Lighthouse CI job.
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      // These three are at zero findings, so they stay at the recommended
+      // 'error' severity to keep them there. no-case-declarations and
+      // no-prototype-builtins take their severity from js.configs.recommended
+      // above and need no entry here.
+      'no-unused-vars': [
+        'error',
+        {
+          argsIgnorePattern: '^_',
+          varsIgnorePattern: '^_',
+          // ESLint 9's recommended set turns on caughtErrors: 'all', which
+          // ESLint 8 did not. Deliberately-ignored catch bindings are named _
+          // in this codebase, so honour the same convention for them.
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
+
+      // Still outstanding. Fixing these means restructuring JSX and visually
+      // confirming the rendered forms are unchanged, so they stay warnings
+      // rather than blocking the build. Accessibility is separately gated for
+      // real by the Lighthouse CI job, which asserts a score of at least 0.9.
       'jsx-a11y/label-has-associated-control': 'warn',
       'jsx-a11y/no-static-element-interactions': 'warn',
       'jsx-a11y/click-events-have-key-events': 'warn',
-      'no-case-declarations': 'warn',
-      'no-prototype-builtins': 'warn',
     },
   },
 
