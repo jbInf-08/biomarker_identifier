@@ -63,7 +63,7 @@ const Reports = () => {
         setGeneratedReports(prev => [newReport, ...prev]);
         toast.success('Report generated successfully');
       }
-    } catch (error) {
+    } catch (_) {
       toast.error('Failed to generate report');
     } finally {
       setGenerating(false);
@@ -305,7 +305,7 @@ const Reports = () => {
                                 const url = URL.createObjectURL(new Blob([data]));
                                 window.open(url, '_blank');
                                 setTimeout(() => URL.revokeObjectURL(url), 1000);
-                              } catch (e) {
+                              } catch (_) {
                                 toast.error('Failed to view report');
                               }
                             }}
@@ -325,7 +325,7 @@ const Reports = () => {
                                 a.click();
                                 URL.revokeObjectURL(url);
                                 toast.success('Report downloaded');
-                              } catch (e) {
+                              } catch (_) {
                                 toast.error('Download failed');
                               }
                             }}

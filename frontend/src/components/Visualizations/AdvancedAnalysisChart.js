@@ -3,16 +3,13 @@
  * Interactive analysis tools with advanced data visualization features
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   LineChart,
   Line,
-  AreaChart,
   Area,
   ScatterChart,
   Scatter,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -25,8 +22,7 @@ import {
 } from 'recharts';
 
 const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => {
-  const [selectedDimensions, setSelectedDimensions] = useState(['x', 'y']);
-  const [zoomDomain, setZoomDomain] = useState(null);
+  const [, setSelectedDimensions] = useState(['x', 'y']);
   const [highlightedPoints, setHighlightedPoints] = useState([]);
   const [filterOptions, setFilterOptions] = useState({
     minValue: null,
@@ -34,7 +30,6 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
     geneFilter: '',
     significanceFilter: 0.05
   });
-  const chartRef = useRef(null);
 
   // Interactive tooltip component
   const CustomTooltip = ({ active, payload, label }) => {
@@ -267,7 +262,10 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
 
   // Heatmap visualization - requires heatmap-formatted data (samples x genes matrix)
   const renderHeatmap = () => {
-    const hasHeatmapData = data?.length && data[0]?.hasOwnProperty?.('samples');
+    const hasHeatmapData =
+      data?.length &&
+      data[0] != null &&
+      Object.prototype.hasOwnProperty.call(data[0], 'samples');
     return (
       <div className="w-full h-96 flex flex-col items-center justify-center border border-gray-300 rounded bg-gray-50">
         {hasHeatmapData ? (
@@ -374,7 +372,7 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
           <select
             className="px-4 py-2 border border-gray-300 rounded-md"
             value={analysisType}
-            onChange={(e) => setSelectedDimensions(['x', 'y'])}
+            onChange={() => setSelectedDimensions(['x', 'y'])}
           >
             <option value="multi-dimensional">Multi-dimensional</option>
             <option value="volcano">Volcano Plot</option>

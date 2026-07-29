@@ -9,19 +9,15 @@ import {
   Line,
   AreaChart,
   Area,
-  BarChart,
-  Bar,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
-  Cell
 } from 'recharts';
 import {
   Activity,
-  Server,
   Database,
   HardDrive,
   Cpu,

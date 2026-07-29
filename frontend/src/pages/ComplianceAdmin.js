@@ -31,7 +31,7 @@ const ComplianceAdmin = () => {
       const params = frameworkFilter ? { framework: frameworkFilter } : {};
       const { data } = await api.admin.compliance.listChecklistItems(params);
       setItems(data.items || []);
-    } catch (e) {
+    } catch (_) {
       toast.error('Could not load compliance checklist.');
     } finally {
       setListLoading(false);

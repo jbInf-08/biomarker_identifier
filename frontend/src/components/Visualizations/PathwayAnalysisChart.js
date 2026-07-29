@@ -90,7 +90,7 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
   ];
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -137,7 +137,7 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
           </ResponsiveContainer>
         );
 
-      case 'treemap':
+      case 'treemap': {
         const treemapData = processedData.map(item => ({
           name: item.pathway_name,
           size: item.gene_count,
@@ -169,6 +169,7 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
             </Treemap>
           </ResponsiveContainer>
         );
+      }
 
       case 'scatter':
         return (

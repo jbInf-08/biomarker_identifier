@@ -193,7 +193,7 @@ const Results = () => {
       a.click();
       URL.revokeObjectURL(url);
       toast.success('Download started');
-    } catch (error) {
+    } catch (_) {
       toast.error('Export failed — save a snapshot first or sign in');
     }
   };

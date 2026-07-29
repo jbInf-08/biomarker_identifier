@@ -72,7 +72,7 @@ const BiomarkerResultsChart = ({ data, title = "Biomarker Analysis Results" }) =
   ];
 
   // Custom tooltip
-  const CustomTooltip = ({ active, payload, label }) => {
+  const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       const data = payload[0].payload;
       return (
@@ -171,7 +171,7 @@ const BiomarkerResultsChart = ({ data, title = "Biomarker Analysis Results" }) =
           </ResponsiveContainer>
         );
 
-      case 'pie':
+      case 'pie': {
         // Group by significance level
         const significanceData = processedData.reduce((acc, item) => {
           const level = item.significance;
@@ -207,6 +207,7 @@ const BiomarkerResultsChart = ({ data, title = "Biomarker Analysis Results" }) =
             </PieChart>
           </ResponsiveContainer>
         );
+      }
 
       default:
         return null;
