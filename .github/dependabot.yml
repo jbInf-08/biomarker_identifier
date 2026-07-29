@@ -34,14 +34,12 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Paused until their respective migrations are done deliberately. ESLint 9
-    # drops .eslintrc for flat config (eslint.config.js), and Tailwind 4
-    # replaces tailwind.config.js with CSS-first @theme config and rewires the
-    # PostCSS/Vite plugins -- both break the build as isolated bumps and have
-    # already been opened and closed more than once. Remove when migrating.
+    # Paused until the Tailwind 4 migration is done deliberately: v4 replaces
+    # tailwind.config.js with CSS-first @theme configuration and moves the
+    # PostCSS integration to the separate @tailwindcss/postcss plugin, so as an
+    # isolated bump it breaks the build. It also needs a visual check that the
+    # rendered UI is unchanged, which CI cannot do. Remove when migrating.
     ignore:
-      - dependency-name: "eslint"
-        versions: [">= 9"]
       - dependency-name: "tailwindcss"
         versions: [">= 4"]
 
