@@ -281,7 +281,7 @@ bokeh==3.9.2
 holoviews==1.23.1
 
 # Interactive plots
-dash==2.16.1
+dash==4.4.1
 dash-bootstrap-components==1.5.0
 
 # Web framework
@@ -457,7 +457,7 @@ bokeh==3.9.2
 holoviews==1.23.1
 
 # Interactive applications
-dash==2.16.1
+dash==4.4.1
 streamlit==1.60.0
 
 # Testing
