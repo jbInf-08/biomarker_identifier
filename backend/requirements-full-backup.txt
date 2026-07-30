@@ -1,3 +1,26 @@
+# Full dependency set -- KEPT DELIBERATELY, NOT INSTALLED BY ANYTHING.
+#
+# Nothing installs this file. CI, the Dockerfiles and the workflows install
+# requirements.txt, requirements-prod.txt and requirements-dev.txt only. It is
+# retained as the record of the full feature set, which carries ~74 packages
+# that requirements-prod.txt does not (cloud SDKs, dashboards, GPU builds,
+# notebook tooling).
+#
+# Two consequences to know about:
+#
+#   1. Dependabot scans the whole /backend directory, so it will open PRs
+#      against this file. Those bumps are inert -- nothing installs them --
+#      but they still need triage. #107 was one: it bumped dash for a frontend
+#      that had already been removed, and was merged only because it was
+#      harmless. Check whether a package here is actually used before
+#      accepting a bump against it.
+#
+#   2. Pins here can drift from the installed files without CI noticing,
+#      because no job resolves them.
+#
+# If a package is needed in production, add it to requirements-prod.txt; adding
+# it here alone does nothing.
+
 # Core web framework and API
 fastapi==0.141.1
 uvicorn[standard]==0.52.0
