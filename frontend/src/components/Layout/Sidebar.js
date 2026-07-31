@@ -46,14 +46,18 @@ const Sidebar = ({ isOpen, onClose, user = null }) => {
 
   return (
     <>
-      {/* Mobile backdrop */}
+      {/* Mobile backdrop. A button, not a div: it is a real control -- it
+          dismisses the menu -- so it needs an accessible name and has to be
+          reachable and activatable from the keyboard. */}
       {isOpen && (
-        <div 
-          className="fixed inset-0 z-40 lg:hidden"
+        <button
+          type="button"
+          aria-label="Close navigation menu"
+          className="fixed inset-0 z-40 lg:hidden w-full cursor-default"
           onClick={onClose}
         >
-          <div className="absolute inset-0 bg-gray-600 opacity-75"></div>
-        </div>
+          <span className="absolute inset-0 bg-gray-600 opacity-75" />
+        </button>
       )}
 
       {/* Sidebar */}

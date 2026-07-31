@@ -118,8 +118,8 @@ const Reports = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Run Selection */}
           <div>
-            <label className="label">Select Run</label>
-            <select
+            <label htmlFor="reports-select-run" className="label">Select Run</label>
+            <select id="reports-select-run"
               className="input-field"
               value={selectedRun}
               onChange={(e) => setSelectedRun(e.target.value)}
@@ -140,8 +140,8 @@ const Reports = () => {
 
           {/* Report Format */}
           <div>
-            <label className="label">Report Format</label>
-            <select
+            <label htmlFor="reports-report-format" className="label">Report Format</label>
+            <select id="reports-report-format"
               className="input-field"
               value={reportConfig.format}
               onChange={(e) => handleConfigChange('format', e.target.value)}
@@ -153,8 +153,8 @@ const Reports = () => {
 
           {/* Report Title */}
           <div>
-            <label className="label">Report Title</label>
-            <input
+            <label htmlFor="reports-report-title" className="label">Report Title</label>
+            <input id="reports-report-title"
               type="text"
               className="input-field"
               placeholder="Enter report title"
@@ -165,8 +165,8 @@ const Reports = () => {
 
           {/* Project Name */}
           <div>
-            <label className="label">Project Name</label>
-            <input
+            <label htmlFor="reports-project-name" className="label">Project Name</label>
+            <input id="reports-project-name"
               type="text"
               className="input-field"
               placeholder="Enter project name"
@@ -177,8 +177,8 @@ const Reports = () => {
 
           {/* Investigator */}
           <div>
-            <label className="label">Investigator</label>
-            <input
+            <label htmlFor="reports-investigator" className="label">Investigator</label>
+            <input id="reports-investigator"
               type="text"
               className="input-field"
               placeholder="Enter investigator name"
@@ -189,8 +189,8 @@ const Reports = () => {
 
           {/* Institution */}
           <div>
-            <label className="label">Institution</label>
-            <input
+            <label htmlFor="reports-institution" className="label">Institution</label>
+            <input id="reports-institution"
               type="text"
               className="input-field"
               placeholder="Enter institution name"

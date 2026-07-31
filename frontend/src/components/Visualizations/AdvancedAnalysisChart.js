@@ -305,10 +305,10 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
         {/* Filter Controls */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="advancedanalysischart-min-value" className="block text-sm font-medium text-gray-700 mb-1">
               Min Value
             </label>
-            <input
+            <input id="advancedanalysischart-min-value"
               type="number"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               value={filterOptions.minValue || ''}
@@ -319,10 +319,10 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="advancedanalysischart-max-value" className="block text-sm font-medium text-gray-700 mb-1">
               Max Value
             </label>
-            <input
+            <input id="advancedanalysischart-max-value"
               type="number"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               value={filterOptions.maxValue || ''}
@@ -333,10 +333,10 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="advancedanalysischart-gene-filter" className="block text-sm font-medium text-gray-700 mb-1">
               Gene Filter
             </label>
-            <input
+            <input id="advancedanalysischart-gene-filter"
               type="text"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
               placeholder="Search genes..."
@@ -348,10 +348,10 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label htmlFor="advancedanalysischart-significance-p-value" className="block text-sm font-medium text-gray-700 mb-1">
               Significance (p-value)
             </label>
-            <input
+            <input id="advancedanalysischart-significance-p-value"
               type="number"
               step="0.01"
               className="w-full px-3 py-2 border border-gray-300 rounded-md"
@@ -366,10 +366,10 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
 
         {/* Analysis Type Selector */}
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="advancedanalysischart-analysis-type" className="block text-sm font-medium text-gray-700 mb-2">
             Analysis Type
           </label>
-          <select
+          <select id="advancedanalysischart-analysis-type"
             className="px-4 py-2 border border-gray-300 rounded-md"
             value={analysisType}
             onChange={() => setSelectedDimensions(['x', 'y'])}

@@ -59,7 +59,14 @@ const MobileLayout = ({ children }) => {
       {/* Mobile sidebar */}
       {sidebarOpen && (
         <div className="fixed inset-0 z-50 lg:hidden">
-          <div className="fixed inset-0 bg-gray-600 bg-opacity-75" onClick={() => setSidebarOpen(false)} />
+          {/* See Sidebar: the backdrop dismisses the menu, so it is a button
+              with a name rather than a div with a click handler. */}
+          <button
+            type="button"
+            aria-label="Close navigation menu"
+            className="fixed inset-0 bg-gray-600 bg-opacity-75 w-full cursor-default"
+            onClick={() => setSidebarOpen(false)}
+          />
           <div className="relative flex-1 flex flex-col max-w-xs w-full bg-white">
             <div className="absolute top-0 right-0 -mr-12 pt-2">
               <button

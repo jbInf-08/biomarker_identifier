@@ -210,8 +210,8 @@ const ProgressTrackingChart = ({ data, title = "Pipeline Progress Tracking" }) =
           <div className="flex items-center space-x-4">
             {/* Chart type selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Chart Type:</label>
-              <select
+              <label htmlFor="progresstrackingchart-chart-type" className="text-sm font-medium text-gray-700">Chart Type:</label>
+              <select id="progresstrackingchart-chart-type"
                 value={chartType}
                 onChange={(e) => setChartType(e.target.value)}
                 className="input-field text-sm"
@@ -226,8 +226,8 @@ const ProgressTrackingChart = ({ data, title = "Pipeline Progress Tracking" }) =
 
             {/* Metric selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Metric:</label>
-              <select
+              <label htmlFor="progresstrackingchart-metric" className="text-sm font-medium text-gray-700">Metric:</label>
+              <select id="progresstrackingchart-metric"
                 value={metric}
                 onChange={(e) => setMetric(e.target.value)}
                 className="input-field text-sm"
