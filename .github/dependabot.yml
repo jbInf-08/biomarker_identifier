@@ -39,14 +39,6 @@ updates:
         update-types:
           - "minor"
           - "patch"
-    # Paused until the Tailwind 4 migration is done deliberately: v4 replaces
-    # tailwind.config.js with CSS-first @theme configuration and moves the
-    # PostCSS integration to the separate @tailwindcss/postcss plugin, so as an
-    # isolated bump it breaks the build. It also needs a visual check that the
-    # rendered UI is unchanged, which CI cannot do. Remove when migrating.
-    ignore:
-      - dependency-name: "tailwindcss"
-        versions: [">= 4"]
 
   - package-ecosystem: "github-actions"
     directory: "/"

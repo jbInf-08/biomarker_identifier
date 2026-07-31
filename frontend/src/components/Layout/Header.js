@@ -16,7 +16,7 @@ const Header = ({ onMenuClick }) => {
   };
 
   return (
-    <header className="bg-white shadow-sm border-b border-gray-200" role="banner">
+    <header className="bg-white shadow-xs border-b border-gray-200" role="banner">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Left side */}
@@ -24,7 +24,7 @@ const Header = ({ onMenuClick }) => {
             <button
               type="button"
               aria-label={t('header.openMenu')}
-              className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+              className="lg:hidden p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary-500"
               onClick={onMenuClick}
             >
               <Menu className="h-6 w-6" />
@@ -43,7 +43,7 @@ const Header = ({ onMenuClick }) => {
             <button
               type="button"
               aria-label={t('header.notifications')}
-              className="p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+              className="p-2 rounded-full text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary-500"
             >
               <Bell className="h-6 w-6" />
             </button>
@@ -68,7 +68,7 @@ const Header = ({ onMenuClick }) => {
                 aria-label={t('header.userMenu')}
                 aria-expanded={showUserMenu}
                 aria-haspopup="menu"
-                className="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary-500"
+                className="flex items-center space-x-3 p-2 rounded-lg text-gray-700 hover:bg-gray-100 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-primary-500"
                 onClick={() => setShowUserMenu(!showUserMenu)}
               >
                 <div className="flex items-center space-x-2">

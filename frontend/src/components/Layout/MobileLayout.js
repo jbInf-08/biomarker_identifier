@@ -35,10 +35,10 @@ const MobileLayout = ({ children }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Mobile header */}
-      <div className="lg:hidden bg-white shadow-sm border-b border-gray-200">
+      <div className="lg:hidden bg-white shadow-xs border-b border-gray-200">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">BI</span>
               </div>
@@ -71,13 +71,13 @@ const MobileLayout = ({ children }) => {
             <div className="absolute top-0 right-0 -mr-12 pt-2">
               <button
                 onClick={() => setSidebarOpen(false)}
-                className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                className="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white"
               >
                 <X className="h-6 w-6 text-white" />
               </button>
             </div>
             <div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
-              <div className="flex-shrink-0 flex items-center px-4">
+              <div className="shrink-0 flex items-center px-4">
                 <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">BI</span>
                 </div>
@@ -110,9 +110,9 @@ const MobileLayout = ({ children }) => {
                 })}
               </nav>
             </div>
-            <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+            <div className="shrink-0 flex border-t border-gray-200 p-4">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
                     <User className="h-5 w-5 text-gray-600" />
                   </div>
@@ -128,11 +128,11 @@ const MobileLayout = ({ children }) => {
       )}
 
       {/* Desktop sidebar */}
-      <div className="hidden lg:flex lg:flex-shrink-0">
+      <div className="hidden lg:flex lg:shrink-0">
         <div className="flex flex-col w-64">
           <div className="flex flex-col h-0 flex-1 bg-white border-r border-gray-200">
             <div className="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
-              <div className="flex items-center flex-shrink-0 px-4">
+              <div className="flex items-center shrink-0 px-4">
                 <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
                   <span className="text-white font-bold text-sm">BI</span>
                 </div>
@@ -164,9 +164,9 @@ const MobileLayout = ({ children }) => {
                 })}
               </nav>
             </div>
-            <div className="flex-shrink-0 flex border-t border-gray-200 p-4">
+            <div className="shrink-0 flex border-t border-gray-200 p-4">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <div className="h-8 w-8 bg-gray-300 rounded-full flex items-center justify-center">
                     <User className="h-5 w-5 text-gray-600" />
                   </div>

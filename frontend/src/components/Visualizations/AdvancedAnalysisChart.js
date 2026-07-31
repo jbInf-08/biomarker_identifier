@@ -267,7 +267,7 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
       data[0] != null &&
       Object.prototype.hasOwnProperty.call(data[0], 'samples');
     return (
-      <div className="w-full h-96 flex flex-col items-center justify-center border border-gray-300 rounded bg-gray-50">
+      <div className="w-full h-96 flex flex-col items-center justify-center border border-gray-300 rounded-sm bg-gray-50">
         {hasHeatmapData ? (
           <p className="text-gray-600">Heatmap requires a samples×genes matrix format. Use volcano or PCA for expression data.</p>
         ) : (
@@ -284,7 +284,7 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
   const renderNetworkGraph = () => {
     const hasNetworkData = data?.length && data.some(d => d.source || d.target);
     return (
-      <div className="w-full h-96 flex flex-col items-center justify-center border border-gray-300 rounded bg-gray-50">
+      <div className="w-full h-96 flex flex-col items-center justify-center border border-gray-300 rounded-sm bg-gray-50">
         {hasNetworkData ? (
           <p className="text-gray-600">Network graph requires source/target edge data. Run pathway analysis for interaction networks.</p>
         ) : (
@@ -391,23 +391,23 @@ const AdvancedAnalysisChart = ({ data, analysisType = 'multi-dimensional' }) => 
 
       {/* Statistics Summary */}
       <div className="mt-4 grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-gray-50 p-3 rounded-sm">
           <p className="text-sm text-gray-600">Total Points</p>
           <p className="text-xl font-bold">{filteredData.length}</p>
         </div>
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-gray-50 p-3 rounded-sm">
           <p className="text-sm text-gray-600">Significant</p>
           <p className="text-xl font-bold text-green-600">
             {filteredData.filter(d => (d.pValue || 1) < 0.05).length}
           </p>
         </div>
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-gray-50 p-3 rounded-sm">
           <p className="text-sm text-gray-600">Filtered</p>
           <p className="text-xl font-bold">
             {data?.length ? data.length - filteredData.length : 0}
           </p>
         </div>
-        <div className="bg-gray-50 p-3 rounded">
+        <div className="bg-gray-50 p-3 rounded-sm">
           <p className="text-sm text-gray-600">Highlighted</p>
           <p className="text-xl font-bold text-blue-600">{highlightedPoints.length}</p>
         </div>

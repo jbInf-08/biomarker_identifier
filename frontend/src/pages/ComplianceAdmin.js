@@ -120,8 +120,8 @@ const ComplianceAdmin = () => {
         <div>
           <h1 className="text-3xl font-bold text-gray-900">Compliance checklist (admin)</h1>
           <p className="mt-2 text-gray-600 max-w-3xl">
-            Manage IRB, HIPAA, and GDPR control items. Status <code className="text-sm bg-gray-100 px-1 rounded">complete</code>{' '}
-            requires a non-empty evidence link; <code className="text-sm bg-gray-100 px-1 rounded">waived</code> requires
+            Manage IRB, HIPAA, and GDPR control items. Status <code className="text-sm bg-gray-100 px-1 rounded-sm">complete</code>{' '}
+            requires a non-empty evidence link; <code className="text-sm bg-gray-100 px-1 rounded-sm">waived</code> requires
             notes (at least 20 characters) documenting the waiver.
           </p>
         </div>
@@ -135,7 +135,7 @@ const ComplianceAdmin = () => {
           <label className="block text-sm text-gray-700">
             Framework
             <select
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-xs p-2"
               value={createForm.framework}
               onChange={(e) => setCreateForm((f) => ({ ...f, framework: e.target.value }))}
             >
@@ -149,7 +149,7 @@ const ComplianceAdmin = () => {
           <label className="block text-sm text-gray-700">
             Control code
             <input
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-xs p-2"
               value={createForm.control_code}
               onChange={(e) => setCreateForm((f) => ({ ...f, control_code: e.target.value }))}
               placeholder="e.g. 164.308(a)(1)"
@@ -158,7 +158,7 @@ const ComplianceAdmin = () => {
           <label className="block text-sm text-gray-700 sm:col-span-2">
             Title
             <input
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-xs p-2"
               value={createForm.title}
               onChange={(e) => setCreateForm((f) => ({ ...f, title: e.target.value }))}
             />
@@ -166,7 +166,7 @@ const ComplianceAdmin = () => {
           <label className="block text-sm text-gray-700 sm:col-span-2">
             Tenant ID (optional)
             <input
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
+              className="mt-1 block w-full border border-gray-300 rounded-md shadow-xs p-2"
               value={createForm.tenant_id}
               onChange={(e) => setCreateForm((f) => ({ ...f, tenant_id: e.target.value }))}
               placeholder="Leave blank for global / unset"
@@ -232,7 +232,7 @@ const ComplianceAdmin = () => {
                       <td className="py-2 pr-4 max-w-xs">{m.title}</td>
                       <td className="py-2 pr-4">
                         <select
-                          className="border border-gray-300 rounded p-1 max-w-[9rem]"
+                          className="border border-gray-300 rounded-sm p-1 max-w-36"
                           aria-label={`Status for ${m.control_code}`}
                           value={m.status}
                           onChange={(e) => patchField(row.id, { status: e.target.value })}
@@ -244,18 +244,18 @@ const ComplianceAdmin = () => {
                           ))}
                         </select>
                       </td>
-                      <td className="py-2 pr-4 min-w-[12rem]">
+                      <td className="py-2 pr-4 min-w-48">
                         <input
-                          className="w-full border border-gray-300 rounded p-1 text-xs"
+                          className="w-full border border-gray-300 rounded-sm p-1 text-xs"
                           aria-label={`Evidence link for ${m.control_code}`}
                           value={m.evidence_link || ''}
                           onChange={(e) => patchField(row.id, { evidence_link: e.target.value })}
                           placeholder="https://… or ticket"
                         />
                       </td>
-                      <td className="py-2 pr-4 min-w-[14rem]">
+                      <td className="py-2 pr-4 min-w-56">
                         <textarea
-                          className="w-full border border-gray-300 rounded p-1 text-xs"
+                          className="w-full border border-gray-300 rounded-sm p-1 text-xs"
                           rows={2}
                           aria-label={`Notes for ${m.control_code}`}
                           value={m.notes || ''}

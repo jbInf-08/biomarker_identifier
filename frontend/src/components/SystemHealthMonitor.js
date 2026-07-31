@@ -142,14 +142,14 @@ const SystemHealthMonitor = () => {
               type="checkbox"
               checked={autoRefresh}
               onChange={(e) => setAutoRefresh(e.target.checked)}
-              className="rounded"
+              className="rounded-sm"
             />
             <span className="text-sm text-gray-600">Auto-refresh</span>
           </label>
           <select
             value={refreshInterval}
             onChange={(e) => setRefreshInterval(Number(e.target.value))}
-            className="text-sm border border-gray-300 rounded px-2 py-1"
+            className="text-sm border border-gray-300 rounded-sm px-2 py-1"
           >
             <option value={5000}>5s</option>
             <option value={10000}>10s</option>
@@ -158,7 +158,7 @@ const SystemHealthMonitor = () => {
           </select>
           <button
             onClick={fetchHealthData}
-            className="px-4 py-2 bg-primary-600 text-white rounded hover:bg-primary-700 text-sm"
+            className="px-4 py-2 bg-primary-600 text-white rounded-sm hover:bg-primary-700 text-sm"
           >
             Refresh
           </button>
@@ -260,7 +260,7 @@ const SystemHealthMonitor = () => {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Service Status</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {services && Object.entries(services).map(([serviceName, serviceStatus]) => (
-            <div key={serviceName} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+            <div key={serviceName} className="flex items-center justify-between p-3 bg-gray-50 rounded-sm">
               <div className="flex items-center gap-2">
                 {serviceStatus === 'running' ? (
                   <CheckCircle className="h-5 w-5 text-green-600" />
