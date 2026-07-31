@@ -232,8 +232,8 @@ const BiomarkerResultsChart = ({ data, title = "Biomarker Analysis Results" }) =
           <div className="flex items-center space-x-4">
             {/* Chart type selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Chart Type:</label>
-              <select
+              <label htmlFor="biomarkerresultschart-chart-type" className="text-sm font-medium text-gray-700">Chart Type:</label>
+              <select id="biomarkerresultschart-chart-type"
                 value={chartType}
                 onChange={(e) => setChartType(e.target.value)}
                 className="input-field text-sm"
@@ -248,8 +248,8 @@ const BiomarkerResultsChart = ({ data, title = "Biomarker Analysis Results" }) =
 
             {/* Sort by selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Sort By:</label>
-              <select
+              <label htmlFor="biomarkerresultschart-sort-by" className="text-sm font-medium text-gray-700">Sort By:</label>
+              <select id="biomarkerresultschart-sort-by"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="input-field text-sm"
@@ -262,8 +262,8 @@ const BiomarkerResultsChart = ({ data, title = "Biomarker Analysis Results" }) =
 
             {/* Top N selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Show Top:</label>
-              <select
+              <label htmlFor="biomarkerresultschart-show-top" className="text-sm font-medium text-gray-700">Show Top:</label>
+              <select id="biomarkerresultschart-show-top"
                 value={topN}
                 onChange={(e) => setTopN(parseInt(e.target.value))}
                 className="input-field text-sm"

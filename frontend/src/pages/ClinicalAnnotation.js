@@ -277,10 +277,13 @@ const ClinicalAnnotation = () => {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
           {/* Search */}
           <div>
-            <label className="label">Search Genes</label>
+            <label htmlFor="clinical-search-genes" className="label">
+              Search Genes
+            </label>
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <input
+                id="clinical-search-genes"
                 type="text"
                 placeholder="Search by gene symbol..."
                 className="input-field pl-10"
@@ -291,8 +294,10 @@ const ClinicalAnnotation = () => {
           </div>
 
           {/* Database Selection */}
-          <div>
-            <label className="label">Databases</label>
+          <fieldset>
+            {/* Names a group of checkboxes, so it is a legend. A label binds to
+                exactly one control, which is why this reported unassociated. */}
+            <legend className="label">Databases</legend>
             <div className="space-y-2">
               {['COSMIC', 'ClinVar', 'OncoKB'].map((db) => (
                 <label key={db} className="flex items-center">
@@ -306,12 +311,12 @@ const ClinicalAnnotation = () => {
                 </label>
               ))}
             </div>
-          </div>
+          </fieldset>
 
           {/* Relevance Filter */}
           <div>
-            <label className="label">Relevance</label>
-            <select
+            <label htmlFor="clinicalannotation-relevance" className="label">Relevance</label>
+            <select id="clinicalannotation-relevance"
               className="input-field"
               value={filterByRelevance}
               onChange={(e) => setFilterByRelevance(e.target.value)}
@@ -325,8 +330,8 @@ const ClinicalAnnotation = () => {
 
           {/* Sort By */}
           <div>
-            <label className="label">Sort By</label>
-            <select
+            <label htmlFor="clinicalannotation-sort-by" className="label">Sort By</label>
+            <select id="clinicalannotation-sort-by"
               className="input-field"
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}

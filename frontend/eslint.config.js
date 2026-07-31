@@ -67,13 +67,13 @@ module.exports = [
         },
       ],
 
-      // Still outstanding. Fixing these means restructuring JSX and visually
-      // confirming the rendered forms are unchanged, so they stay warnings
-      // rather than blocking the build. Accessibility is separately gated for
-      // real by the Lighthouse CI job, which asserts a score of at least 0.9.
-      'jsx-a11y/label-has-associated-control': 'warn',
-      'jsx-a11y/no-static-element-interactions': 'warn',
-      'jsx-a11y/click-events-have-key-events': 'warn',
+      // At zero, so they hold at the recommended error severity. The forms
+      // were checked in a browser after the change, not just against the rule:
+      // every label focuses its control on click, and the menu backdrop is
+      // reachable and activatable from the keyboard.
+      'jsx-a11y/label-has-associated-control': 'error',
+      'jsx-a11y/no-static-element-interactions': 'error',
+      'jsx-a11y/click-events-have-key-events': 'error',
     },
   },
 

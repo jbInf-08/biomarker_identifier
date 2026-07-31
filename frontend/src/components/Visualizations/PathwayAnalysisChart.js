@@ -219,8 +219,8 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
           <div className="flex items-center space-x-4">
             {/* Chart type selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Chart Type:</label>
-              <select
+              <label htmlFor="pathwayanalysischart-chart-type" className="text-sm font-medium text-gray-700">Chart Type:</label>
+              <select id="pathwayanalysischart-chart-type"
                 value={chartType}
                 onChange={(e) => setChartType(e.target.value)}
                 className="input-field text-sm"
@@ -235,8 +235,8 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
 
             {/* Sort by selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Sort By:</label>
-              <select
+              <label htmlFor="pathwayanalysischart-sort-by" className="text-sm font-medium text-gray-700">Sort By:</label>
+              <select id="pathwayanalysischart-sort-by"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="input-field text-sm"
@@ -266,8 +266,8 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
 
             {/* Top N selector */}
             <div className="flex items-center space-x-2">
-              <label className="text-sm font-medium text-gray-700">Show Top:</label>
-              <select
+              <label htmlFor="pathwayanalysischart-show-top" className="text-sm font-medium text-gray-700">Show Top:</label>
+              <select id="pathwayanalysischart-show-top"
                 value={topN}
                 onChange={(e) => setTopN(parseInt(e.target.value))}
                 className="input-field text-sm"

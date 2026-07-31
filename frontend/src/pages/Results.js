@@ -599,10 +599,10 @@ const Results = () => {
               </button>
             </div>
             <div className="mt-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">
+              <label htmlFor="results-optional-notes-for-the-model-cohort-contrast-hypothesis" className="block text-sm font-medium text-gray-700 mb-1">
                 Optional notes for the model (cohort, contrast, hypothesis)
               </label>
-              <textarea
+              <textarea id="results-optional-notes-for-the-model-cohort-contrast-hypothesis"
                 className="input-field w-full min-h-[80px]"
                 placeholder="e.g. TCGA BRCA tumor vs normal; focus on DNA repair pathway"
                 value={groundedNotes}

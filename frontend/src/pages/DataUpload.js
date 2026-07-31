@@ -104,7 +104,7 @@ const DataUpload = () => {
     }
   };
 
-  const FileUploadArea = ({ fileType, getRootProps, getInputProps, isDragActive, file, onSelectClick }) => (
+  const FileUploadArea = ({ fileType, inputId, getRootProps, getInputProps, isDragActive, file, onSelectClick }) => (
     <div
       {...getRootProps()}
       className={`
@@ -117,7 +117,9 @@ const DataUpload = () => {
         }
       `}
     >
-      <input {...getInputProps()} />
+      {/* id lets the visible label above bind to the real file input;
+          react-dropzone merges overrides passed to getInputProps. */}
+      <input {...getInputProps({ id: inputId })} />
       {file ? (
         <div className="space-y-2">
           <CheckCircle className="h-8 w-8 text-green-500 mx-auto" />
@@ -183,11 +185,12 @@ const DataUpload = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="label">
+              <label htmlFor="upload-expression-file" className="label">
                 Expression Data File
                 <span className="text-red-500 ml-1">*</span>
               </label>
               <FileUploadArea
+                inputId="upload-expression-file"
                 fileType="expression"
                 getRootProps={getExpressionRootProps}
                 getInputProps={getExpressionInputProps}
@@ -201,11 +204,12 @@ const DataUpload = () => {
             </div>
 
             <div>
-              <label className="label">
+              <label htmlFor="upload-labels-file" className="label">
                 Sample Labels File
                 <span className="text-red-500 ml-1">*</span>
               </label>
               <FileUploadArea
+                inputId="upload-labels-file"
                 fileType="labels"
                 getRootProps={getLabelsRootProps}
                 getInputProps={getLabelsInputProps}
@@ -229,8 +233,8 @@ const DataUpload = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label className="label">Run Name</label>
-              <input
+              <label htmlFor="dataupload-run-name" className="label">Run Name</label>
+              <input id="dataupload-run-name"
                 type="text"
                 className="input-field"
                 placeholder="Enter a name for this run"
@@ -240,8 +244,8 @@ const DataUpload = () => {
             </div>
 
             <div>
-              <label className="label">Normalization Method</label>
-              <select
+              <label htmlFor="dataupload-normalization-method" className="label">Normalization Method</label>
+              <select id="dataupload-normalization-method"
                 className="input-field"
                 value={config.normalizationMethod}
                 onChange={(e) => handleConfigChange('normalizationMethod', e.target.value)}
@@ -254,8 +258,8 @@ const DataUpload = () => {
             </div>
 
             <div>
-              <label className="label">Statistical Test</label>
-              <select
+              <label htmlFor="dataupload-statistical-test" className="label">Statistical Test</label>
+              <select id="dataupload-statistical-test"
                 className="input-field"
                 value={config.statisticalTest}
                 onChange={(e) => handleConfigChange('statisticalTest', e.target.value)}
@@ -267,8 +271,8 @@ const DataUpload = () => {
             </div>
 
             <div>
-              <label className="label">Significance Level (α)</label>
-              <input
+              <label htmlFor="dataupload-significance-level" className="label">Significance Level (α)</label>
+              <input id="dataupload-significance-level"
                 type="number"
                 step="0.01"
                 min="0"
@@ -280,8 +284,10 @@ const DataUpload = () => {
             </div>
           </div>
 
-          <div className="mt-6">
-            <label className="label">Machine Learning Models</label>
+          <fieldset className="mt-6">
+            {/* Names a group of checkboxes, so it is a legend rather than a
+                label, which binds to exactly one control. */}
+            <legend className="label">Machine Learning Models</legend>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { value: 'logistic_regression', label: 'Logistic Regression' },
@@ -306,7 +312,7 @@ const DataUpload = () => {
                 </label>
               ))}
             </div>
-          </div>
+          </fieldset>
         </div>
 
         {/* Submit Button */}
