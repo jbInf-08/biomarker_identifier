@@ -139,7 +139,7 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         <div className="card">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <TrendingUp className="h-8 w-8 text-primary-600" />
             </div>
             <div className="ml-4">
@@ -151,7 +151,7 @@ const Dashboard = () => {
 
         <div className="card">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <CheckCircle className="h-8 w-8 text-green-600" />
             </div>
             <div className="ml-4">
@@ -163,7 +163,7 @@ const Dashboard = () => {
 
         <div className="card">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <Clock className="h-8 w-8 text-blue-600" />
             </div>
             <div className="ml-4">
@@ -175,7 +175,7 @@ const Dashboard = () => {
 
         <div className="card">
           <div className="flex items-center">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <XCircle className="h-8 w-8 text-red-600" />
             </div>
             <div className="ml-4">
@@ -199,7 +199,7 @@ const Dashboard = () => {
                 className="card hover:shadow-md transition-shadow duration-200"
               >
                 <div className="flex items-center">
-                  <div className={`flex-shrink-0 p-3 rounded-lg ${action.color} text-white`}>
+                  <div className={`shrink-0 p-3 rounded-lg ${action.color} text-white`}>
                     <Icon className="h-6 w-6" />
                   </div>
                   <div className="ml-4">

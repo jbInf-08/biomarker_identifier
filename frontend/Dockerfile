@@ -1,5 +1,6 @@
 # Multi-stage build for the Cancer Biomarker Identifier frontend
-FROM node:18-alpine as build
+# 22: Tailwind 4 needs node >= 20 for its native oxide binary.
+FROM node:22-alpine AS build
 
 # Set working directory
 WORKDIR /app

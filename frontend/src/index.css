@@ -1,25 +1,151 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Explicit source globs. v4 drops the `content` array that tailwind.config.js
+   used to carry and auto-detects instead, but that detection did not reach this
+   app's sources here -- the build came out with only the base layer and none of
+   the utilities or @utility components. Naming them removes the guesswork. */
+@source './**/*.{js,jsx,ts,tsx}';
 
-/* Fallback base styles - ensure content is visible even if Tailwind has issues */
-html {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap')
+layer(utilities);
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-200: #bfdbfe;
+  --color-primary-300: #93c5fd;
+  --color-primary-400: #60a5fa;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb;
+  --color-primary-700: #1d4ed8;
+  --color-primary-800: #1e40af;
+  --color-primary-900: #1e3a8a;
+
+  --color-secondary-50: #f8fafc;
+  --color-secondary-100: #f1f5f9;
+  --color-secondary-200: #e2e8f0;
+  --color-secondary-300: #cbd5e1;
+  --color-secondary-400: #94a3b8;
+  --color-secondary-500: #64748b;
+  --color-secondary-600: #475569;
+  --color-secondary-700: #334155;
+  --color-secondary-800: #1e293b;
+  --color-secondary-900: #0f172a;
+
+  --font-sans: Inter, system-ui, sans-serif;
+
+  --animate-fade-in: fadeIn 0.5s ease-in-out;
+  --animate-slide-up: slideUp 0.3s ease-out;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      transform: translateY(10px);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  background-color: #f9fafb;
-  color: #111827;
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
 }
 
-#root {
-  min-height: 100vh;
+@utility btn-primary {
+  @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
+}
+
+@utility btn-secondary {
+  @apply bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-hidden focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
+}
+
+@utility card {
+  @apply bg-white rounded-lg shadow-xs border border-gray-200 p-6;
+}
+
+@utility input-field {
+  @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:border-transparent;
+}
+
+@utility label {
+  @apply block text-sm font-medium text-gray-700 mb-1;
+}
+
+@utility badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+@utility badge-success {
+  @apply bg-green-100 text-green-800;
+}
+
+@utility badge-warning {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+@utility badge-error {
+  @apply bg-red-100 text-red-800;
+}
+
+@utility badge-info {
+  @apply bg-blue-100 text-blue-800;
+}
+
+@utility text-gradient {
+  @apply bg-linear-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
+}
+
+@utility shadow-glow {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
+}
+
+@layer utilities {
+  /* Fallback base styles - ensure content is visible even if Tailwind has issues */
+  html {
+    font-family:
+      'Inter',
+      system-ui,
+      -apple-system,
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #f9fafb;
+    color: #111827;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
 }
 
 @layer base {
@@ -29,57 +155,5 @@ body {
   
   body {
     @apply bg-gray-50 text-gray-900;
-  }
-}
-
-@layer components {
-  .btn-primary {
-    @apply bg-primary-600 hover:bg-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2;
-  }
-  
-  .btn-secondary {
-    @apply bg-gray-200 hover:bg-gray-300 text-gray-900 font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2;
-  }
-  
-  .card {
-    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
-  }
-  
-  .input-field {
-    @apply w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent;
-  }
-  
-  .label {
-    @apply block text-sm font-medium text-gray-700 mb-1;
-  }
-  
-  .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
-  }
-  
-  .badge-success {
-    @apply bg-green-100 text-green-800;
-  }
-  
-  .badge-warning {
-    @apply bg-yellow-100 text-yellow-800;
-  }
-  
-  .badge-error {
-    @apply bg-red-100 text-red-800;
-  }
-  
-  .badge-info {
-    @apply bg-blue-100 text-blue-800;
-  }
-}
-
-@layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-primary-800 bg-clip-text text-transparent;
-  }
-  
-  .shadow-glow {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.15);
   }
 }

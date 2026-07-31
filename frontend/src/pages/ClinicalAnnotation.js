@@ -303,7 +303,7 @@ const ClinicalAnnotation = () => {
                 <label key={db} className="flex items-center">
                   <input
                     type="checkbox"
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="rounded-sm border-gray-300 text-primary-600 focus:ring-primary-500"
                     checked={selectedDatabases.includes(db)}
                     onChange={() => handleDatabaseToggle(db)}
                   />

@@ -686,7 +686,7 @@ const Results = () => {
           </div>
           <div className="card">
             <h4 className="text-sm font-semibold text-gray-800 mb-2">Run results summary (from artifacts)</h4>
-            <pre className="text-xs bg-gray-50 p-3 rounded overflow-x-auto max-h-96">
+            <pre className="text-xs bg-gray-50 p-3 rounded-sm overflow-x-auto max-h-96">
               {artifactSummary?.results_summary
                 ? JSON.stringify(artifactSummary.results_summary, null, 2)
                 : 'No results_summary stored for this run yet.'}

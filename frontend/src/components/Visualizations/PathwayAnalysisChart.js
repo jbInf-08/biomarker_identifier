@@ -153,7 +153,7 @@ const PathwayAnalysisChart = ({ data, title = "Pathway Analysis Results" }) => {
                   if (active && payload && payload.length) {
                     const data = payload[0].payload;
                     return (
-                      <div className="bg-white p-3 border border-gray-200 rounded shadow">
+                      <div className="bg-white p-3 border border-gray-200 rounded-sm shadow-sm">
                         <p className="font-semibold">{data.name}</p>
                         <p className="text-sm">Size: {data.size}</p>
                         <p className="text-sm">Value: {data.value.toFixed(2)}</p>
