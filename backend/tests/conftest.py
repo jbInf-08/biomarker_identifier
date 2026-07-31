@@ -30,7 +30,6 @@ os.environ.setdefault("DEBUG", "true")
 # SlowAPI per-route limits share one IP in TestClient; disable for stable tests
 os.environ.setdefault("BIOMARKER_DISABLE_RATE_LIMIT", "1")
 
-import asyncio
 from typing import AsyncGenerator, Generator
 
 import pytest
@@ -89,14 +88,6 @@ from app.models.biomarker_model import BiomarkerResult
 from app.models.run_model import AnalysisRun
 from app.models.user_model import User
 from app.services.auth_service import auth_service
-
-
-@pytest.fixture(scope="session")
-def event_loop():
-    """Create an instance of the default event loop for the test session."""
-    loop = asyncio.get_event_loop_policy().new_event_loop()
-    yield loop
-    loop.close()
 
 
 @pytest.fixture(scope="function")
