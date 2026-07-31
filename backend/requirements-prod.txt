@@ -29,7 +29,7 @@ scikit-learn==1.9.0
 statsmodels==0.14.6
 
 # Machine learning
-xgboost==2.0.3
+xgboost==3.3.0
 lightgbm==4.7.0
 # shap 0.51+ requires numpy>=2; stay on 0.44.x while the stack pins numpy<2 (pandas 2.1.x)
 shap==0.52.0
