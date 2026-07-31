@@ -8,7 +8,11 @@ on:
 
 env:
   PYTHON_VERSION: "3.12"
-  NODE_VERSION: "18"
+  # 22, not 18. Tailwind 4 builds through @tailwindcss/oxide, a native
+  # binary whose engines require node >= 20, so on 18 npm ci skipped it as
+  # incompatible and the build died on "Cannot find native binding".
+  # Node 18 is also past end of life.
+  NODE_VERSION: "22"
 
 jobs:
   backend-tests:
