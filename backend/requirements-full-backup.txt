@@ -262,7 +262,7 @@ nltk==3.10.0
 spacy==3.8.14
 
 # Natural language processing
-transformers==4.35.2
+transformers==5.14.1
 torch==2.13.0
 
 # Deep learning (optional)
@@ -448,7 +448,7 @@ nltk==3.10.0
 spacy==3.8.14
 
 # Machine learning
-transformers==4.35.2
+transformers==5.14.1
 torch==2.13.0
 
 # Deep learning
