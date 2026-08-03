@@ -78,8 +78,10 @@ module.exports = [
   },
 
   {
-    // Vitest globals (vite.config.js sets test.globals = true).
-    files: ['src/**/*.test.js', 'src/setupTests.js'],
+    // Vitest globals (vite.config.mjs sets test.globals = true).
+    // Both extensions: the tests carrying JSX are .test.jsx since the JSX-in-.js
+    // files were renamed for Vite 8, and managedLifecycle.test.js has none.
+    files: ['src/**/*.test.{js,jsx}', 'src/setupTests.js'],
     languageOptions: {
       globals: {
         describe: 'readonly',
@@ -96,8 +98,14 @@ module.exports = [
   },
 
   {
-    // Config files run in Node.
-    files: ['*.config.js', '.lighthouserc.js', 'lighthouserc.js'],
+    // Config files run in Node. Only this file is CommonJS -- lighthouserc.js
+    // is ESM, and the previous `*.config.js` glob also caught vite.config.js,
+    // forcing sourceType 'commonjs' onto files that use `import`. That made
+    // vite.config.js an unconditional parse error, invisible because the `lint`
+    // script only covers src/. It is now vite.config.mjs and neither needs an
+    // entry here: .mjs parses as a module by definition, and the
+    // `**/*.{js,jsx}` block above covers lighthouserc.js with the Node globals.
+    files: ['eslint.config.js'],
     languageOptions: {
       sourceType: 'commonjs',
       globals: { ...globals.node },
