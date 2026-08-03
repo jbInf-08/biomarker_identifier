@@ -26,8 +26,8 @@
     "@lhci/cli": "^0.15.1",
     "@tailwindcss/postcss": "^4.3.3",
     "@testing-library/react": "^16.3.2",
-    "@vitejs/plugin-react": "^4.7.0",
-    "@vitest/coverage-v8": "^1.6.1",
+    "@vitejs/plugin-react": "^6.0.5",
+    "@vitest/coverage-v8": "^4.1.10",
     "baseline-browser-mapping": "^2.11.7",
     "eslint": "^9.39.5",
     "eslint-plugin-jsx-a11y": "^6.10.2",
@@ -37,8 +37,8 @@
     "jsdom": "^30.0.0",
     "postcss": "^8.5.25",
     "tailwindcss": "^4.3.3",
-    "vite": "^5.4.21",
-    "vitest": "^1.6.1"
+    "vite": "^8.2.0",
+    "vitest": "^4.1.10"
   },
   "scripts": {
     "dev": "vite",
@@ -64,21 +64,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8000",
-  "jest": {
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts",
-      "!src/index.js",
-      "!src/reportWebVitals.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 12,
-        "functions": 15,
-        "lines": 22,
-        "statements": 21
-      }
-    }
-  }
+  "proxy": "http://localhost:8000"
 }
