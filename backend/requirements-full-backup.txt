@@ -23,30 +23,30 @@
 
 # Core web framework and API
 fastapi==0.141.1
-uvicorn[standard]==0.52.0
-pydantic==2.13.4
+uvicorn[standard]==0.52.4
+pydantic==2.13.5
 python-multipart==0.0.32
 websockets==16.1.1
 
 # Database and ORM
-sqlalchemy==2.0.51
-alembic==1.18.5
+sqlalchemy==2.0.52
+alembic==1.19.1
 psycopg2-binary==2.9.12
 redis==5.0.1
 
 # Background tasks and job queue
 celery==5.6.3
-flower==2.0.1
+flower==2.1.0
 
 # Data processing and analysis
 pandas==2.3.3
 numpy==2.4.6
-scipy==1.18.0
+scipy==1.18.1
 scikit-learn==1.9.0
-statsmodels==0.14.6
+statsmodels==0.15.0
 
 # Machine learning
-xgboost==3.3.0
+xgboost==3.4.1
 lightgbm==4.7.0
 shap==0.52.0
 joblib==1.5.3
@@ -55,7 +55,7 @@ tqdm==4.70.0
 # Bioinformatics and statistical analysis
 lifelines==0.30.3
 rpy2==3.6.7
-biopython==1.87
+biopython==1.88
 networkx==3.6.1
 
 # Visualization
@@ -75,7 +75,7 @@ httpx==0.28.1
 # Data validation and processing
 openpyxl==3.1.5
 xlrd==2.0.2
-python-dotenv==1.2.2
+python-dotenv==1.2.3
 
 # Security and authentication
 python-jose[cryptography]==3.5.0
@@ -84,7 +84,7 @@ python-multipart==0.0.32
 
 # Testing
 pytest==9.1.1
-pytest-asyncio==1.3.0
+pytest-asyncio==1.4.0
 pytest-cov==7.1.0
 httpx==0.28.1
 
@@ -111,7 +111,7 @@ python-dateutil==2.9.0.post0
 pytz==2026.3.post1
 
 # JSON handling
-orjson==3.11.9
+orjson==3.12.0
 
 # CORS and middleware
 fastapi-cors==0.0.6
@@ -120,9 +120,9 @@ fastapi-cors==0.0.6
 healthcheck==1.3.3
 
 # Development tools
-ipython==9.15.0
+ipython==9.17.0
 jupyter==1.1.1
-notebook==7.6.1
+notebook==7.6.2
 
 # Documentation
 mkdocs==1.6.1
@@ -133,17 +133,17 @@ memory-profiler==0.61.0
 psutil==7.2.2
 
 # Error tracking (optional)
-sentry-sdk[fastapi]==2.66.1
+sentry-sdk[fastapi]==2.68.1
 
 # Cloud storage (optional)
-boto3==1.43.58
+boto3==1.43.83
 google-cloud-storage==2.10.0
-azure-storage-blob==12.30.0
+azure-storage-blob==12.30.1
 
 # Additional bioinformatics tools
 gseapy==1.3.1
-anndata==0.13.2
-scanpy==1.12.3
+anndata==0.13.3.post0
+scanpy==1.12.4
 
 # Pathway analysis
 gprofiler-official==1.0.0
@@ -178,7 +178,7 @@ joblib==1.5.3
 # mmap-io - mmap is built-in Python module
 
 # Caching
-cachetools==7.1.6
+cachetools==7.1.7
 
 # Rate limiting
 slowapi==0.1.10
@@ -196,7 +196,7 @@ tenacity==8.2.3
 python-decouple==3.8
 
 # Data serialization
-msgpack==1.2.1
+msgpack==1.2.2
 
 # Network utilities
 urllib3==2.7.0
@@ -220,14 +220,14 @@ lz4==4.4.5
 jsonschema==4.26.0
 
 # XML processing
-lxml==6.1.1
+lxml==6.1.2
 
 # Regular expressions
 regex==2026.7.19
 
 # String processing
 fuzzywuzzy==0.18.0
-python-levenshtein==0.27.3
+python-levenshtein==0.27.4
 
 # Data cleaning
 clean-text==0.7.1
@@ -258,11 +258,11 @@ mygene==3.2.2
 pubmed-lookup==0.2.3
 
 # Text processing
-nltk==3.10.0
-spacy==3.8.14
+nltk==3.10.3
+spacy==3.8.16
 
 # Natural language processing
-transformers==5.14.1
+transformers==5.16.1
 torch==2.13.0
 
 # Deep learning (optional)
@@ -276,16 +276,16 @@ dask==2023.11.0
 dask[distributed]==2023.11.0
 
 # Cluster computing
-ray==2.56.1
+ray==2.58.0
 
 # Message queuing
-pika==1.4.2
+pika==1.4.4
 
 # Graph databases
-neo4j==6.2.0
+neo4j==6.3.0
 
 # Time series analysis
-statsmodels==0.14.6
+statsmodels==0.15.0
 
 # Survival analysis
 lifelines==0.30.3
@@ -294,25 +294,25 @@ lifelines==0.30.3
 pymc==5.28.4
 
 # Optimization
-scipy==1.18.0
+scipy==1.18.1
 
 # Numerical computing
-numba==0.66.0
+numba==0.67.0
 
 # Data visualization
-bokeh==3.9.2
-holoviews==1.23.1
+bokeh==3.10.0
+holoviews==1.23.2
 
 # Interactive plots
 
 # Web framework
-streamlit==1.60.0
+streamlit==1.62.0
 
 # API testing
 pytest-httpx==0.36.2
 
 # Load testing
-locust==2.46.2
+locust==2.46.4
 
 # Performance profiling
 py-spy==0.4.2
@@ -321,7 +321,7 @@ py-spy==0.4.2
 memory-profiler==0.61.0
 
 # Code coverage
-coverage==7.15.2
+coverage==7.16.0
 
 # Documentation generation
 sphinx==7.2.6
@@ -344,7 +344,7 @@ structlog==26.1.0
 prometheus-client==0.26.0
 
 # Error tracking
-sentry-sdk[fastapi]==2.66.1
+sentry-sdk[fastapi]==2.68.1
 
 # Health checks
 healthcheck==1.3.3
@@ -368,13 +368,13 @@ python-multipart==0.0.32
 marshmallow==3.20.1
 
 # Configuration
-dynaconf==3.3.4
+dynaconf==3.3.5
 
 # Environment variables
 python-decouple==3.8
 
 # Database migrations
-alembic==1.18.5
+alembic==1.19.1
 
 # API documentation
 # fastapi-openapi removed - FastAPI has built-in OpenAPI support
@@ -407,17 +407,17 @@ watchdog==6.0.0
 lz4==4.4.5
 
 # JSON handling
-orjson==3.11.9
+orjson==3.12.0
 
 # XML processing
-lxml==6.1.1
+lxml==6.1.2
 
 # Regular expressions
 regex==2026.7.19
 
 # String processing
 fuzzywuzzy==0.18.0
-python-levenshtein==0.27.3
+python-levenshtein==0.27.4
 
 # Data cleaning
 clean-text==0.7.1
@@ -444,11 +444,11 @@ enrichr==0.0.6
 pubmed-lookup==0.2.3
 
 # Text processing
-nltk==3.10.0
-spacy==3.8.14
+nltk==3.10.3
+spacy==3.8.16
 
 # Machine learning
-transformers==5.14.1
+transformers==5.16.1
 torch==2.13.0
 
 # Deep learning
@@ -459,30 +459,30 @@ cupy-cuda12x==12.2.0
 
 # Distributed computing
 dask==2023.11.0
-ray==2.56.1
+ray==2.58.0
 
 # Message queuing
-pika==1.4.2
+pika==1.4.4
 
 # Graph databases
-neo4j==6.2.0
+neo4j==6.3.0
 
 # Bayesian statistics
 pymc==5.28.4
 
 # Optimization
-numba==0.66.0
+numba==0.67.0
 
 # Visualization
-bokeh==3.9.2
-holoviews==1.23.1
+bokeh==3.10.0
+holoviews==1.23.2
 
 # Interactive applications
-streamlit==1.60.0
+streamlit==1.62.0
 
 # Testing
 pytest-httpx==0.36.2
-locust==2.46.2
+locust==2.46.4
 
 # Profiling
 py-spy==0.4.2
