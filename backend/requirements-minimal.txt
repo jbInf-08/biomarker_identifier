@@ -1,29 +1,29 @@
 # Core web framework and API
 fastapi==0.141.1
-uvicorn[standard]==0.52.0
-pydantic==2.13.4
+uvicorn[standard]==0.52.4
+pydantic==2.13.5
 python-multipart==0.0.32
 websockets==16.1.1
 
 # Database and ORM
-sqlalchemy==2.0.51
-alembic==1.18.5
+sqlalchemy==2.0.52
+alembic==1.19.1
 psycopg2-binary==2.9.12
 redis==5.0.1
 
 # Background tasks and job queue
 celery==5.6.3
-flower==2.0.1
+flower==2.1.0
 
 # Data processing and analysis
 pandas==2.3.3
 numpy==2.4.6
-scipy==1.18.0
+scipy==1.18.1
 scikit-learn==1.9.0
-statsmodels==0.14.6
+statsmodels==0.15.0
 
 # Machine learning
-xgboost==3.3.0
+xgboost==3.4.1
 lightgbm==4.7.0
 shap==0.52.0
 joblib==1.5.3
@@ -32,7 +32,7 @@ tqdm==4.70.0
 # Bioinformatics and statistical analysis
 lifelines==0.30.3
 rpy2==3.6.7
-biopython==1.87
+biopython==1.88
 networkx==3.6.1
 
 # Visualization
@@ -50,7 +50,7 @@ httpx==0.28.1
 
 # Data validation and processing
 openpyxl==3.1.5
-python-dotenv==1.2.2
+python-dotenv==1.2.3
 
 # Security and authentication
 python-jose[cryptography]==3.5.0
@@ -59,7 +59,7 @@ cryptography==48.0.1
 
 # Testing
 pytest==9.1.1
-pytest-asyncio==1.3.0
+pytest-asyncio==1.4.0
 pytest-cov==7.1.0
 
 # Code quality
@@ -78,13 +78,13 @@ pyyaml==6.0.3
 python-dateutil==2.9.0.post0
 
 # JSON handling
-orjson==3.11.9
+orjson==3.12.0
 
 # Task scheduling
 apscheduler==3.11.3
 
 # Caching
-cachetools==7.1.6
+cachetools==7.1.7
 
 # Rate limiting
 slowapi==0.1.10
@@ -97,7 +97,7 @@ jsonschema==4.26.0
 
 # Additional bioinformatics tools
 gseapy==1.3.1
-anndata==0.13.2
+anndata==0.13.3.post0
 
 # Pathway analysis
 gprofiler-official==1.0.0
@@ -112,7 +112,7 @@ pillow==12.3.0
 mygene==3.2.2
 
 # NLP for literature
-nltk==3.10.0
+nltk==3.10.3
 
 # Production
 gunicorn==23.0.0
